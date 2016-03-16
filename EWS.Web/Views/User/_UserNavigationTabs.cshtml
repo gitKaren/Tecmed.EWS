@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Spectrum.SharedKernel.Navigation.TabMenuItem>
+
+<div id="tabmenu" class="tabs">
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Content(item.PageUrl.AbsoluteUrl)" class="throbber">@item.Label</a>
+    }
+</div>

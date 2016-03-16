@@ -1,0 +1,4 @@
+C:\DevWebsites\Tecmed\TOPS\TOPS.Services\bin\Debug\TOPS.Services.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Services\bin\Debug\TOPS.Services.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Services\obj\Debug\TOPS.Services.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Services\obj\Debug\TOPS.Services.pdb

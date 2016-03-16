@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/subthemes/navy/sub.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <div id="maincontainer">
+        <div id="contentwrapper">
+            <div id="contentcolumn">
+                <div id="topsection">
+                    <img src="~/Images/systemlogo.jpg" />
+                </div>
+                <div id="bodywrapper">
+                    <div id="heading">
+                        <h1>@ViewBag.Title</h1>
+                    </div>
+                </div>
+                <div class="quickfuncs">
+                    @Html.ActionLink(" ", "Index", "Home", null, new { @class = "glyphicon glyphicon-home" })
+                    @Html.ActionLink(" ", "Index", "Home", null, new { @class = "glyphicon glyphicon-print" })
+                    @Html.ActionLink(" ", "Index", "Home", null, new { @class = "glyphicon glyphicon-cog" })
+                    @Html.ActionLink(" ", "LogOff", "Login", null, new { @class = "glyphicon glyphicon-off" })
+                </div>
+                <div id="body">
+                    @{Html.RenderAction("UserNavigationTabs", "User", new { tabMenuId = 14 });}
+                    @*TabPlaceholder
+                    Messages Control*@
+                    @RenderBody()
+                </div>
+                <div id="footer">
+                    <div id="footer_hl"></div>
+                </div>
+            </div>
+        </div>
+        <div id="leftcolumn">
+            <div id="logo">
+                <img src="~/Images/clientlogo.jpg" />
+            </div>
+            <div id="menu">
+                @{Html.RenderAction("UserNavigation", "User");}
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<EWS.Domain.Model.OneYearCalculation>
+
+
+<div class="bottom-gap-10">
+    
+</div>
+<div class="clearfix"></div>
+
+<div class="container-fluid">
+    <div class="panel panel-default">
+
+            <div class="panel-heading">
+
+                <div class="row">
+                    <span class="col-xs-1 text-center small">@Html.LabelFor(model => model.First().YearNo)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model.First().ROEPortion)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model.First().ZARPortion)</span>
+                    <span class="col-xs-1 text-center">@Html.LabelFor(model => model.First().ExcludingROE)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model.First().TOPSROE)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model.First().NewROE)</span>
+                    <span class="col-xs-2  text-right">@Html.LabelFor(model => model.First().AmountExclVAT)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model.First().StartDate)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model.First().EndDate)</span>
+                    <span class="col-xs-2 text-right">@Html.LabelFor(model => model.First().AmountInclVAT)</span>
+                </div>
+                </div>
+        <div class="panel-body">
+            @foreach (var item in Model)
+            {
+
+                <div class="row">
+
+                    <div class="col-xs-1 text-center">@Html.DisplayFor(modelItem => item.YearNo) </div>
+                    <div class="col-xs-1 text-right">@Html.DisplayFor(modelItem => item.ROEPortion) </div>
+                    <div class="col-xs-1 text-right">@Html.DisplayFor(modelItem => item.ZARPortion) </div>
+                    <div class="col-xs-1 text-center">@Html.DisplayFor(modelItem => item.ExcludingROE) </div>
+                    <div class="col-xs-1">@Html.DisplayFor(modelItem => item.TOPSROE) </div>
+                    <div class="col-xs-1">@Html.DisplayFor(modelItem => item.NewROE) </div>
+                    <div class="col-xs-2 text-right">@Html.DisplayFor(modelItem => item.AmountExclVAT) </div>
+                    <div class="col-xs-1">@Html.DisplayFor(modelItem => item.StartDate) </div>
+                    <div class="col-xs-1">@Html.DisplayFor(modelItem => item.EndDate) </div>
+                    <div class="col-xs-2 text-right">@Html.DisplayFor(modelItem => item.AmountInclVAT) </div>
+
+                </div>
+
+
+            }
+        </div>
+    </div>
+</div>

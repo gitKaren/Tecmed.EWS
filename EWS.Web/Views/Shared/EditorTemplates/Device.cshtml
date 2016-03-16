@@ -1,0 +1,86 @@
+﻿@model EWS.Domain.Model.Device
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Device</h3>
+    </div>
+
+    <div class="panel-body">
+        @Html.HiddenFor(model => model.Id)
+        <dl class="dl-horizontal">
+            <dt class="pad3">
+                @Html.DisplayNameFor(model => model.Site)
+            </dt>
+
+            <dd class="pad3">
+                @Html.HiddenFor(model => model.Site)
+                <span class="">@Html.DisplayFor(model => model.Site)</span>
+            </dd>
+
+            <dt class="pad3">
+                @Html.DisplayNameFor(model => model.Department)
+            </dt>
+
+            <dd class="pad3">
+                @Html.HiddenFor(model => model.Department)
+                <span class=""> @Html.DisplayFor(model => model.Department)</span>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Room)
+            </dt>
+
+            <dd class="pad3">
+                @Html.HiddenFor(model => model.Room)
+                <span class=""> @Html.DisplayFor(model => model.Room)</span>
+            </dd>
+
+            <dt class="pad3">
+                @Html.DisplayNameFor(model => model.Modality)
+            </dt>
+
+            <dd class="pad3">
+                @Html.HiddenFor(model => model.Modality)
+                <span class="">@Html.DisplayFor(model => model.Modality)</span>
+            </dd>
+
+            <dt class="pad3">
+                @Html.DisplayNameFor(model => model.SubModality)
+            </dt>
+
+            <dd class="pad3">
+                @Html.HiddenFor(model => model.SubModality)
+                <span class=""> @Html.DisplayFor(model => model.SubModality)</span>
+            </dd>
+
+            <dt class="pad3">
+                @Html.DisplayNameFor(model => model.Supplier)
+            </dt>
+
+            <dd class="pad3">
+                @Html.HiddenFor(model => model.Supplier)
+                <span class="">@Html.DisplayFor(model => model.Supplier)</span>
+            </dd>
+
+            <dt class="pad3">
+                @Html.DisplayNameFor(model => model.BrandModel)
+            </dt>
+
+            <dd class="pad3">
+                @Html.HiddenFor(model => model.BrandModel)
+                <span class=""> @Html.DisplayFor(model => model.BrandModel)</span>
+            </dd>
+
+            <dt class="pad3">
+                @Html.DisplayNameFor(model => model.DisplayName)
+            </dt>
+
+            <dd class="pad3">
+                @Html.HiddenFor(model => model.DisplayName)
+                <span class="">@Html.DisplayFor(model => model.DisplayName)</span>
+            </dd>
+
+        </dl>
+    </div>
+</div>  

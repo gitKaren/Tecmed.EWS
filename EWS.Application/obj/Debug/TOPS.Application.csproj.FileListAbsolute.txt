@@ -1,0 +1,16 @@
+C:\DevWebsites\Tecmed\TOPS\TOPS.Services\bin\Debug\TOPS.Application.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Services\bin\Debug\TOPS.Application.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Services\obj\Debug\TOPS.Application.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Services\obj\Debug\TOPS.Application.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Services\obj\Debug\TOPS.Application.csprojResolveAssemblyReference.cache
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\obj\Debug\TOPS.Application.csprojResolveAssemblyReference.cache
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\obj\Debug\TOPS.Application.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\obj\Debug\TOPS.Application.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\bin\Debug\TOPS.Application.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\bin\Debug\TOPS.Application.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\bin\Debug\Spectrum.SharedKernel.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\bin\Debug\TOPS.Domain.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\bin\Debug\EntityFramework.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\bin\Debug\TOPS.Domain.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\bin\Debug\Spectrum.SharedKernel.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Application\bin\Debug\EntityFramework.xml

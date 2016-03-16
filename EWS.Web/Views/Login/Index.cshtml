@@ -1,0 +1,78 @@
+﻿@model EWS.Web.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+    <link href="@Url.Content("~/Content/subthemes/rose/sub.css")" rel="stylesheet" type="text/css" />
+    <style>
+        .container {
+            margin: 0;
+            display: inline;
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        .loginbox {
+            font: 1em Arial;
+            display: block;
+            width: 446px;
+            height: 128px;
+            background: url(@Url.Content("~/Images/loginbox.png")) no-repeat left top;
+            padding: 5px 0 5px 25px;
+            margin: 200px auto auto auto;
+            padding: 200px 0 0 150px;
+        }
+
+            .loginbox A {
+                font-weight: bold;
+                color: #444;
+                text-decoration: none;
+            }
+
+                .loginbox A:hover {
+                    color: #000;
+                }
+    </style>
+
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-top">
+            <div class="pull-left">
+                <img src="@Url.Content("~/Images/systemlogo.jpg")" />
+            </div>
+            <div class="pull-right">
+                <img src="@Url.Content("~/Images/clientlogo_s.jpg")" />
+            </div>
+        </div>
+        <div class="login-main">
+            <div class="login-main-head">Log In</div>
+            <div class="login-main-form" style="padding:30px;">
+                @Html.ValidationSummary(true, null, new { @class = "fg-error" })
+                @using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName)
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <input type="submit" value="Log in" class="btn btn-default" />
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

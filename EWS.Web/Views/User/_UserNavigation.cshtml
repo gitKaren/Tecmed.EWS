@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Spectrum.SharedKernel.Navigation.MainMenuItem>
+
+<div class="panel-group" id="mainnav" role="tablist">
+    @foreach (var item in Model)
+    { 
+        <div class="panel panel-default">
+            <div class="panel-heading @item.CssClass" role="tab" id="@Html.Raw("heading" + item.Id)">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="@Html.Raw("#collapse" + item.Id)" aria-expanded="false" aria-controls="@Html.Raw("collapse" + item.Id)">
+                    @item.Label
+                </a>
+            </div>
+            <div id="@Html.Raw("collapse" + item.Id)" class="panel-collapse collapse" role="tabpanel" aria-labelledby="@Html.Raw("heading" + item.Id)">
+                <div class="panel-body @item.CssClass">
+                    @foreach (var child in item.Children)
+                    {
+                        <a href="@child.PageUrl.AbsoluteUrl">@child.Label</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

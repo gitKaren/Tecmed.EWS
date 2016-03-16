@@ -1,0 +1,5 @@
+﻿<configuration>
+	<connectionStrings>
+		<add name="Host.RabbitMQConnection" connectionString="endpoint=rabbitmq://RABBITMQ_SERVER/RABBITMQ_ENDPOINT_QUEUE; userId=guest; password=guest" />
+	</connectionStrings>
+</configuration>

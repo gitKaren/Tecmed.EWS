@@ -1,0 +1,13 @@
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\EntityFramework.dll
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\Spectrum.SharedKernel.dll
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\EntityFramework.xml
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+D:\Work\Tecmed\EWS\EWS.Infrastructure\obj\Debug\EWS.Infrastructure.csprojResolveAssemblyReference.cache
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\EWS.Domain.dll
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\EWS.Domain.pdb
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\EWS.Infrastructure.dll.config
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\EWS.Infrastructure.dll
+D:\Work\Tecmed\EWS\EWS.Infrastructure\bin\Debug\EWS.Infrastructure.pdb
+D:\Work\Tecmed\EWS\EWS.Infrastructure\obj\Debug\EWS.Infrastructure.dll
+D:\Work\Tecmed\EWS\EWS.Infrastructure\obj\Debug\EWS.Infrastructure.pdb

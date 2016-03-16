@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2CA88D9A-DA46-41EC-8179-A3AFB60C6282}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EWS.Domain</RootNamespace>
+    <AssemblyName>EWS.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spectrum.SharedKernel">
+      <HintPath>..\..\Spectrum\Spectrum.SharedKernel\bin\Debug\Spectrum.SharedKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionResults\ActionResultEnum.cs" />
+    <Compile Include="ActionResults\ErrorResult.cs" />
+    <Compile Include="ActionResults\FailureResult.cs" />
+    <Compile Include="ActionResults\IActionResult.cs" />
+    <Compile Include="ActionResults\NoneResult.cs" />
+    <Compile Include="ActionResults\SuccessResult.cs" />
+    <Compile Include="Core\AggregateRoot.cs" />
+    <Compile Include="Data\Commands\QuoteCalculationSave.cs" />
+    <Compile Include="Data\Commands\QuoteCalculationItemSave.cs" />
+    <Compile Include="Data\Commands\Sources\SourceCountryCreateCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Commands\Sources\SourceCountryDeleteCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Commands\Sources\SourceCountryUpdateCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Commands\Sources\SourceCurrencyCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceCurrencyDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceCurrencyUpdateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceProductLineCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceProductLineDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceProductLineUpdateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSubModalityCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSubModalityDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSubModalityUpdateCommand.cs" />
+    <Compile Include="Data\Commands\QuoteSaveCommand.cs" />
+    <Compile Include="Data\DataModel\Contract_Type.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\ProductLine.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\QuoteCalculation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\QuoteCalculationItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Queries\QuoteCalculationsQuery.cs" />
+    <Compile Include="Data\Queries\QuotesQuery.cs" />
+    <Compile Include="Data\Queries\QuoteQuery.cs" />
+    <Compile Include="Data\Queries\ContractTypesQuery.cs" />
+    <Compile Include="Data\Queries\DeviceQuery.cs" />
+    <Compile Include="Data\Queries\CurrencyQuery.cs" />
+    <Compile Include="Data\Queries\SourceQuoteQuery.cs" />
+    <Compile Include="Model\ContractTypePortion.cs" />
+    <Compile Include="Model\EquipmentQuoteStep1.cs" />
+    <Compile Include="Model\ContractCalculation.cs" />
+    <Compile Include="Model\ExchangeRate.cs" />
+    <Compile Include="Types.cs" />
+    <Compile Include="Core\Entity.cs" />
+    <Compile Include="Core\IAggregateRoot.cs" />
+    <Compile Include="Core\ValueObject.cs" />
+    <Compile Include="Data\BaseCreateEntityCommand.cs" />
+    <Compile Include="Data\BaseEntitiesQuery.cs" />
+    <Compile Include="Data\BaseEntityCommand.cs" />
+    <Compile Include="Data\BaseEntityQuery.cs" />
+    <Compile Include="Data\BaseEnumerableQuery.cs" />
+    <Compile Include="Data\Commands\CommandWithIdDefinition.cs" />
+    <Compile Include="Data\Commands\Sources\SourceModalityCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceModalityDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceModalityUpdateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSupplierCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSupplierDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSupplierUpdateCommand.cs" />
+    <Compile Include="Data\Commands\TestSaveCommand.cs" />
+    <Compile Include="Data\DataModel\Branch.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\BrandModel.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Contract.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\ContractType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Country.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Currency.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Customer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\CustomerLocality.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Department.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Device.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\DeviceComponent.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\DeviceType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\HospitalDepartment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\MetaData.cs" />
+    <Compile Include="Data\DataModel\Modality.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Quote.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Room.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Site.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\SourceQuote.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\SubModality.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Supplier.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Test.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DbEntity.cs" />
+    <Compile Include="Data\DbEntityWithId.cs" />
+    <Compile Include="Data\EntityExtensions.cs" />
+    <Compile Include="Data\EntitySet.cs" />
+    <Compile Include="Data\ICommandDefinition.cs" />
+    <Compile Include="Data\ICommandHandler.cs" />
+    <Compile Include="Data\ICommandProcessor.cs" />
+    <Compile Include="Data\IEntityReader.cs" />
+    <Compile Include="Data\IEntityWriter.cs" />
+    <Compile Include="Data\IQueryDefinition.cs" />
+    <Compile Include="Data\IQueryHandler.cs" />
+    <Compile Include="Data\IQueryProcessor.cs" />
+    <Compile Include="Data\ISoftDeleteEntity.cs" />
+    <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Data\OrderByDirection.cs" />
+    <Compile Include="Data\Queries\DevicesQuery.cs" />
+    <Compile Include="Data\Queries\ContractTypeQuery.cs" />
+    <Compile Include="Data\Queries\SourceQuotesQuery.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Queries\TestQuery.cs" />
+    <Compile Include="Data\QueryableExtensions.cs" />
+    <Compile Include="DomainServices\ICurrentUserFactory.cs" />
+    <Compile Include="Events\DomainEvents.cs" />
+    <Compile Include="Events\IDomainEvent.cs" />
+    <Compile Include="Events\IEventDispatcher.cs" />
+    <Compile Include="Calculations\Quoting.cs" />
+    <Compile Include="Model\Device.cs" />
+    <Compile Include="Model\EquipmentQuote.cs" />
+    <Compile Include="Model\OneYearCalculation.cs" />
+    <Compile Include="Model\SourceQuote.cs" />
+    <Compile Include="Model\Test.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Data\DataModel\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

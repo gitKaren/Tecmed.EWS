@@ -1,0 +1,84 @@
+﻿@model EWS.Domain.Model.EquipmentQuoteStep1
+
+
+@*<style>
+        .labelright {
+            padding-right: 2px;
+            vertical-align: central;
+
+        }
+
+    </style>*@
+
+<div class="clearfix"></div>
+
+<div class="container-fluid">
+
+    @for (int i = 0; i < Model.ContractCalculationParameters.Count; i++) {
+        @Html.HiddenFor(modelitem => Model.ContractCalculationParameters[i].ContractCalculationID)
+        @Html.HiddenFor(modelitem => Model.ContractCalculationParameters[i].ContractTypeID)
+        <div id="ContractCalculation_@i" class="">
+            <div class="col-xs-4">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <span class="control-label col-xs-2 pad3 r-align">
+                            @Html.EditorFor(modelitem => Model.ContractCalculationParameters[i].Selected)
+                        </span>
+                        <div class="col-xs-9 pad3">
+                            @Html.EditorFor(modelitem => Model.ContractCalculationParameters[i].ContractType, new
+                            {
+                                htmlAttributes = new { @class = "form-control", @readonly = "readonly" }
+                            })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2 pad3 r-align" style="border: solid 0px red;">
+                            @Html.LabelFor(modelitem => Model.ContractCalculationParameters[i].SellingPricePerc, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-3 pad3">
+                            @Html.EditorFor(modelitem => Model.ContractCalculationParameters[i].SellingPricePerc, new { htmlAttributes = new { @class = "form-control text-right", id = "SellingPricePerc"}})
+                        </div>
+                        <div class="col-xs-2 pad3 r-align">
+                            @Html.LabelFor(modelitem => Model.ContractCalculationParameters[i].SellingPricePercAmount, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-4 pad3">
+                            @Html.EditorFor(modelitem => Model.ContractCalculationParameters[i].SellingPricePercAmount, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly", id = "SellingPricePercAmount" } })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 pad3 r-align">
+                            @Html.LabelFor(modelitem => Model.ContractCalculationParameters[i].ROEPortion, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-3 pad3">
+                            @Html.EditorFor(modelitem => Model.ContractCalculationParameters[i].ROEPortion, new { htmlAttributes = new { @class = "form-control text-right", id="ROEPortion" } })
+                        </div>
+                        <div class="col-xs-2 pad3 r-align">
+                            @Html.LabelFor(modelitem => Model.ContractCalculationParameters[i].ROEPortionAmount, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-4 pad3">
+                            @Html.EditorFor(modelitem => Model.ContractCalculationParameters[i].ROEPortionAmount, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly", id="ROEPortionAmount" } })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 pad3 r-align">
+                            @Html.LabelFor(modelitem => Model.ContractCalculationParameters[i].ZARPortion, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-3 pad3">
+                            @Html.EditorFor(modelitem => Model.ContractCalculationParameters[i].ZARPortion, new { htmlAttributes = new { @class = "form-control text-right", id = "ZARPortion" } })
+                        </div>
+                        <div class="col-xs-2 pad3 r-align">
+                            @Html.LabelFor(modelitem => Model.ContractCalculationParameters[i].ZARPortionAmount, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-4 pad3">
+                            @Html.EditorFor(modelitem => Model.ContractCalculationParameters[i].ZARPortionAmount, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly", id = "ZARPortionAmount" } })
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

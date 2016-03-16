@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Warranty System";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<!DOCTYPE html>
+
+
+
+@using (Html.BeginForm(MVC.Quote.ChooseMode(), FormMethod.Post, new { role = "form", id = "MainForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <form>
+        <div class="clearfix"></div>   
+        <div class="panel-heading">
+            <h3 class="panel-title">Choose input method</h3>
+        </div>
+        <div class="panel-body">
+                <input type="radio" name="Method" value="Current" /> Current Q.P.C/E.W.C
+
+                <input type="radio" name="Method" value="New" checked/> Equipment
+
+                        
+                &nbsp;
+                <button id="btnSearch" type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Next</button>
+
+        </div>
+       @*@Html.ActionLink("Add People", MVC.Audit.Audit.RequestPerson(Model.ID), new { @class = "btn btn-primary btn-sm" })*@
+</form>
+            
+}

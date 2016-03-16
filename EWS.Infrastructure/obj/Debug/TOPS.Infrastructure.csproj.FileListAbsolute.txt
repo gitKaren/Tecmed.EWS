@@ -1,0 +1,14 @@
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\obj\Debug\TOPS.Infrastructure.csprojResolveAssemblyReference.cache
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\TOPS.Infrastructure.dll.config
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\TOPS.Infrastructure.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\TOPS.Infrastructure.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\EntityFramework.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\TOPS.Domain.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\Spectrum.SharedKernel.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\TOPS.Domain.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\EntityFramework.xml
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\bin\Debug\Spectrum.SharedKernel.pdb
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\obj\Debug\TOPS.Infrastructure.dll
+C:\DevWebsites\Tecmed\TOPS\TOPS.Infrastructure\obj\Debug\TOPS.Infrastructure.pdb
