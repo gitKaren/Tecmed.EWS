@@ -15,10 +15,12 @@ namespace EWS.Domain.Data.Commands
         public short ContractTypeID { get; set; }
         public decimal SellingPricePerc { get; set; }
         public decimal SellingPricePercAmount { get; set; }
+        public decimal BasePrice { get; set; }
         public decimal ROEPortion { get; set; }
         public decimal ZARPortion { get; set; }
         public decimal ROEPortionAmount { get; set; }
         public decimal ZARPortionAmount { get; set; }
+
     }
 
     public class QuoteCalculationSaveCommandHandler : ICommandHandler<QuoteCalculationSaveCommand>
@@ -42,6 +44,7 @@ namespace EWS.Domain.Data.Commands
                     ContractTypeID = command.ContractTypeID,
                     SellingPricePerc = command.SellingPricePerc,
                     SellingPricePercAmount = command.SellingPricePercAmount,
+                    BasePrice = command.BasePrice,
                     ROEPortion = command.ROEPortion,
                     ZARPortion = command.ZARPortion,
                     ROEPortionAmount = command.ROEPortionAmount,
@@ -56,10 +59,12 @@ namespace EWS.Domain.Data.Commands
                 entity.ContractTypeID = command.ContractTypeID;
                 entity.SellingPricePerc = command.SellingPricePerc;
                 entity.SellingPricePercAmount = command.SellingPricePercAmount;
+                entity.BasePrice = command.BasePrice;
                 entity.ROEPortion = command.ROEPortion;
                 entity.ZARPortion = command.ZARPortion;
                 entity.ROEPortionAmount = command.ROEPortionAmount;
                 entity.ZARPortionAmount = command.ZARPortionAmount;
+                
             }
             
             _entities.SaveChanges();

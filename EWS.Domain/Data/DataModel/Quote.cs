@@ -19,6 +19,7 @@ namespace EWS.Domain.Data.DataModel
         {
             this.Contracts = new HashSet<Contract>();
             this.QuoteCalculations = new HashSet<QuoteCalculation>();
+            this.ContractInclusions = new HashSet<ContractInclusion>();
         }
     
         public int ID { get; set; }
@@ -32,12 +33,18 @@ namespace EWS.Domain.Data.DataModel
         public System.DateTime ROEDate { get; set; }
         public float VAT { get; set; }
         public bool Deleted { get; set; }
+        public Nullable<int> BaseContractID { get; set; }
+        public byte ContractTerm { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contract> Contracts { get; set; }
         public virtual Device Device { get; set; }
         public virtual SourceQuote SourceQuote { get; set; }
+        public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contract> Contracts { get; set; }
+        public virtual ContractTerm ContractTerm1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuoteCalculation> QuoteCalculations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContractInclusion> ContractInclusions { get; set; }
     }
 }

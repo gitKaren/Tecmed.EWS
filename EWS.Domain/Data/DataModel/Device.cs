@@ -17,9 +17,9 @@ namespace EWS.Domain.Data.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Device()
         {
-            this.Contracts = new HashSet<Contract>();
             this.Quotes = new HashSet<Quote>();
             this.SourceQuotes = new HashSet<SourceQuote>();
+            this.Contracts = new HashSet<Contract>();
         }
     
         public int ID { get; set; }
@@ -44,10 +44,10 @@ namespace EWS.Domain.Data.DataModel
         public virtual Room Room { get; set; }
         public virtual SubModality SubModality { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contract> Contracts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Quote> Quotes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SourceQuote> SourceQuotes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contract> Contracts { get; set; }
     }
 }

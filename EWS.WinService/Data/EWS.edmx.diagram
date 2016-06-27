@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7cb889fb58924b7da8524ce5486043ca" Name="Diagram1">
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Branch" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.BrandModel" Width="1.5" PointX="9.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Contract" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.ContractInclusion" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.ContractItem" Width="1.5" PointX="10.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.ContractTerm" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.ContractType" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Country" Width="1.5" PointX="17" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Currency" Width="1.5" PointX="14.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Customer" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.CustomerLocality" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Department" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Device" Width="1.5" PointX="12" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.DeviceComponent" Width="1.5" PointX="12" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.DeviceType" Width="1.5" PointX="12" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.HospitalDepartment" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Modality" Width="1.5" PointX="7.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.ProductLine" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Quote" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.QuoteCalculation" Width="1.5" PointX="13.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.QuoteCalculationItem" Width="1.5" PointX="15.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Room" Width="1.5" PointX="9.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Site" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.SourceQuote" Width="1.5" PointX="14.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.SubModality" Width="1.5" PointX="9.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tecmed_EWSModel.Supplier" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Site_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_BrandModel_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_DeviceComponent_BrandModel" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Contract_ContractTerm" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Contract_ContractType" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Contract_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Contract_Device" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Contract_Quote" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_ContractItem_Contract" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_ContractInclusion_Modality" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_ContractItem_ContractTerm" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_ContractItem_ContractType" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Quote_ContractTerm" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_QuoteCalculation_ContractType" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Country_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Customer_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Customer_CustomerLocality" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Customers_CustomerLocality" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Quote_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Site_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_SourceQuote_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Department_HospitalDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Department_Site" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Room_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Device_BrandModel" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Device_Room" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Device_SubModality" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Quote_Device" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_SourceQuote_Device" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_DeviceType_SubModality" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_SubModality_Modality" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_ProductLine_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_Quote_SourceQuote" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_QuoteCalculation_Quote" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_QuoteCalculationItem_QuoteCalculation" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.FK_SourceQuote_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="Tecmed_EWSModel.Quote_ContractInclusion" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

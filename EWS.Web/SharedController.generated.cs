@@ -40,18 +40,24 @@ namespace T4MVC
             {
                 public readonly string _ContractsCalculation = "_ContractsCalculation";
                 public readonly string _DeviceInfo = "_DeviceInfo";
+                public readonly string _Grid = "_Grid";
+                public readonly string _GridPager = "_GridPager";
                 public readonly string _Layout = "_Layout";
                 public readonly string _SourceQuoteList = "_SourceQuoteList";
                 public readonly string _temp = "_temp";
+                public readonly string _YearlyCalculation = "_YearlyCalculation";
                 public readonly string Error = "Error";
                 public readonly string Lockout = "Lockout";
                 public readonly string ValidationSummary = "ValidationSummary";
             }
             public readonly string _ContractsCalculation = "~/Views/Shared/_ContractsCalculation.cshtml";
             public readonly string _DeviceInfo = "~/Views/Shared/_DeviceInfo.cshtml";
+            public readonly string _Grid = "~/Views/Shared/_Grid.cshtml";
+            public readonly string _GridPager = "~/Views/Shared/_GridPager.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _SourceQuoteList = "~/Views/Shared/_SourceQuoteList.cshtml";
             public readonly string _temp = "~/Views/Shared/_temp.cshtml";
+            public readonly string _YearlyCalculation = "~/Views/Shared/_YearlyCalculation.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
             public readonly string Lockout = "~/Views/Shared/Lockout.cshtml";
             public readonly string ValidationSummary = "~/Views/Shared/ValidationSummary.cshtml";
@@ -60,8 +66,13 @@ namespace T4MVC
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
+                public readonly string ContractCalculation = "ContractCalculation";
+                public readonly string ContractCalculations = "ContractCalculations";
+                public readonly string Customer = "Customer";
+                public readonly string DateTime = "DateTime";
                 public readonly string Device = "Device";
                 public readonly string ExchangeRate = "ExchangeRate";
+                public readonly string QuoteTable = "QuoteTable";
             }
         }
     }

@@ -15,10 +15,13 @@ namespace EWS.Domain.Data.Commands
         public int DeviceID { get; set; }
         public string TenderNo { get; set; }
         public string QuoteRef { get; set; }
+        public int? BaseContractID { get; set; }
         public decimal SellingPrice { get; set; }
+        public decimal BasePrice { get; set; }
         public decimal ROE { get; set; }
         public System.DateTime ROEDate { get; set; }
         public float VAT { get; set; }
+        public byte ContractTerm { get; set; }
         public bool Deleted { get; set; }
     }
 
@@ -45,9 +48,11 @@ namespace EWS.Domain.Data.Commands
                     TenderNo = command.TenderNo,
                     QuoteRef = command.QuoteRef,
                     SellingPrice = command.SellingPrice,
+                    BaseContractID = command.BaseContractID,
                     ROE = command.ROE,
                     ROEDate = command.ROEDate,
                     VAT = command.VAT,
+                    ContractTerm = command.ContractTerm,
                     Deleted = command.Deleted                   
                 };
                 _entities.Create(entity);
@@ -55,14 +60,15 @@ namespace EWS.Domain.Data.Commands
             else
             {
                 entity.CustomerID = command.CustomerID;
-                entity.CustomerID = command.CustomerID;
                 entity.DeviceID = command.DeviceID;
                 entity.TenderNo = command.TenderNo;
                 entity.QuoteRef = command.QuoteRef;
+                entity.BaseContractID = command.BaseContractID;
                 entity.SellingPrice = command.SellingPrice;
                 entity.ROE = command.ROE;
                 entity.ROEDate = command.ROEDate;
                 entity.VAT = command.VAT;
+                entity.ContractTerm = command.ContractTerm;
                 entity.Deleted = command.Deleted;
             }
             

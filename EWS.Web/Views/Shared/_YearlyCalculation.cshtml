@@ -1,5 +1,11 @@
-﻿@model IEnumerable<EWS.Domain.Model.OneYearCalculation>
+﻿@model EWS.Domain.Model.QuoteCalculationItem[]
 
+<style >
+    .nopadding {
+   padding: 0 ;
+   margin: 0 ;
+}
+</style>
 
 <div class="bottom-gap-10">
     
@@ -12,16 +18,17 @@
             <div class="panel-heading">
 
                 <div class="row">
-                    <span class="col-xs-1 text-center small">@Html.LabelFor(model => model.First().YearNo)</span>
-                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model.First().ROEPortion)</span>
-                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model.First().ZARPortion)</span>
-                    <span class="col-xs-1 text-center">@Html.LabelFor(model => model.First().ExcludingROE)</span>
-                    <span class="col-xs-1">@Html.LabelFor(model => model.First().TOPSROE)</span>
-                    <span class="col-xs-1">@Html.LabelFor(model => model.First().NewROE)</span>
-                    <span class="col-xs-2  text-right">@Html.LabelFor(model => model.First().AmountExclVAT)</span>
-                    <span class="col-xs-1">@Html.LabelFor(model => model.First().StartDate)</span>
-                    <span class="col-xs-1">@Html.LabelFor(model => model.First().EndDate)</span>
-                    <span class="col-xs-2 text-right">@Html.LabelFor(model => model.First().AmountInclVAT)</span>
+                    <span class="col-xs-1 text-center">@Html.LabelFor(model => model[0].YearNo)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model[0].ROEPortion)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model[0].ZARPortion)</span>
+                    <span class="col-xs-1 text-center">@Html.LabelFor(model => model[0].UseNewROE)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model[0].TOPSROE)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model[0].NewROE)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model[0].AmountExclVAT)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model[0].Increment)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model[0].StartDate)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model[0].EndDate)</span>
+                    <span class="col-xs-2 text-right">@Html.LabelFor(model => model[0].AmountInclVAT)</span>
                 </div>
                 </div>
         <div class="panel-body">
@@ -33,10 +40,11 @@
                     <div class="col-xs-1 text-center">@Html.DisplayFor(modelItem => item.YearNo) </div>
                     <div class="col-xs-1 text-right">@Html.DisplayFor(modelItem => item.ROEPortion) </div>
                     <div class="col-xs-1 text-right">@Html.DisplayFor(modelItem => item.ZARPortion) </div>
-                    <div class="col-xs-1 text-center">@Html.DisplayFor(modelItem => item.ExcludingROE) </div>
+                    <div class="col-xs-1 text-center">@Html.EditorFor(modelItem => item.UseNewROE) </div>
                     <div class="col-xs-1">@Html.DisplayFor(modelItem => item.TOPSROE) </div>
                     <div class="col-xs-1">@Html.DisplayFor(modelItem => item.NewROE) </div>
-                    <div class="col-xs-2 text-right">@Html.DisplayFor(modelItem => item.AmountExclVAT) </div>
+                    <div class="col-xs-1 text-right">@Html.DisplayFor(modelItem => item.AmountExclVAT) </div>
+                    <div class="col-xs-1">@Html.EditorFor(modelItem => item.Increment, new { htmlAttributes = new { @class = "col-xs-12 text-right nopadding" } }) </div>
                     <div class="col-xs-1">@Html.DisplayFor(modelItem => item.StartDate) </div>
                     <div class="col-xs-1">@Html.DisplayFor(modelItem => item.EndDate) </div>
                     <div class="col-xs-2 text-right">@Html.DisplayFor(modelItem => item.AmountInclVAT) </div>

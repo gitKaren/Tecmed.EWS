@@ -20,7 +20,9 @@ namespace EWS.Domain.Data.DataModel
         public decimal ROEPortionAmount { get; set; }
         public decimal ZARPortionAmount { get; set; }
         public decimal ROE { get; set; }
-        public Nullable<decimal> IncrPerc { get; set; }
+        public decimal IncrPerc { get; set; }
+        public decimal AmountExclVAT { get; set; }
+        public decimal AmountInclVAT { get; set; }
     
         public virtual QuoteCalculation QuoteCalculation { get; set; }
     }

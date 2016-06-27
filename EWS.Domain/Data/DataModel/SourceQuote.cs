@@ -28,10 +28,14 @@ namespace EWS.Domain.Data.DataModel
         public decimal SellingPriceInclVAT { get; set; }
         public Nullable<decimal> SellingPriceExclVAT { get; set; }
         public float VAT { get; set; }
+        public string TenderNumber { get; set; }
+        public decimal ROE { get; set; }
+        public System.DateTime ROEDate { get; set; }
     
         public virtual Device Device { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Quote> Quotes { get; set; }
         public virtual Supplier Supplier { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

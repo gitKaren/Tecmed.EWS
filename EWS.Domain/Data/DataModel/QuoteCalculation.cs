@@ -25,6 +25,7 @@ namespace EWS.Domain.Data.DataModel
         public short ContractTypeID { get; set; }
         public decimal SellingPricePerc { get; set; }
         public decimal SellingPricePercAmount { get; set; }
+        public decimal BasePrice { get; set; }
         public decimal ROEPortion { get; set; }
         public decimal ZARPortion { get; set; }
         public decimal ROEPortionAmount { get; set; }

@@ -40,7 +40,9 @@ namespace EWS.Domain.Data.Queries
                                                               DeviceID = item.DeviceID,
                                                               DeviceDescription = item.DeviceID.ToString(),
                                                               QuoteRef = item.Ref,
-                                                              Supplier = item.Supplier.SupplierName};
+                                                              Supplier = item.Supplier.SupplierName,
+                                                              VAT = item.VAT,
+                                                              TenderNumber = item.TenderNumber};
                 models.Add(model);
             }
 

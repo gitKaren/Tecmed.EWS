@@ -23,12 +23,49 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="QuoteID" Type="int" />
+    <Property Name="TenderNo" Type="varchar" MaxLength="15" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
     <Property Name="DeviceID" Type="int" Nullable="false" />
     <Property Name="ContractTypeID" Type="smallint" Nullable="false" />
-    <Property Name="ContractDate" Type="smalldatetime" />
+    <Property Name="ContractDate" Type="smalldatetime" Nullable="false" />
     <Property Name="StartDate" Type="smalldatetime" />
     <Property Name="EndDate" Type="smalldatetime" />
+    <Property Name="ContractTerm" Type="tinyint" Nullable="false" />
+    <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="ROEDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="VAT" Type="real" Nullable="false" />
     <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContractInclusion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" Nullable="false" />
+    <Property Name="ModalityID" Type="char" MaxLength="3" />
+    <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContractItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractID" Type="int" Nullable="false" />
+    <Property Name="ContractTypeID" Type="smallint" Nullable="false" />
+    <Property Name="ContractTerm" Type="tinyint" Nullable="false" />
+    <Property Name="BasePrice" Type="money" Nullable="false" />
+    <Property Name="ROEPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="ZARPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="ROEPortionAmount" Type="money" Nullable="false" />
+    <Property Name="ZARPortionAmount" Type="money" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContractTerm">
+    <Key>
+      <PropertyRef Name="NoOfMonths" />
+    </Key>
+    <Property Name="NoOfMonths" Type="tinyint" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="15" Nullable="false" />
   </EntityType>
   <EntityType Name="ContractType">
     <Key>
@@ -175,11 +212,21 @@
     <Property Name="DeviceID" Type="int" Nullable="false" />
     <Property Name="TenderNo" Type="varchar" MaxLength="15" />
     <Property Name="QuoteRef" Type="varchar" MaxLength="15" />
+    <Property Name="BaseContractID" Type="int" />
     <Property Name="SellingPrice" Type="money" Nullable="false" />
     <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
     <Property Name="ROEDate" Type="smalldatetime" Nullable="false" />
     <Property Name="VAT" Type="real" Nullable="false" />
+    <Property Name="ContractTerm" Type="tinyint" Nullable="false" />
     <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quote_ContractInclusion">
+    <Key>
+      <PropertyRef Name="QuoteID" />
+      <PropertyRef Name="ContractIncusionID" />
+    </Key>
+    <Property Name="QuoteID" Type="int" Nullable="false" />
+    <Property Name="ContractIncusionID" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="QuoteCalculation">
     <Key>
@@ -190,6 +237,7 @@
     <Property Name="ContractTypeID" Type="smallint" Nullable="false" />
     <Property Name="SellingPricePerc" Type="decimal" Precision="5" Scale="2" Nullable="false" />
     <Property Name="SellingPricePercAmount" Type="money" Nullable="false" />
+    <Property Name="BasePrice" Type="money" Nullable="false" />
     <Property Name="ROEPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
     <Property Name="ZARPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
     <Property Name="ROEPortionAmount" Type="money" Nullable="false" />
@@ -205,7 +253,9 @@
     <Property Name="ROEPortionAmount" Type="money" Nullable="false" />
     <Property Name="ZARPortionAmount" Type="money" Nullable="false" />
     <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
-    <Property Name="IncrPerc" Type="decimal" Precision="5" Scale="3" />
+    <Property Name="IncrPerc" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="AmountExclVAT" Type="money" Nullable="false" />
+    <Property Name="AmountInclVAT" Type="money" Nullable="false" />
   </EntityType>
   <EntityType Name="Room">
     <Key>
@@ -244,6 +294,9 @@
     <Property Name="SellingPriceInclVAT" Type="money" Nullable="false" />
     <Property Name="SellingPriceExclVAT" Type="money" />
     <Property Name="VAT" Type="real" Nullable="false" />
+    <Property Name="TenderNumber" Type="varchar" MaxLength="15" />
+    <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="ROEDate" Type="smalldatetime" Nullable="false" />
   </EntityType>
   <EntityType Name="SubModality">
     <Key>
@@ -282,6 +335,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Contract_ContractTerm">
+    <End Role="ContractTerm" Type="Self.ContractTerm" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractTerm">
+        <PropertyRef Name="NoOfMonths" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="ContractTerm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Contract_ContractType">
     <End Role="ContractType" Type="Self.ContractType" Multiplicity="1" />
     <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
@@ -291,6 +356,18 @@
       </Principal>
       <Dependent Role="Contract">
         <PropertyRef Name="ContractTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -315,6 +392,54 @@
       </Principal>
       <Dependent Role="Contract">
         <PropertyRef Name="QuoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractInclusion_Modality">
+    <End Role="Modality" Type="Self.Modality" Multiplicity="0..1" />
+    <End Role="ContractInclusion" Type="Self.ContractInclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modality">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ContractInclusion">
+        <PropertyRef Name="ModalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractItem_Contract">
+    <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+    <End Role="ContractItem" Type="Self.ContractItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ContractItem">
+        <PropertyRef Name="ContractID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractItem_ContractTerm">
+    <End Role="ContractTerm" Type="Self.ContractTerm" Multiplicity="1" />
+    <End Role="ContractItem" Type="Self.ContractItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractTerm">
+        <PropertyRef Name="NoOfMonths" />
+      </Principal>
+      <Dependent Role="ContractItem">
+        <PropertyRef Name="ContractTerm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractItem_ContractType">
+    <End Role="ContractType" Type="Self.ContractType" Multiplicity="1" />
+    <End Role="ContractItem" Type="Self.ContractItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ContractItem">
+        <PropertyRef Name="ContractTypeID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -462,6 +587,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Quote_ContractInclusion_ContractInclusion">
+    <End Role="ContractInclusion" Type="Self.ContractInclusion" Multiplicity="1" />
+    <End Role="Quote_ContractInclusion" Type="Self.Quote_ContractInclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractInclusion">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Quote_ContractInclusion">
+        <PropertyRef Name="ContractIncusionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quote_ContractInclusion_Quote">
+    <End Role="Quote" Type="Self.Quote" Multiplicity="1" />
+    <End Role="Quote_ContractInclusion" Type="Self.Quote_ContractInclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quote">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Quote_ContractInclusion">
+        <PropertyRef Name="QuoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quote_ContractTerm">
+    <End Role="ContractTerm" Type="Self.ContractTerm" Multiplicity="1" />
+    <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractTerm">
+        <PropertyRef Name="NoOfMonths" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="ContractTerm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quote_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Quote_Device">
     <End Role="Device" Type="Self.Device" Multiplicity="1" />
     <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
@@ -558,6 +731,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SourceQuote_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="SourceQuote" Type="Self.SourceQuote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SourceQuote">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SourceQuote_Device">
     <End Role="Device" Type="Self.Device" Multiplicity="1" />
     <End Role="SourceQuote" Type="Self.SourceQuote" Multiplicity="*" />
@@ -598,6 +783,9 @@
     <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BrandModel" EntityType="Self.BrandModel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractInclusion" EntityType="Self.ContractInclusion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractItem" EntityType="Self.ContractItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractTerm" EntityType="Self.ContractTerm" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ContractType" EntityType="Self.ContractType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
@@ -611,6 +799,7 @@
     <EntitySet Name="Modality" EntityType="Self.Modality" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductLine" EntityType="Self.ProductLine" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Quote" EntityType="Self.Quote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quote_ContractInclusion" EntityType="Self.Quote_ContractInclusion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="QuoteCalculation" EntityType="Self.QuoteCalculation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="QuoteCalculationItem" EntityType="Self.QuoteCalculationItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
@@ -623,8 +812,16 @@
       <End Role="Supplier" EntitySet="Supplier" />
       <End Role="BrandModel" EntitySet="BrandModel" />
     </AssociationSet>
+    <AssociationSet Name="FK_Contract_ContractTerm" Association="Self.FK_Contract_ContractTerm">
+      <End Role="ContractTerm" EntitySet="ContractTerm" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
     <AssociationSet Name="FK_Contract_ContractType" Association="Self.FK_Contract_ContractType">
       <End Role="ContractType" EntitySet="ContractType" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Customer" Association="Self.FK_Contract_Customer">
+      <End Role="Customer" EntitySet="Customer" />
       <End Role="Contract" EntitySet="Contract" />
     </AssociationSet>
     <AssociationSet Name="FK_Contract_Device" Association="Self.FK_Contract_Device">
@@ -634,6 +831,22 @@
     <AssociationSet Name="FK_Contract_Quote" Association="Self.FK_Contract_Quote">
       <End Role="Quote" EntitySet="Quote" />
       <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractInclusion_Modality" Association="Self.FK_ContractInclusion_Modality">
+      <End Role="Modality" EntitySet="Modality" />
+      <End Role="ContractInclusion" EntitySet="ContractInclusion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractItem_Contract" Association="Self.FK_ContractItem_Contract">
+      <End Role="Contract" EntitySet="Contract" />
+      <End Role="ContractItem" EntitySet="ContractItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractItem_ContractTerm" Association="Self.FK_ContractItem_ContractTerm">
+      <End Role="ContractTerm" EntitySet="ContractTerm" />
+      <End Role="ContractItem" EntitySet="ContractItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractItem_ContractType" Association="Self.FK_ContractItem_ContractType">
+      <End Role="ContractType" EntitySet="ContractType" />
+      <End Role="ContractItem" EntitySet="ContractItem" />
     </AssociationSet>
     <AssociationSet Name="FK_Country_Currency" Association="Self.FK_Country_Currency">
       <End Role="Currency" EntitySet="Currency" />
@@ -683,6 +896,22 @@
       <End Role="Supplier" EntitySet="Supplier" />
       <End Role="ProductLine" EntitySet="ProductLine" />
     </AssociationSet>
+    <AssociationSet Name="FK_Quote_ContractInclusion_ContractInclusion" Association="Self.FK_Quote_ContractInclusion_ContractInclusion">
+      <End Role="ContractInclusion" EntitySet="ContractInclusion" />
+      <End Role="Quote_ContractInclusion" EntitySet="Quote_ContractInclusion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_ContractInclusion_Quote" Association="Self.FK_Quote_ContractInclusion_Quote">
+      <End Role="Quote" EntitySet="Quote" />
+      <End Role="Quote_ContractInclusion" EntitySet="Quote_ContractInclusion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_ContractTerm" Association="Self.FK_Quote_ContractTerm">
+      <End Role="ContractTerm" EntitySet="ContractTerm" />
+      <End Role="Quote" EntitySet="Quote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_Customer" Association="Self.FK_Quote_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Quote" EntitySet="Quote" />
+    </AssociationSet>
     <AssociationSet Name="FK_Quote_Device" Association="Self.FK_Quote_Device">
       <End Role="Device" EntitySet="Device" />
       <End Role="Quote" EntitySet="Quote" />
@@ -714,6 +943,10 @@
     <AssociationSet Name="FK_Site_Customer" Association="Self.FK_Site_Customer">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Site" EntitySet="Site" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceQuote_Customer" Association="Self.FK_SourceQuote_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="SourceQuote" EntitySet="SourceQuote" />
     </AssociationSet>
     <AssociationSet Name="FK_SourceQuote_Device" Association="Self.FK_SourceQuote_Device">
       <End Role="Device" EntitySet="Device" />

@@ -72,53 +72,31 @@
     <Compile Include="Data\Commands\Sources\SourceCurrencyCreateCommand.cs" />
     <Compile Include="Data\Commands\Sources\SourceCurrencyDeleteCommand.cs" />
     <Compile Include="Data\Commands\Sources\SourceCurrencyUpdateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceDevice_CreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceDevice_DeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceDevice_UpdateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceDepartmentCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceCustomerLocalityCreateCommand.cs" />
     <Compile Include="Data\Commands\Sources\SourceProductLineCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceCustomer_DeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceDepartmentDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceCustomerLocalityDeleteCommand.cs" />
     <Compile Include="Data\Commands\Sources\SourceProductLineDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceCustomer_UpdateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceDepartmentUpdateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceCustomerLocalityUpdateCommand.cs" />
     <Compile Include="Data\Commands\Sources\SourceProductLineUpdateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceRoom_CreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSite_CreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceRoom_DeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceRoom_UpdateCommand.cs" />
     <Compile Include="Data\Commands\Sources\SourceSubModalityCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSite_DeleteCommand.cs" />
     <Compile Include="Data\Commands\Sources\SourceSubModalityDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSite_UpdateCommand.cs" />
     <Compile Include="Data\Commands\Sources\SourceSubModalityUpdateCommand.cs" />
     <Compile Include="Data\Commands\QuoteSaveCommand.cs" />
-    <Compile Include="Data\DataModel\Contract_Type.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\DataModel\ProductLine.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\DataModel\QuoteCalculation.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\DataModel\QuoteCalculationItem.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Queries\QuoteCalculationsQuery.cs" />
-    <Compile Include="Data\Queries\QuotesQuery.cs" />
-    <Compile Include="Data\Queries\QuoteQuery.cs" />
-    <Compile Include="Data\Queries\ContractTypesQuery.cs" />
-    <Compile Include="Data\Queries\DeviceQuery.cs" />
-    <Compile Include="Data\Queries\CurrencyQuery.cs" />
-    <Compile Include="Data\Queries\SourceQuoteQuery.cs" />
-    <Compile Include="Model\ContractTypePortion.cs" />
-    <Compile Include="Model\EquipmentQuoteStep1.cs" />
-    <Compile Include="Model\ContractCalculation.cs" />
-    <Compile Include="Model\ExchangeRate.cs" />
-    <Compile Include="Types.cs" />
-    <Compile Include="Core\Entity.cs" />
-    <Compile Include="Core\IAggregateRoot.cs" />
-    <Compile Include="Core\ValueObject.cs" />
-    <Compile Include="Data\BaseCreateEntityCommand.cs" />
-    <Compile Include="Data\BaseEntitiesQuery.cs" />
-    <Compile Include="Data\BaseEntityCommand.cs" />
-    <Compile Include="Data\BaseEntityQuery.cs" />
-    <Compile Include="Data\BaseEnumerableQuery.cs" />
-    <Compile Include="Data\Commands\CommandWithIdDefinition.cs" />
-    <Compile Include="Data\Commands\Sources\SourceModalityCreateCommand.cs" />
-    <Compile Include="Data\Commands\Sources\SourceModalityDeleteCommand.cs" />
-    <Compile Include="Data\Commands\Sources\SourceModalityUpdateCommand.cs" />
-    <Compile Include="Data\Commands\Sources\SourceSupplierCreateCommand.cs" />
-    <Compile Include="Data\Commands\Sources\SourceSupplierDeleteCommand.cs" />
-    <Compile Include="Data\Commands\Sources\SourceSupplierUpdateCommand.cs" />
-    <Compile Include="Data\Commands\TestSaveCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceCustomer_CreateCommand.cs" />
     <Compile Include="Data\DataModel\Branch.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -128,7 +106,19 @@
     <Compile Include="Data\DataModel\Contract.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\DataModel\ContractInclusion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\ContractItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\ContractTerm.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\DataModel\ContractType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\Contract_Type.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\DataModel\Country.cs">
@@ -158,16 +148,19 @@
     <Compile Include="Data\DataModel\HospitalDepartment.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\DataModel\MetaData.cs" />
     <Compile Include="Data\DataModel\Modality.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\DataModel\Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Data\DataModel\ProductLine.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\DataModel\Quote.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\QuoteCalculation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataModel\QuoteCalculationItem.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\DataModel\Room.cs">
@@ -186,6 +179,52 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\DataModel\Test.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Queries\ContractItemQuery.cs" />
+    <Compile Include="Data\Queries\ContractItemsQuery.cs" />
+    <Compile Include="Data\Queries\ContractTermQuery.cs" />
+    <Compile Include="Data\Queries\ContractTermsQuery.cs" />
+    <Compile Include="Data\Queries\ContractInclusionQuery.cs" />
+    <Compile Include="Data\Queries\ContractInclusionsQuery.cs" />
+    <Compile Include="Data\Queries\CustomerQuery.cs" />
+    <Compile Include="Data\Queries\QuoteCalculationItemsQuery.cs" />
+    <Compile Include="Data\Queries\QuoteCalculationsQuery.cs" />
+    <Compile Include="Data\Queries\ContractQuery.cs" />
+    <Compile Include="Data\Queries\ContractsQuery.cs" />
+    <Compile Include="Data\Queries\QuotesQuery.cs" />
+    <Compile Include="Data\Queries\QuoteQuery.cs" />
+    <Compile Include="Data\Queries\ContractTypesQuery.cs" />
+    <Compile Include="Data\Queries\DeviceQuery.cs" />
+    <Compile Include="Data\Queries\CurrencyQuery.cs" />
+    <Compile Include="Data\Queries\SourceQuoteQuery.cs" />
+    <Compile Include="Defaults.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\EnterCurrentQuote.cs" />
+    <Compile Include="Model\EnterContractCalculation.cs" />
+    <Compile Include="Model\Quote.cs" />
+    <Compile Include="Model\ExchangeRate.cs" />
+    <Compile Include="Types.cs" />
+    <Compile Include="Core\Entity.cs" />
+    <Compile Include="Core\IAggregateRoot.cs" />
+    <Compile Include="Core\ValueObject.cs" />
+    <Compile Include="Data\BaseCreateEntityCommand.cs" />
+    <Compile Include="Data\BaseEntitiesQuery.cs" />
+    <Compile Include="Data\BaseEntityCommand.cs" />
+    <Compile Include="Data\BaseEntityQuery.cs" />
+    <Compile Include="Data\BaseEnumerableQuery.cs" />
+    <Compile Include="Data\Commands\CommandWithIdDefinition.cs" />
+    <Compile Include="Data\Commands\Sources\SourceModalityCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceModalityDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceModalityUpdateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSupplierCreateCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSupplierDeleteCommand.cs" />
+    <Compile Include="Data\Commands\Sources\SourceSupplierUpdateCommand.cs" />
+    <Compile Include="Data\Commands\TestSaveCommand.cs" />
+    <Compile Include="Data\DataModel\MetaData.cs" />
+    <Compile Include="Data\DataModel\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\DbEntity.cs" />
@@ -216,8 +255,8 @@
     <Compile Include="Events\IEventDispatcher.cs" />
     <Compile Include="Calculations\Quoting.cs" />
     <Compile Include="Model\Device.cs" />
-    <Compile Include="Model\EquipmentQuote.cs" />
-    <Compile Include="Model\OneYearCalculation.cs" />
+    <Compile Include="Model\EnterEquipmentQuote.cs" />
+    <Compile Include="Model\QuoteCalculationItem.cs" />
     <Compile Include="Model\SourceQuote.cs" />
     <Compile Include="Model\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

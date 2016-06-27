@@ -39,6 +39,15 @@ namespace EWS.Domain.Model
         [Display(Name = "VAT"), DisplayFormat(DataFormatString = "{0:C2}")]
         public float VAT { get; set; }
 
+        [Display(Name = "Tender No")]
+        public string TenderNumber { get; set; }
+
+        [Display(Name = "TOPS R.O.E.")]
+        public decimal ROE { get; set; }
+
+        [Display(Name = "TOPS R.O.E. Date")]
+        public System.DateTime ROEDate { get; set; }
+
         public bool Selected { get; set; }
     }
 }

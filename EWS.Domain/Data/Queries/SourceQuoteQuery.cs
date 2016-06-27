@@ -27,22 +27,31 @@ namespace EWS.Domain.Data.Queries
         {
             SourceQuote entity =
                 _entities.Query<SourceQuote>()
-                    .Where(p => p.Ref.ToLower().Contains(query.QuoteRef.ToLower())
+                    .Where(p => p.Ref.ToLower() == query.QuoteRef.ToLower()
                            ).FirstOrDefault<SourceQuote>();
             List<Domain.Model.SourceQuote> models = new List<Domain.Model.SourceQuote>();
 
-            Domain.Model.SourceQuote model = new Domain.Model.SourceQuote()
-                                                        {
-                                                            Date = entity.Date,
-                                                            DeviceID = entity.DeviceID,
-                                                            DeviceDescription = entity.DeviceID.ToString(),
-                                                            QuoteRef = entity.Ref,
-                                                            Supplier = entity.Supplier.SupplierName,
-                                                            SellingPriceInclVAT = entity.SellingPriceInclVAT,
-                                                            VAT = entity.VAT
-                                                           
-                                                        };
-            return model;
+            if (entity == null)
+                return null;
+            else
+            {
+                Domain.Model.SourceQuote model = new Domain.Model.SourceQuote()
+                                                            {
+                                                                Date = entity.Date,
+                                                                DeviceID = entity.DeviceID,
+                                                                DeviceDescription = entity.DeviceID.ToString(),
+                                                                QuoteRef = entity.Ref,
+                                                                Supplier = entity.Supplier.SupplierName,
+                                                                SellingPriceInclVAT = entity.SellingPriceInclVAT,
+                                                                VAT = entity.VAT,
+                                                                TenderNumber = entity.TenderNumber,
+                                                                ROE = entity.ROE,
+                                                                ROEDate = entity.ROEDate
+
+                                                            };
+                return model;
+            }
+            
         }
     }
 }

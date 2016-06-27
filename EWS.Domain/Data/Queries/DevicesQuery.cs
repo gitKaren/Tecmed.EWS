@@ -42,12 +42,14 @@ namespace EWS.Domain.Data.Queries
             foreach (Device device in devices)
             {
                 Domain.Model.Device model = new Model.Device(device.ID,
+                                                                device.SerialNo,
                                                                 device.Room.Department.Site.SiteName,
                                                                 device.Room.Department.HospitalDepartment.HospitalDepartmentName,
                                                                 device.Room.RoomNo,
                                                                 device.SubModality.Modality.ModalityName,
+                                                                device.SubModality.Modality.ID,
                                                                 device.SubModality.SubModalityName,
-                                                                device.ProductLine.supplierID,
+                                                                device.ProductLine.Supplier.SupplierName,
                                                                 device.ProductLine.ProductLineName,
                                                                 device.ProductLine.ProductLineName + " " + device.SerialNo
 

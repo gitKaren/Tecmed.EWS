@@ -11,6 +11,7 @@ namespace EWS.Domain.Data.Queries
     {
         public int ID { get; set; }
         public string QuoteRef { get; set; }
+        public int BaseContractID { get; set; }
     }
 
     public class QuoteQueryHandler : IQueryHandler<QuoteQuery, Quote>
@@ -24,9 +25,10 @@ namespace EWS.Domain.Data.Queries
 
         public Quote Handle(QuoteQuery query)
         {
-            return _entities.Query<Quote>().First(p => (p.ID == query.ID || query.ID == 0) 
+            return _entities.Query<Quote>().FirstOrDefault(p => (p.ID == query.ID || query.ID == 0) 
                                                          && (p.QuoteRef == query.QuoteRef || string.IsNullOrEmpty(query.QuoteRef) )
-                                                   );           
+                                                         && (p.BaseContractID == query.BaseContractID || query.BaseContractID == 0)
+                                                            );           
         }
     }
 }

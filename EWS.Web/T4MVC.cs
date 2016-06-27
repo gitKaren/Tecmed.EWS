@@ -27,10 +27,12 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static partial class MVC
 {
+    public static EWS.Web.Areas.Admin.Controllers.ContractServicesController ContractServices = new EWS.Web.Areas.Admin.Controllers.T4MVC_ContractServicesController();
     public static EWS.Web.Controllers.HomeController Home = new EWS.Web.Controllers.T4MVC_HomeController();
     public static EWS.Web.Controllers.LoginController Login = new EWS.Web.Controllers.T4MVC_LoginController();
     public static EWS.Web.Controllers.QuoteController Quote = new EWS.Web.Controllers.T4MVC_QuoteController();
     public static EWS.Web.Controllers.UserController User = new EWS.Web.Controllers.T4MVC_UserController();
+    public static T4MVC.AdminController Admin = new T4MVC.AdminController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -85,6 +87,9 @@ namespace Links
             public static readonly string SubmitForm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/SubmitForm.min.js") ? Url("SubmitForm.min.js") : Url("SubmitForm.js");
         }
     
+        public static readonly string gridmvc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/gridmvc.min.js") ? Url("gridmvc.min.js") : Url("gridmvc.js");
+        public static readonly string gridmvc_lang_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/gridmvc.lang.ru.min.js") ? Url("gridmvc.lang.ru.min.js") : Url("gridmvc.lang.ru.js");
+        public static readonly string gridmvc_min_js = Url("gridmvc.min.js");
         public static readonly string jquery_1_10_2_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.10.2.intellisense.min.js") ? Url("jquery-1.10.2.intellisense.min.js") : Url("jquery-1.10.2.intellisense.js");
         public static readonly string jquery_1_10_2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.10.2.min.js") ? Url("jquery-1.10.2.min.js") : Url("jquery-1.10.2.js");
         public static readonly string jquery_1_10_2_min_js = Url("jquery-1.10.2.min.js");
@@ -120,6 +125,8 @@ namespace Links
     
         public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
         public static readonly string font_awesome_min_css = Url("font-awesome.min.css");
+        public static readonly string Gridmvc_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Gridmvc.min.css") ? Url("Gridmvc.min.css") : Url("Gridmvc.css");
+             
         public static readonly string Hierarchy_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Hierarchy.min.css") ? Url("Hierarchy.min.css") : Url("Hierarchy.css");
              
         public static readonly string jasny_bootstrap_min_css = Url("jasny-bootstrap.min.css");
@@ -212,6 +219,9 @@ namespace Links
                 public const string _references_js = "~/Scripts/_references.js"; 
                 public const string bootstrap_js = "~/Scripts/bootstrap.js"; 
                 public const string bootstrap_min_js = "~/Scripts/bootstrap.min.js"; 
+                public const string gridmvc_js = "~/Scripts/gridmvc.js"; 
+                public const string gridmvc_lang_ru_js = "~/Scripts/gridmvc.lang.ru.js"; 
+                public const string gridmvc_min_js = "~/Scripts/gridmvc.min.js"; 
                 public const string jquery_1_10_2_intellisense_js = "~/Scripts/jquery-1.10.2.intellisense.js"; 
                 public const string jquery_1_10_2_js = "~/Scripts/jquery-1.10.2.js"; 
                 public const string jquery_1_10_2_min_js = "~/Scripts/jquery-1.10.2.min.js"; 
@@ -284,6 +294,7 @@ namespace Links
                 public const string BaseStyles_css = "~/Content/BaseStyles.css";
                 public const string bootstrap_min_css = "~/Content/bootstrap.min.css";
                 public const string font_awesome_min_css = "~/Content/font-awesome.min.css";
+                public const string Gridmvc_css = "~/Content/Gridmvc.css";
                 public const string Hierarchy_css = "~/Content/Hierarchy.css";
                 public const string jasny_bootstrap_min_css = "~/Content/jasny-bootstrap.min.css";
             }

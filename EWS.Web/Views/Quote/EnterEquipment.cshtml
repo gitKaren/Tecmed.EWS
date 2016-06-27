@@ -1,0 +1,151 @@
+﻿@using EWS.Web.Models;
+@model EWS.Domain.Model.EnterEquipmentQuote
+
+@{
+    ViewBag.Title = "Extended Warranty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    <script type="text/javascript">
+        //Ajax Submit
+        var DoPortions = function (div, amt) {
+            var x1 = $(div + " #ROEPortion").val() * amt / 100;
+            $(div + " #ROEPortionAmount").val(parseFloat(x1).toFixed(2));
+
+
+            var x2 = $(div + " #ZARPortion").val() * amt / 100;
+            $(div + " #ZARPortionAmount").val(parseFloat(x2).toFixed(2));
+        }
+
+        $(document).ready(function () {
+            $('input[type=text][id=SellingPricePerc]').change(function () {
+                var id = $(this).attr("id");
+
+                if ($.isNumeric(this.value)) {
+                    var txtb;
+                    var div;
+                    for (i = 0; i < @Model.ContractCalculations.Count() ; i++) {
+
+                        if ($("#ContractCalculation_" + i + " #" + id).is(this)) {
+                            div = "#ContractCalculation_" + i;
+                            txtb = $(div + " #BasePrice");
+                        }
+                    }
+
+                    var x = this.value * $("#SellingPriceExclVAT").val() / 100;
+
+
+                    //alert('I changed to a numeric value: ' + this.value + ' and this will be the change: ' + x + " from this: " + txtb.val());
+
+                    txtb.val(parseFloat(x).toFixed(2));
+
+                    DoPortions(div, x);
+                }
+
+            });
+        });
+
+    </script>
+
+}
+
+<div class="container-fluid">
+    @Html.Partial("ValidationSummary", ViewData.ModelState)
+    <h2></h2>
+    <div class="row">
+        <div class="col-xs-12 bottom-gap-20">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Equipment Calculation</h3>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm(MVC.Quote.EnterEquipment(), FormMethod.Post, new { role = "form", id = "SubmitForm", name = "SubmitForm" }))
+                    {
+                        @Html.HiddenFor(model => model.QuoteID)
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                @Html.EditorFor(model => model.Customer)
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.QuoteRef, htmlAttributes: new { @class = "control-label col-md-4 form-control-static" })
+                                    <div class="col-sm-6 col-md-5">
+                                        @Html.EditorFor(model => model.QuoteRef, new { htmlAttributes = new { @class = "form-control form-control-greyed text-center", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TenderNumber, htmlAttributes: new { @class = "control-label col-md-4 form-control-static" })
+                                    <div class="col-sm-6 col-md-5">
+                                        @Html.EditorFor(model => model.TenderNumber, new { htmlAttributes = new { @class = "form-control form-control-greyed text-center", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.VAT, htmlAttributes: new { @class = "control-label col-md-4 form-control-static" })
+                                    <div class="col-sm-6  col-md-5">
+                                        @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "form-control form-control-greyed text-right", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SellingPriceExclVAT, htmlAttributes: new { @class = "control-label col-md-4 form-control-static" })
+                                    <div class="col-sm-6 col-md-5">
+                                        @Html.EditorFor(model => model.SellingPriceExclVAT, new { htmlAttributes = new { @class = "form-control text-right" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SellingPriceInclVAT, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-sm-6  col-md-5">
+                                        @Html.EditorFor(model => model.SellingPriceInclVAT, new { htmlAttributes = new { @class = "form-control text-right" } })
+                                    </div>
+                                </div>
+
+                                @Html.EditorFor(model => model.ExchangeRate)
+
+                                <div class="form-group">
+                                    @Html.LabelFor(modelitem => Model.NoOfMonths, htmlAttributes: new { @class = "control-label col-md-4 form-control-static" })
+                                    <div class="col-sm-6 col-md-5">
+                                        @Html.DropDownListFor(modelitem => Model.NoOfMonths, new SelectList(ViewData["ContractTerms"] as IEnumerable<EWS.Domain.Data.DataModel.ContractTerm>, "NoOfMonths", "Description", Model.NoOfMonths), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-5">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.Device)
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="clearfix"></div>
+
+                            <div class="container-fluid">
+                                @for (int i = 0; i < Model.ContractCalculations.Count; i++)
+                                {
+                                    <div id="ContractCalculation_@i" class="">
+                                        @Html.EditorFor(model => model.ContractCalculations[i], "ContractCalculation")
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+
+
+                        <div class="panel"></div>
+                        <div class="pull-right">
+                            <button id="btnSubmit" type="submit" value="Next" class="btn btn-primary throbber">
+                                Next&nbsp;<span class="glyphicon glyphicon-step-forward"></span>
+                            </button>
+                        </div>
+
+
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

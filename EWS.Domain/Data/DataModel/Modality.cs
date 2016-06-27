@@ -18,6 +18,7 @@ namespace EWS.Domain.Data.DataModel
         public Modality()
         {
             this.SubModalities = new HashSet<SubModality>();
+            this.ContractInclusions = new HashSet<ContractInclusion>();
         }
     
         public string ID { get; set; }
@@ -30,5 +31,7 @@ namespace EWS.Domain.Data.DataModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubModality> SubModalities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContractInclusion> ContractInclusions { get; set; }
     }
 }

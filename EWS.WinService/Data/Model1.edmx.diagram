@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="621e479107ef4c68b385c2fb2a4a8a0f" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.DocumentMetaField" Width="1.75" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DocumentMetaValue" Width="1.875" PointX="7.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Document" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DocumentTypeCategory" Width="2.125" PointX="0.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DocumentType" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DocumentVersionExpiry" Width="2.5" PointX="10.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DocumentVersion" Width="1.75" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_DocumentMetaValues_DocumentMetaFields" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_DocumentMetaValues_Documents" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Documents_DocumentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_DocumentVersions_Documents" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_DocumentTypes_DocumentTypeCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_DocumentVersionExpiries_DocumentVersions" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="7.5" PointY="6.25" />
+        <AssociationConnector Association="Model.DocumentRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

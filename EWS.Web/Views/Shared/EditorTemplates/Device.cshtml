@@ -8,7 +8,17 @@
 
     <div class="panel-body">
         @Html.HiddenFor(model => model.Id)
+
         <dl class="dl-horizontal">
+            <dt class="pad3">
+                @Html.DisplayNameFor(model => model.SerialNo)
+            </dt>
+
+            <dd class="pad3">
+                @Html.HiddenFor(model => model.SerialNo)
+                <span class="">@Html.DisplayFor(model => model.SerialNo)</span>
+            </dd>
+
             <dt class="pad3">
                 @Html.DisplayNameFor(model => model.Site)
             </dt>
@@ -63,14 +73,14 @@
                 <span class="">@Html.DisplayFor(model => model.Supplier)</span>
             </dd>
 
-            <dt class="pad3">
+            @*<dt class="pad3">
                 @Html.DisplayNameFor(model => model.BrandModel)
             </dt>
 
             <dd class="pad3">
                 @Html.HiddenFor(model => model.BrandModel)
                 <span class=""> @Html.DisplayFor(model => model.BrandModel)</span>
-            </dd>
+            </dd>*@
 
             <dt class="pad3">
                 @Html.DisplayNameFor(model => model.DisplayName)

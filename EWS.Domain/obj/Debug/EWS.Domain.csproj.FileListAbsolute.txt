@@ -8,3 +8,13 @@ D:\Work\Tecmed\EWS\EWS.Domain\bin\Debug\EWS.Domain.dll
 D:\Work\Tecmed\EWS\EWS.Domain\bin\Debug\EWS.Domain.pdb
 D:\Work\Tecmed\EWS\EWS.Domain\obj\Debug\EWS.Domain.dll
 D:\Work\Tecmed\EWS\EWS.Domain\obj\Debug\EWS.Domain.pdb
+D:\Work\Tecmed.EWS\EWS.Domain\bin\Debug\EWS.Domain.dll.config
+D:\Work\Tecmed.EWS\EWS.Domain\bin\Debug\EWS.Domain.dll
+D:\Work\Tecmed.EWS\EWS.Domain\bin\Debug\EWS.Domain.pdb
+D:\Work\Tecmed.EWS\EWS.Domain\bin\Debug\EntityFramework.dll
+D:\Work\Tecmed.EWS\EWS.Domain\bin\Debug\EntityFramework.SqlServer.dll
+D:\Work\Tecmed.EWS\EWS.Domain\bin\Debug\EntityFramework.xml
+D:\Work\Tecmed.EWS\EWS.Domain\bin\Debug\EntityFramework.SqlServer.xml
+D:\Work\Tecmed.EWS\EWS.Domain\obj\Debug\EWS.Domain.csprojResolveAssemblyReference.cache
+D:\Work\Tecmed.EWS\EWS.Domain\obj\Debug\EWS.Domain.dll
+D:\Work\Tecmed.EWS\EWS.Domain\obj\Debug\EWS.Domain.pdb

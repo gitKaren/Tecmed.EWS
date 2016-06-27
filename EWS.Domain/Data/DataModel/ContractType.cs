@@ -18,6 +18,7 @@ namespace EWS.Domain.Data.DataModel
         public ContractType()
         {
             this.Contracts = new HashSet<Contract>();
+            this.ContractItems = new HashSet<ContractItem>();
             this.QuoteCalculations = new HashSet<QuoteCalculation>();
         }
     
@@ -27,6 +28,8 @@ namespace EWS.Domain.Data.DataModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contract> Contracts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContractItem> ContractItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuoteCalculation> QuoteCalculations { get; set; }
     }

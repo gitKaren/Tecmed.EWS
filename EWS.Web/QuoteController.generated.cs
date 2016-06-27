@@ -58,21 +58,27 @@ namespace EWS.Web.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult ChooseMode()
+        public virtual System.Web.Mvc.ActionResult EnterEquipment()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChooseMode);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EnterEquipment);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult EquipmentCalculation()
+        public virtual System.Web.Mvc.ActionResult EnterCurrent()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EquipmentCalculation);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EnterCurrent);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Quote()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Quote);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult FinaliseQuote()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.FinaliseQuote);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -91,18 +97,22 @@ namespace EWS.Web.Controllers
         public class ActionNamesClass
         {
             public readonly string ChooseMode = "ChooseMode";
-            public readonly string NewQuote = "NewQuote";
-            public readonly string EquipmentCalculation = "EquipmentCalculation";
+            public readonly string ChooseContract = "ChooseContract";
+            public readonly string EnterEquipment = "EnterEquipment";
+            public readonly string EnterCurrent = "EnterCurrent";
             public readonly string Quote = "Quote";
+            public readonly string FinaliseQuote = "FinaliseQuote";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string ChooseMode = "ChooseMode";
-            public const string NewQuote = "NewQuote";
-            public const string EquipmentCalculation = "EquipmentCalculation";
+            public const string ChooseContract = "ChooseContract";
+            public const string EnterEquipment = "EnterEquipment";
+            public const string EnterCurrent = "EnterCurrent";
             public const string Quote = "Quote";
+            public const string FinaliseQuote = "FinaliseQuote";
         }
 
 
@@ -112,23 +122,32 @@ namespace EWS.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_ChooseMode
         {
-            public readonly string Method = "Method";
+            public readonly string model = "model";
         }
-        static readonly ActionParamsClass_NewQuote s_params_NewQuote = new ActionParamsClass_NewQuote();
+        static readonly ActionParamsClass_ChooseContract s_params_ChooseContract = new ActionParamsClass_ChooseContract();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_NewQuote NewQuoteParams { get { return s_params_NewQuote; } }
+        public ActionParamsClass_ChooseContract ChooseContractParams { get { return s_params_ChooseContract; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_NewQuote
+        public class ActionParamsClass_ChooseContract
         {
             public readonly string model = "model";
         }
-        static readonly ActionParamsClass_EquipmentCalculation s_params_EquipmentCalculation = new ActionParamsClass_EquipmentCalculation();
+        static readonly ActionParamsClass_EnterEquipment s_params_EnterEquipment = new ActionParamsClass_EnterEquipment();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_EquipmentCalculation EquipmentCalculationParams { get { return s_params_EquipmentCalculation; } }
+        public ActionParamsClass_EnterEquipment EnterEquipmentParams { get { return s_params_EnterEquipment; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_EquipmentCalculation
+        public class ActionParamsClass_EnterEquipment
         {
             public readonly string QuoteRef = "QuoteRef";
+            public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_EnterCurrent s_params_EnterCurrent = new ActionParamsClass_EnterCurrent();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EnterCurrent EnterCurrentParams { get { return s_params_EnterCurrent; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EnterCurrent
+        {
+            public readonly string ContractID = "ContractID";
             public readonly string model = "model";
         }
         static readonly ActionParamsClass_Quote s_params_Quote = new ActionParamsClass_Quote();
@@ -136,6 +155,15 @@ namespace EWS.Web.Controllers
         public ActionParamsClass_Quote QuoteParams { get { return s_params_Quote; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Quote
+        {
+            public readonly string QuoteID = "QuoteID";
+            public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_FinaliseQuote s_params_FinaliseQuote = new ActionParamsClass_FinaliseQuote();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_FinaliseQuote FinaliseQuoteParams { get { return s_params_FinaliseQuote; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_FinaliseQuote
         {
             public readonly string QuoteID = "QuoteID";
         }
@@ -149,15 +177,21 @@ namespace EWS.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string ChooseContract = "ChooseContract";
                 public readonly string ChooseMode = "ChooseMode";
-                public readonly string EquipmentCalculation = "EquipmentCalculation";
+                public readonly string EnterCurrent = "EnterCurrent";
+                public readonly string EnterEquipment = "EnterEquipment";
+                public readonly string FinaliseQuote = "FinaliseQuote";
                 public readonly string NewContractForm = "NewContractForm";
-                public readonly string NewQuote = "NewQuote";
+                public readonly string Quote = "Quote";
             }
+            public readonly string ChooseContract = "~/Views/Quote/ChooseContract.cshtml";
             public readonly string ChooseMode = "~/Views/Quote/ChooseMode.cshtml";
-            public readonly string EquipmentCalculation = "~/Views/Quote/EquipmentCalculation.cshtml";
+            public readonly string EnterCurrent = "~/Views/Quote/EnterCurrent.cshtml";
+            public readonly string EnterEquipment = "~/Views/Quote/EnterEquipment.cshtml";
+            public readonly string FinaliseQuote = "~/Views/Quote/FinaliseQuote.cshtml";
             public readonly string NewContractForm = "~/Views/Quote/NewContractForm.cshtml";
-            public readonly string NewQuote = "~/Views/Quote/NewQuote.cshtml";
+            public readonly string Quote = "~/Views/Quote/Quote.cshtml";
         }
     }
 
@@ -167,61 +201,96 @@ namespace EWS.Web.Controllers
         public T4MVC_QuoteController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void ChooseModeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string Method);
+        partial void ChooseModeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult ChooseMode(string Method)
+        public override System.Web.Mvc.ActionResult ChooseMode()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChooseMode);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Method", Method);
-            ChooseModeOverride(callInfo, Method);
+            ChooseModeOverride(callInfo);
             return callInfo;
         }
 
         [NonAction]
-        partial void NewQuoteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void ChooseModeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, EWS.Web.Models.ChooseMode_Model model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult NewQuote()
+        public override System.Web.Mvc.ActionResult ChooseMode(EWS.Web.Models.ChooseMode_Model model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewQuote);
-            NewQuoteOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void NewQuoteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, EWS.Web.Models.QuoteStart_Model model);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult NewQuote(EWS.Web.Models.QuoteStart_Model model)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewQuote);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChooseMode);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            NewQuoteOverride(callInfo, model);
+            ChooseModeOverride(callInfo, model);
             return callInfo;
         }
 
         [NonAction]
-        partial void EquipmentCalculationOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string QuoteRef);
+        partial void ChooseContractOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult EquipmentCalculation(string QuoteRef)
+        public override System.Web.Mvc.ActionResult ChooseContract()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EquipmentCalculation);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChooseContract);
+            ChooseContractOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ChooseContractOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, EWS.Web.Models.SearchContracts model);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ChooseContract(EWS.Web.Models.SearchContracts model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChooseContract);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ChooseContractOverride(callInfo, model);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EnterEquipmentOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string QuoteRef);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult EnterEquipment(string QuoteRef)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EnterEquipment);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "QuoteRef", QuoteRef);
-            EquipmentCalculationOverride(callInfo, QuoteRef);
+            EnterEquipmentOverride(callInfo, QuoteRef);
             return callInfo;
         }
 
         [NonAction]
-        partial void EquipmentCalculationOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, EWS.Domain.Model.EquipmentQuoteStep1 model);
+        partial void EnterEquipmentOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, EWS.Domain.Model.EnterEquipmentQuote model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult EquipmentCalculation(EWS.Domain.Model.EquipmentQuoteStep1 model)
+        public override System.Web.Mvc.ActionResult EnterEquipment(EWS.Domain.Model.EnterEquipmentQuote model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EquipmentCalculation);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EnterEquipment);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            EquipmentCalculationOverride(callInfo, model);
+            EnterEquipmentOverride(callInfo, model);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EnterCurrentOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int ContractID);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult EnterCurrent(int ContractID)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EnterCurrent);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "ContractID", ContractID);
+            EnterCurrentOverride(callInfo, ContractID);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EnterCurrentOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, EWS.Domain.Model.EnterCurrentQuote model);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult EnterCurrent(EWS.Domain.Model.EnterCurrentQuote model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EnterCurrent);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            EnterCurrentOverride(callInfo, model);
             return callInfo;
         }
 
@@ -234,6 +303,30 @@ namespace EWS.Web.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Quote);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "QuoteID", QuoteID);
             QuoteOverride(callInfo, QuoteID);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void QuoteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, EWS.Domain.Model.Quote model);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Quote(EWS.Domain.Model.Quote model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Quote);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            QuoteOverride(callInfo, model);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void FinaliseQuoteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int QuoteID);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult FinaliseQuote(int QuoteID)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.FinaliseQuote);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "QuoteID", QuoteID);
+            FinaliseQuoteOverride(callInfo, QuoteID);
             return callInfo;
         }
 

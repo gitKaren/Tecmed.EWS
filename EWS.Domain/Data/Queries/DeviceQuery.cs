@@ -29,17 +29,19 @@ namespace EWS.Domain.Data.Queries
                     .Where(p => p.ID == query.DeviceID ).Single<Device>();
 
        
-                Domain.Model.Device model = new Model.Device(device.ID,
-                                                                device.Room.Department.Site.SiteName,
-                                                                device.Room.Department.HospitalDepartment.HospitalDepartmentName,
-                                                                device.Room.RoomNo,
-                                                                device.SubModality.Modality.ModalityName,
-                                                                device.SubModality.SubModalityName,
-                                                                device.ProductLine.supplierID,
-                                                                device.ProductLine.ProductLineName,
-                                                                device.ProductLine.ProductLineName + " " + device.SerialNo
+            Domain.Model.Device model = new Model.Device(device.ID,
+                                                            device.SerialNo,
+                                                            device.Room.Department.Site.SiteName,
+                                                            device.Room.Department.HospitalDepartment.HospitalDepartmentName,
+                                                            device.Room.RoomNo,
+                                                            device.SubModality.Modality.ModalityName,
+                                                            device.SubModality.Modality.ID, 
+                                                            device.SubModality.SubModalityName,
+                                                            device.ProductLine.Supplier.SupplierName,
+                                                            device.ProductLine.ProductLineName,
+                                                            device.ProductLine.ProductLineName + " " + device.SerialNo
 
-                                                                );
+                                                            );
                
             
 

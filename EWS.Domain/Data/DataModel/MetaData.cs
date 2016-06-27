@@ -65,7 +65,24 @@ namespace EWS.Domain.Data.DataModel
 
     public class DeviceMetadata
     {
-       
+        [Display(Name = "Description")]
+        public string DisplayName { get; set; }
+    }
+
+    #endregion
+
+    #region Department
+
+    [MetadataType(typeof(DepartmentMetadata))]
+    public partial class Department : DbEntity
+    {
+        
+    }
+
+    public class DepartmentMetadata
+    {
+        [Required(ErrorMessage = "Department Name is required")]
+        public string DepartmentName { get; set; }
     }
 
     #endregion
@@ -134,6 +151,37 @@ namespace EWS.Domain.Data.DataModel
 
     #endregion
 
+    #region Site
+
+    [MetadataType(typeof(SiteMetadata))]
+    public partial class Site : DbEntity
+    {
+
+    }
+
+    public class SiteMetadata
+    {
+        [Required(ErrorMessage = "Site Name is required")]
+        public string SiteName { get; set; }
+    }
+
+    #endregion
+
+    #region Room
+
+    [MetadataType(typeof(RoomMetadata))]
+    public partial class Room : DbEntity
+    {
+
+    }
+
+    public class RoomMetadata
+    {
+       
+    }
+
+    #endregion
+
     #region Currency
 
     [MetadataType(typeof(CurrencyMetadata))]
@@ -150,6 +198,107 @@ namespace EWS.Domain.Data.DataModel
 
     #endregion
 
+    #region Contract
+
+    [MetadataType(typeof(ContractMetadata))]
+    public partial class Contract : DbEntity
+    {
+
+    }
+
+    public class ContractMetadata
+    {
+
+    }
+
+    #endregion
+
+    #region ContractItem
+
+    [MetadataType(typeof(ContractItemMetadata))]
+    public partial class ContractItem : DbEntity
+    {
+
+    }
+
+    public class ContractItemMetadata
+    {
+
+    }
+
+    #endregion
+
+    #region ContractInclusion
+
+    [MetadataType(typeof(ContractInclusionMetadata))]
+    public partial class ContractInclusion : DbEntity
+    {
+
+    }
+
+    public class ContractInclusionMetadata
+    {
+        [Required(ErrorMessage = "Description is required")]
+        public string Description { get; set; }
+    }
+
+    #endregion
+
+    #region ContractTerm
+
+    [MetadataType(typeof(ContractTermMetadata))]
+    public partial class ContractTerm : DbEntity
+    {
+        public static byte DefaultNoOfMonths { get { return 120; } }
+    }
+
+    public class ContractTermMetadata
+    {
+        [Required]
+        [Display(Name="No of Months")]
+        public byte NoOfMonths { get; set; }
+
+        [Required]
+        [Display(Name = "Term")]
+        public string Description { get; set; }
+       
+    }
+
+    #endregion
+
+    #region Customer
+
+    [MetadataType(typeof(CustomerMetadata))]
+    public partial class Customer : DbEntity
+    {
+    }
+
+    
+    public class CustomerMetadata
+    {
+        [Required(ErrorMessage = "Customer Name is required")]
+        [Display(Name="Customer")]
+        public string CustomerName { get; set; }
+    }
+
+    #endregion
+
+    #region CustomerLocality
+
+    [MetadataType(typeof(CustomerLocalityMetadata))]
+    public partial class CustomerLocality : DbEntity
+    {
+    }
+
+    
+    public class CustomerLocalityMetadata
+    {
+        [Required(ErrorMessage = "CustomerLocality Name is required")]
+        [Display(Name="CustomerLocality")]
+        public string CustomerLocalityName { get; set; }
+    }
+
+    #endregion
     #region SourceQuote
 
     [MetadataType(typeof(SourceQuoteMetadata))]
@@ -206,7 +355,7 @@ namespace EWS.Domain.Data.DataModel
     public class QuoteCalculationItemMetadata
     {
         [Required(ErrorMessage = "QuoteCalculation Item Year is required")]
-        public int Year { get; set; }
+        public int YearNo { get; set; }
     }
 
     #endregion

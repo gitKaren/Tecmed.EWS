@@ -37,7 +37,6 @@ namespace EWS.Infrastructure
         public virtual DbSet<Site> Sites { get; set; }
         public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<Device> Devices { get; set; }
         public virtual DbSet<ProductLine> ProductLines { get; set; }
@@ -46,9 +45,13 @@ namespace EWS.Infrastructure
         public virtual DbSet<ContractType> ContractTypes { get; set; }
         public virtual DbSet<Test> Tests { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<QuoteCalculationItem> QuoteCalculationItems { get; set; }
         public virtual DbSet<Quote> Quotes { get; set; }
         public virtual DbSet<SourceQuote> SourceQuotes { get; set; }
+        public virtual DbSet<Contract> Contracts { get; set; }
+        public virtual DbSet<ContractTerm> ContractTerms { get; set; }
+        public virtual DbSet<ContractItem> ContractItems { get; set; }
         public virtual DbSet<QuoteCalculation> QuoteCalculations { get; set; }
+        public virtual DbSet<QuoteCalculationItem> QuoteCalculationItems { get; set; }
+        public virtual DbSet<ContractInclusion> ContractInclusions { get; set; }
     }
 }

@@ -28,12 +28,49 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="QuoteID" Type="int" />
+          <Property Name="TenderNo" Type="varchar" MaxLength="15" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="DeviceID" Type="int" Nullable="false" />
           <Property Name="ContractTypeID" Type="smallint" Nullable="false" />
-          <Property Name="ContractDate" Type="smalldatetime" />
+          <Property Name="ContractDate" Type="smalldatetime" Nullable="false" />
           <Property Name="StartDate" Type="smalldatetime" />
           <Property Name="EndDate" Type="smalldatetime" />
+          <Property Name="ContractTerm" Type="tinyint" Nullable="false" />
+          <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+          <Property Name="ROEDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="VAT" Type="real" Nullable="false" />
           <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContractInclusion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" Nullable="false" />
+          <Property Name="ModalityID" Type="char" MaxLength="3" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContractItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractID" Type="int" Nullable="false" />
+          <Property Name="ContractTypeID" Type="smallint" Nullable="false" />
+          <Property Name="ContractTerm" Type="tinyint" Nullable="false" />
+          <Property Name="BasePrice" Type="money" Nullable="false" />
+          <Property Name="ROEPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="ZARPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="ROEPortionAmount" Type="money" Nullable="false" />
+          <Property Name="ZARPortionAmount" Type="money" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContractTerm">
+          <Key>
+            <PropertyRef Name="NoOfMonths" />
+          </Key>
+          <Property Name="NoOfMonths" Type="tinyint" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="ContractType">
           <Key>
@@ -180,11 +217,21 @@
           <Property Name="DeviceID" Type="int" Nullable="false" />
           <Property Name="TenderNo" Type="varchar" MaxLength="15" />
           <Property Name="QuoteRef" Type="varchar" MaxLength="15" />
+          <Property Name="BaseContractID" Type="int" />
           <Property Name="SellingPrice" Type="money" Nullable="false" />
           <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
           <Property Name="ROEDate" Type="smalldatetime" Nullable="false" />
           <Property Name="VAT" Type="real" Nullable="false" />
+          <Property Name="ContractTerm" Type="tinyint" Nullable="false" />
           <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Quote_ContractInclusion">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+            <PropertyRef Name="ContractIncusionID" />
+          </Key>
+          <Property Name="QuoteID" Type="int" Nullable="false" />
+          <Property Name="ContractIncusionID" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="QuoteCalculation">
           <Key>
@@ -195,6 +242,7 @@
           <Property Name="ContractTypeID" Type="smallint" Nullable="false" />
           <Property Name="SellingPricePerc" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="SellingPricePercAmount" Type="money" Nullable="false" />
+          <Property Name="BasePrice" Type="money" Nullable="false" />
           <Property Name="ROEPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="ZARPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="ROEPortionAmount" Type="money" Nullable="false" />
@@ -210,7 +258,9 @@
           <Property Name="ROEPortionAmount" Type="money" Nullable="false" />
           <Property Name="ZARPortionAmount" Type="money" Nullable="false" />
           <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
-          <Property Name="IncrPerc" Type="decimal" Precision="5" Scale="3" />
+          <Property Name="IncrPerc" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+          <Property Name="AmountExclVAT" Type="money" Nullable="false" />
+          <Property Name="AmountInclVAT" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -249,6 +299,9 @@
           <Property Name="SellingPriceInclVAT" Type="money" Nullable="false" />
           <Property Name="SellingPriceExclVAT" Type="money" />
           <Property Name="VAT" Type="real" Nullable="false" />
+          <Property Name="TenderNumber" Type="varchar" MaxLength="15" />
+          <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+          <Property Name="ROEDate" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="SubModality">
           <Key>
@@ -287,6 +340,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Contract_ContractTerm">
+          <End Role="ContractTerm" Type="Self.ContractTerm" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTerm">
+              <PropertyRef Name="NoOfMonths" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="ContractTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contract_ContractType">
           <End Role="ContractType" Type="Self.ContractType" Multiplicity="1" />
           <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
@@ -296,6 +361,18 @@
             </Principal>
             <Dependent Role="Contract">
               <PropertyRef Name="ContractTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -320,6 +397,54 @@
             </Principal>
             <Dependent Role="Contract">
               <PropertyRef Name="QuoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractInclusion_Modality">
+          <End Role="Modality" Type="Self.Modality" Multiplicity="0..1" />
+          <End Role="ContractInclusion" Type="Self.ContractInclusion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ContractInclusion">
+              <PropertyRef Name="ModalityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractItem_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="ContractItem" Type="Self.ContractItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ContractItem">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractItem_ContractTerm">
+          <End Role="ContractTerm" Type="Self.ContractTerm" Multiplicity="1" />
+          <End Role="ContractItem" Type="Self.ContractItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTerm">
+              <PropertyRef Name="NoOfMonths" />
+            </Principal>
+            <Dependent Role="ContractItem">
+              <PropertyRef Name="ContractTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractItem_ContractType">
+          <End Role="ContractType" Type="Self.ContractType" Multiplicity="1" />
+          <End Role="ContractItem" Type="Self.ContractItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ContractItem">
+              <PropertyRef Name="ContractTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -467,6 +592,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Quote_ContractInclusion_ContractInclusion">
+          <End Role="ContractInclusion" Type="Self.ContractInclusion" Multiplicity="1" />
+          <End Role="Quote_ContractInclusion" Type="Self.Quote_ContractInclusion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractInclusion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Quote_ContractInclusion">
+              <PropertyRef Name="ContractIncusionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_ContractInclusion_Quote">
+          <End Role="Quote" Type="Self.Quote" Multiplicity="1" />
+          <End Role="Quote_ContractInclusion" Type="Self.Quote_ContractInclusion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quote">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Quote_ContractInclusion">
+              <PropertyRef Name="QuoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_ContractTerm">
+          <End Role="ContractTerm" Type="Self.ContractTerm" Multiplicity="1" />
+          <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTerm">
+              <PropertyRef Name="NoOfMonths" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="ContractTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Quote_Device">
           <End Role="Device" Type="Self.Device" Multiplicity="1" />
           <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
@@ -563,6 +736,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SourceQuote_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="SourceQuote" Type="Self.SourceQuote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SourceQuote">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SourceQuote_Device">
           <End Role="Device" Type="Self.Device" Multiplicity="1" />
           <End Role="SourceQuote" Type="Self.SourceQuote" Multiplicity="*" />
@@ -603,6 +788,9 @@
           <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BrandModel" EntityType="Self.BrandModel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractInclusion" EntityType="Self.ContractInclusion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractItem" EntityType="Self.ContractItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractTerm" EntityType="Self.ContractTerm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContractType" EntityType="Self.ContractType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
@@ -616,6 +804,7 @@
           <EntitySet Name="Modality" EntityType="Self.Modality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductLine" EntityType="Self.ProductLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quote" EntityType="Self.Quote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quote_ContractInclusion" EntityType="Self.Quote_ContractInclusion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuoteCalculation" EntityType="Self.QuoteCalculation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuoteCalculationItem" EntityType="Self.QuoteCalculationItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
@@ -628,8 +817,16 @@
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="BrandModel" EntitySet="BrandModel" />
           </AssociationSet>
+          <AssociationSet Name="FK_Contract_ContractTerm" Association="Self.FK_Contract_ContractTerm">
+            <End Role="ContractTerm" EntitySet="ContractTerm" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
           <AssociationSet Name="FK_Contract_ContractType" Association="Self.FK_Contract_ContractType">
             <End Role="ContractType" EntitySet="ContractType" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Customer" Association="Self.FK_Contract_Customer">
+            <End Role="Customer" EntitySet="Customer" />
             <End Role="Contract" EntitySet="Contract" />
           </AssociationSet>
           <AssociationSet Name="FK_Contract_Device" Association="Self.FK_Contract_Device">
@@ -639,6 +836,22 @@
           <AssociationSet Name="FK_Contract_Quote" Association="Self.FK_Contract_Quote">
             <End Role="Quote" EntitySet="Quote" />
             <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractInclusion_Modality" Association="Self.FK_ContractInclusion_Modality">
+            <End Role="Modality" EntitySet="Modality" />
+            <End Role="ContractInclusion" EntitySet="ContractInclusion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractItem_Contract" Association="Self.FK_ContractItem_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ContractItem" EntitySet="ContractItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractItem_ContractTerm" Association="Self.FK_ContractItem_ContractTerm">
+            <End Role="ContractTerm" EntitySet="ContractTerm" />
+            <End Role="ContractItem" EntitySet="ContractItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractItem_ContractType" Association="Self.FK_ContractItem_ContractType">
+            <End Role="ContractType" EntitySet="ContractType" />
+            <End Role="ContractItem" EntitySet="ContractItem" />
           </AssociationSet>
           <AssociationSet Name="FK_Country_Currency" Association="Self.FK_Country_Currency">
             <End Role="Currency" EntitySet="Currency" />
@@ -688,6 +901,22 @@
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="ProductLine" EntitySet="ProductLine" />
           </AssociationSet>
+          <AssociationSet Name="FK_Quote_ContractInclusion_ContractInclusion" Association="Self.FK_Quote_ContractInclusion_ContractInclusion">
+            <End Role="ContractInclusion" EntitySet="ContractInclusion" />
+            <End Role="Quote_ContractInclusion" EntitySet="Quote_ContractInclusion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_ContractInclusion_Quote" Association="Self.FK_Quote_ContractInclusion_Quote">
+            <End Role="Quote" EntitySet="Quote" />
+            <End Role="Quote_ContractInclusion" EntitySet="Quote_ContractInclusion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_ContractTerm" Association="Self.FK_Quote_ContractTerm">
+            <End Role="ContractTerm" EntitySet="ContractTerm" />
+            <End Role="Quote" EntitySet="Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_Customer" Association="Self.FK_Quote_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Quote" EntitySet="Quote" />
+          </AssociationSet>
           <AssociationSet Name="FK_Quote_Device" Association="Self.FK_Quote_Device">
             <End Role="Device" EntitySet="Device" />
             <End Role="Quote" EntitySet="Quote" />
@@ -719,6 +948,10 @@
           <AssociationSet Name="FK_Site_Customer" Association="Self.FK_Site_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Site" EntitySet="Site" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceQuote_Customer" Association="Self.FK_SourceQuote_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="SourceQuote" EntitySet="SourceQuote" />
           </AssociationSet>
           <AssociationSet Name="FK_SourceQuote_Device" Association="Self.FK_SourceQuote_Device">
             <End Role="Device" EntitySet="Device" />
@@ -789,7 +1022,6 @@
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="BrandModel" EntitySet="BrandModels" />
           </AssociationSet>
-          <EntitySet Name="Contracts" EntityType="DAL.Contract" />
           <EntitySet Name="Currencies" EntityType="DAL.Currency" />
           <EntitySet Name="Devices" EntityType="DAL.Device" />
           <EntitySet Name="ProductLines" EntityType="DAL.ProductLine" />
@@ -826,20 +1058,7 @@
             <End Role="Currency" EntitySet="Currencies" />
             <End Role="Country" EntitySet="Countries" />
           </AssociationSet>
-          <EntitySet Name="QuoteCalculationItems" EntityType="DAL.QuoteCalculationItem" />
-          <AssociationSet Name="FK_Contract_ContractType" Association="DAL.FK_Contract_ContractType">
-            <End Role="ContractType" EntitySet="ContractTypes" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contract_Device" Association="DAL.FK_Contract_Device">
-            <End Role="Device" EntitySet="Devices" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
           <EntitySet Name="Quotes" EntityType="DAL.Quote" />
-          <AssociationSet Name="FK_Contract_Quote" Association="DAL.FK_Contract_Quote">
-            <End Role="Quote" EntitySet="Quotes" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Quote_Device" Association="DAL.FK_Quote_Device">
             <End Role="Device" EntitySet="Devices" />
             <End Role="Quote" EntitySet="Quotes" />
@@ -857,7 +1076,54 @@
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="SourceQuote" EntitySet="SourceQuotes" />
           </AssociationSet>
+          <AssociationSet Name="FK_Quote_Customer" Association="DAL.FK_Quote_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceQuote_Customer" Association="DAL.FK_SourceQuote_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="SourceQuote" EntitySet="SourceQuotes" />
+          </AssociationSet>
+          <EntitySet Name="Contracts" EntityType="DAL.Contract" />
+          <EntitySet Name="ContractTerms" EntityType="DAL.ContractTerm" />
+          <AssociationSet Name="FK_Contract_ContractTerm" Association="DAL.FK_Contract_ContractTerm">
+            <End Role="ContractTerm" EntitySet="ContractTerms" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_ContractType" Association="DAL.FK_Contract_ContractType">
+            <End Role="ContractType" EntitySet="ContractTypes" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Device" Association="DAL.FK_Contract_Device">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Quote" Association="DAL.FK_Contract_Quote">
+            <End Role="Quote" EntitySet="Quotes" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <EntitySet Name="ContractItems" EntityType="DAL.ContractItem" />
+          <AssociationSet Name="FK_Contract_Customer" Association="DAL.FK_Contract_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractItem_Contract" Association="DAL.FK_ContractItem_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="ContractItem" EntitySet="ContractItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractItem_ContractTerm" Association="DAL.FK_ContractItem_ContractTerm">
+            <End Role="ContractTerm" EntitySet="ContractTerms" />
+            <End Role="ContractItem" EntitySet="ContractItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractItem_ContractType" Association="DAL.FK_ContractItem_ContractType">
+            <End Role="ContractType" EntitySet="ContractTypes" />
+            <End Role="ContractItem" EntitySet="ContractItems" />
+          </AssociationSet>
           <EntitySet Name="QuoteCalculations" EntityType="DAL.QuoteCalculation" />
+          <AssociationSet Name="FK_Quote_ContractTerm" Association="DAL.FK_Quote_ContractTerm">
+            <End Role="ContractTerm" EntitySet="ContractTerms" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
           <AssociationSet Name="FK_QuoteCalculation_ContractType" Association="DAL.FK_QuoteCalculation_ContractType">
             <End Role="ContractType" EntitySet="ContractTypes" />
             <End Role="QuoteCalculation" EntitySet="QuoteCalculations" />
@@ -866,11 +1132,21 @@
             <End Role="Quote" EntitySet="Quotes" />
             <End Role="QuoteCalculation" EntitySet="QuoteCalculations" />
           </AssociationSet>
+          <EntitySet Name="QuoteCalculationItems" EntityType="DAL.QuoteCalculationItem" />
           <AssociationSet Name="FK_QuoteCalculationItem_QuoteCalculation" Association="DAL.FK_QuoteCalculationItem_QuoteCalculation">
             <End Role="QuoteCalculation" EntitySet="QuoteCalculations" />
             <End Role="QuoteCalculationItem" EntitySet="QuoteCalculationItems" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="ContractInclusions" EntityType="DAL.ContractInclusion" />
+          <AssociationSet Name="FK_ContractInclusion_Modality" Association="DAL.FK_ContractInclusion_Modality">
+            <End Role="Modality" EntitySet="Modalities" />
+            <End Role="ContractInclusion" EntitySet="ContractInclusions" />
+          </AssociationSet>
+          <AssociationSet Name="Quote_ContractInclusion" Association="DAL.Quote_ContractInclusion">
+            <End Role="ContractInclusion" EntitySet="ContractInclusions" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="BrandModel">
           <Key>
             <PropertyRef Name="ID" />
@@ -905,6 +1181,9 @@
           <NavigationProperty Name="CustomerLocality" Relationship="DAL.FK_Customer_CustomerLocality" FromRole="Customer" ToRole="CustomerLocality" />
           <NavigationProperty Name="CustomerLocality1" Relationship="DAL.FK_Customers_CustomerLocality" FromRole="Customer" ToRole="CustomerLocality" />
           <NavigationProperty Name="Sites" Relationship="DAL.FK_Site_Customer" FromRole="Customer" ToRole="Site" />
+          <NavigationProperty Name="Quotes" Relationship="DAL.FK_Quote_Customer" FromRole="Customer" ToRole="Quote" />
+          <NavigationProperty Name="SourceQuotes" Relationship="DAL.FK_SourceQuote_Customer" FromRole="Customer" ToRole="SourceQuote" />
+          <NavigationProperty Name="Contracts" Relationship="DAL.FK_Contract_Customer" FromRole="Customer" ToRole="Contract" />
         </EntityType>
         <EntityType Name="CustomerLocality">
           <Key>
@@ -960,6 +1239,7 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SubModalities" Relationship="DAL.FK_SubModality_Modality" FromRole="Modality" ToRole="SubModality" />
+          <NavigationProperty Name="ContractInclusions" Relationship="DAL.FK_ContractInclusion_Modality" FromRole="Modality" ToRole="ContractInclusion" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -1131,22 +1411,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Contract">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="QuoteID" Type="Int32" />
-          <Property Name="ContractDate" Type="DateTime" Precision="0" />
-          <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="DeviceID" Type="Int32" Nullable="false" />
-          <Property Name="ContractTypeID" Type="Int16" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ContractType" Relationship="DAL.FK_Contract_ContractType" FromRole="Contract" ToRole="ContractType" />
-          <NavigationProperty Name="Device" Relationship="DAL.FK_Contract_Device" FromRole="Contract" ToRole="Device" />
-          <NavigationProperty Name="Quote" Relationship="DAL.FK_Contract_Quote" FromRole="Contract" ToRole="Quote" />
-        </EntityType>
         <EntityType Name="Currency">
           <Key>
             <PropertyRef Name="ID" />
@@ -1184,9 +1448,9 @@
           <NavigationProperty Name="ProductLine" Relationship="DAL.FK_Device_BrandModel" FromRole="Device" ToRole="ProductLine" />
           <NavigationProperty Name="Room" Relationship="DAL.FK_Device_Room" FromRole="Device" ToRole="Room" />
           <NavigationProperty Name="SubModality" Relationship="DAL.FK_Device_SubModality" FromRole="Device" ToRole="SubModality" />
-          <NavigationProperty Name="Contracts" Relationship="DAL.FK_Contract_Device" FromRole="Device" ToRole="Contract" />
           <NavigationProperty Name="Quotes" Relationship="DAL.FK_Quote_Device" FromRole="Device" ToRole="Quote" />
           <NavigationProperty Name="SourceQuotes" Relationship="DAL.FK_SourceQuote_Device" FromRole="Device" ToRole="SourceQuote" />
+          <NavigationProperty Name="Contracts" Relationship="DAL.FK_Contract_Device" FromRole="Device" ToRole="Contract" />
         </EntityType>
         <EntityType Name="ProductLine">
           <Key>
@@ -1303,6 +1567,7 @@
           <Property Name="ContractTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Contracts" Relationship="DAL.FK_Contract_ContractType" FromRole="ContractType" ToRole="Contract" />
+          <NavigationProperty Name="ContractItems" Relationship="DAL.FK_ContractItem_ContractType" FromRole="ContractType" ToRole="ContractItem" />
           <NavigationProperty Name="QuoteCalculations" Relationship="DAL.FK_QuoteCalculation_ContractType" FromRole="ContractType" ToRole="QuoteCalculation" />
         </EntityType>
         <EntityType Name="Test">
@@ -1335,43 +1600,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="QuoteCalculationItem">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="QuoteCalculationID" Type="Int32" Nullable="false" />
-          <Property Name="YearNo" Type="Int16" Nullable="false" />
-          <Property Name="ROEPortionAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="ZARPortionAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="ROE" Type="Decimal" Nullable="false" Precision="5" Scale="3" />
-          <Property Name="IncrPerc" Type="Decimal" Precision="5" Scale="3" />
-          <NavigationProperty Name="QuoteCalculation" Relationship="DAL.FK_QuoteCalculationItem_QuoteCalculation" FromRole="QuoteCalculationItem" ToRole="QuoteCalculation" />
-        </EntityType>
-        <Association Name="FK_Contract_ContractType">
-          <End Type="DAL.ContractType" Role="ContractType" Multiplicity="1" />
-          <End Type="DAL.Contract" Role="Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContractType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="ContractTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contract_Device">
-          <End Type="DAL.Device" Role="Device" Multiplicity="1" />
-          <End Type="DAL.Contract" Role="Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Device">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="DeviceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Quote">
           <Key>
             <PropertyRef Name="ID" />
@@ -1387,23 +1615,16 @@
           <Property Name="ROEDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="VAT" Type="Single" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Contracts" Relationship="DAL.FK_Contract_Quote" FromRole="Quote" ToRole="Contract" />
           <NavigationProperty Name="Device" Relationship="DAL.FK_Quote_Device" FromRole="Quote" ToRole="Device" />
           <NavigationProperty Name="SourceQuote" Relationship="DAL.FK_Quote_SourceQuote" FromRole="Quote" ToRole="SourceQuote" />
+          <NavigationProperty Name="Customer" Relationship="DAL.FK_Quote_Customer" FromRole="Quote" ToRole="Customer" />
+          <NavigationProperty Name="Contracts" Relationship="DAL.FK_Contract_Quote" FromRole="Quote" ToRole="Contract" />
+          <Property Name="BaseContractID" Type="Int32" />
+          <Property Name="ContractTerm" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="ContractTerm1" Relationship="DAL.FK_Quote_ContractTerm" FromRole="Quote" ToRole="ContractTerm" />
           <NavigationProperty Name="QuoteCalculations" Relationship="DAL.FK_QuoteCalculation_Quote" FromRole="Quote" ToRole="QuoteCalculation" />
+          <NavigationProperty Name="ContractInclusions" Relationship="DAL.Quote_ContractInclusion" FromRole="Quote" ToRole="ContractInclusion" />
         </EntityType>
-        <Association Name="FK_Contract_Quote">
-          <End Type="DAL.Quote" Role="Quote" Multiplicity="0..1" />
-          <End Type="DAL.Contract" Role="Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Quote">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="QuoteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Quote_Device">
           <End Type="DAL.Device" Role="Device" Multiplicity="1" />
           <End Type="DAL.Quote" Role="Quote" Multiplicity="*" />
@@ -1431,6 +1652,10 @@
           <NavigationProperty Name="Device" Relationship="DAL.FK_SourceQuote_Device" FromRole="SourceQuote" ToRole="Device" />
           <NavigationProperty Name="Quotes" Relationship="DAL.FK_Quote_SourceQuote" FromRole="SourceQuote" ToRole="Quote" />
           <NavigationProperty Name="Supplier" Relationship="DAL.FK_SourceQuote_Supplier" FromRole="SourceQuote" ToRole="Supplier" />
+          <Property Name="TenderNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="DAL.FK_SourceQuote_Customer" FromRole="SourceQuote" ToRole="Customer" />
+          <Property Name="ROE" Type="Decimal" Precision="5" Scale="3" Nullable="false" />
+          <Property Name="ROEDate" Type="DateTime" Precision="0" Nullable="false" />
         </EntityType>
         <Association Name="FK_SourceQuote_Device">
           <End Type="DAL.Device" Role="Device" Multiplicity="1" />
@@ -1468,6 +1693,179 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Quote_Customer">
+          <End Type="DAL.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="DAL.Quote" Role="Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SourceQuote_Customer">
+          <End Type="DAL.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DAL.SourceQuote" Role="SourceQuote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SourceQuote">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteID" Type="Int32" />
+          <Property Name="TenderNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <Property Name="ContractTypeID" Type="Int16" Nullable="false" />
+          <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ContractTerm" Type="Byte" Nullable="false" />
+          <Property Name="ROE" Type="Decimal" Nullable="false" Precision="5" Scale="3" />
+          <Property Name="ROEDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ContractTerm1" Relationship="DAL.FK_Contract_ContractTerm" FromRole="Contract" ToRole="ContractTerm" />
+          <NavigationProperty Name="ContractType" Relationship="DAL.FK_Contract_ContractType" FromRole="Contract" ToRole="ContractType" />
+          <NavigationProperty Name="Device" Relationship="DAL.FK_Contract_Device" FromRole="Contract" ToRole="Device" />
+          <NavigationProperty Name="Quote" Relationship="DAL.FK_Contract_Quote" FromRole="Contract" ToRole="Quote" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="VAT" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="DAL.FK_Contract_Customer" FromRole="Contract" ToRole="Customer" />
+          <NavigationProperty Name="ContractItems" Relationship="DAL.FK_ContractItem_Contract" FromRole="Contract" ToRole="ContractItem" />
+        </EntityType>
+        <EntityType Name="ContractTerm">
+          <Key>
+            <PropertyRef Name="NoOfMonths" />
+          </Key>
+          <Property Name="NoOfMonths" Type="Byte" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contracts" Relationship="DAL.FK_Contract_ContractTerm" FromRole="ContractTerm" ToRole="Contract" />
+          <NavigationProperty Name="ContractItems" Relationship="DAL.FK_ContractItem_ContractTerm" FromRole="ContractTerm" ToRole="ContractItem" />
+          <NavigationProperty Name="Quotes" Relationship="DAL.FK_Quote_ContractTerm" FromRole="ContractTerm" ToRole="Quote" />
+        </EntityType>
+        <Association Name="FK_Contract_ContractTerm">
+          <End Type="DAL.ContractTerm" Role="ContractTerm" Multiplicity="1" />
+          <End Type="DAL.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTerm">
+              <PropertyRef Name="NoOfMonths" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="ContractTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_ContractType">
+          <End Type="DAL.ContractType" Role="ContractType" Multiplicity="1" />
+          <End Type="DAL.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="ContractTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Device">
+          <End Type="DAL.Device" Role="Device" Multiplicity="1" />
+          <End Type="DAL.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Quote">
+          <End Type="DAL.Quote" Role="Quote" Multiplicity="0..1" />
+          <End Type="DAL.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quote">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="QuoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ContractItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractID" Type="Int32" Nullable="false" />
+          <Property Name="ContractTypeID" Type="Int16" Nullable="false" />
+          <Property Name="ContractTerm" Type="Byte" Nullable="false" />
+          <Property Name="BasePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ROEPortion" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="ZARPortion" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="ROEPortionAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ZARPortionAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="DAL.FK_ContractItem_Contract" FromRole="ContractItem" ToRole="Contract" />
+          <NavigationProperty Name="ContractTerm1" Relationship="DAL.FK_ContractItem_ContractTerm" FromRole="ContractItem" ToRole="ContractTerm" />
+          <NavigationProperty Name="ContractType" Relationship="DAL.FK_ContractItem_ContractType" FromRole="ContractItem" ToRole="ContractType" />
+        </EntityType>
+        <Association Name="FK_Contract_Customer">
+          <End Type="DAL.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="DAL.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractItem_Contract">
+          <End Type="DAL.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="DAL.ContractItem" Role="ContractItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ContractItem">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractItem_ContractTerm">
+          <End Type="DAL.ContractTerm" Role="ContractTerm" Multiplicity="1" />
+          <End Type="DAL.ContractItem" Role="ContractItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTerm">
+              <PropertyRef Name="NoOfMonths" />
+            </Principal>
+            <Dependent Role="ContractItem">
+              <PropertyRef Name="ContractTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractItem_ContractType">
+          <End Type="DAL.ContractType" Role="ContractType" Multiplicity="1" />
+          <End Type="DAL.ContractItem" Role="ContractItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ContractItem">
+              <PropertyRef Name="ContractTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="QuoteCalculation">
           <Key>
             <PropertyRef Name="ID" />
@@ -1477,6 +1875,7 @@
           <Property Name="ContractTypeID" Type="Int16" Nullable="false" />
           <Property Name="SellingPricePerc" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="SellingPricePercAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="BasePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="ROEPortion" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="ZARPortion" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="ROEPortionAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
@@ -1485,6 +1884,18 @@
           <NavigationProperty Name="Quote" Relationship="DAL.FK_QuoteCalculation_Quote" FromRole="QuoteCalculation" ToRole="Quote" />
           <NavigationProperty Name="QuoteCalculationItems" Relationship="DAL.FK_QuoteCalculationItem_QuoteCalculation" FromRole="QuoteCalculation" ToRole="QuoteCalculationItem" />
         </EntityType>
+        <Association Name="FK_Quote_ContractTerm">
+          <End Type="DAL.ContractTerm" Role="ContractTerm" Multiplicity="1" />
+          <End Type="DAL.Quote" Role="Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTerm">
+              <PropertyRef Name="NoOfMonths" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="ContractTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_QuoteCalculation_ContractType">
           <End Type="DAL.ContractType" Role="ContractType" Multiplicity="1" />
           <End Type="DAL.QuoteCalculation" Role="QuoteCalculation" Multiplicity="*" />
@@ -1509,6 +1920,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="QuoteCalculationItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteCalculationID" Type="Int32" Nullable="false" />
+          <Property Name="YearNo" Type="Int16" Nullable="false" />
+          <Property Name="ROEPortionAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ZARPortionAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ROE" Type="Decimal" Nullable="false" Precision="5" Scale="3" />
+          <Property Name="IncrPerc" Type="Decimal" Nullable="false" Precision="5" Scale="3" />
+          <Property Name="AmountExclVAT" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="AmountInclVAT" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="QuoteCalculation" Relationship="DAL.FK_QuoteCalculationItem_QuoteCalculation" FromRole="QuoteCalculationItem" ToRole="QuoteCalculation" />
+        </EntityType>
         <Association Name="FK_QuoteCalculationItem_QuoteCalculation">
           <End Type="DAL.QuoteCalculation" Role="QuoteCalculation" Multiplicity="1" />
           <End Type="DAL.QuoteCalculationItem" Role="QuoteCalculationItem" Multiplicity="*" />
@@ -1521,7 +1947,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="ContractInclusion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" />
+          <Property Name="ModalityID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Modality" Relationship="DAL.FK_ContractInclusion_Modality" FromRole="ContractInclusion" ToRole="Modality" />
+          <NavigationProperty Name="Quotes" Relationship="DAL.Quote_ContractInclusion" FromRole="ContractInclusion" ToRole="Quote" />
+        </EntityType>
+        <Association Name="FK_ContractInclusion_Modality">
+          <End Type="DAL.Modality" Role="Modality" Multiplicity="0..1" />
+          <End Type="DAL.ContractInclusion" Role="ContractInclusion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ContractInclusion">
+              <PropertyRef Name="ModalityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Quote_ContractInclusion">
+          <End Type="DAL.ContractInclusion" Role="ContractInclusion" Multiplicity="*" />
+          <End Type="DAL.Quote" Role="Quote" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1654,20 +2107,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Contracts">
-            <EntityTypeMapping TypeName="DAL.Contract">
-              <MappingFragment StoreEntitySet="Contract">
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
-                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
-                <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Currencies">
             <EntityTypeMapping TypeName="DAL.Currency">
               <MappingFragment StoreEntitySet="Currency">
@@ -1762,22 +2201,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="QuoteCalculationItems">
-            <EntityTypeMapping TypeName="DAL.QuoteCalculationItem">
-              <MappingFragment StoreEntitySet="QuoteCalculationItem">
-                <ScalarProperty Name="IncrPerc" ColumnName="IncrPerc" />
-                <ScalarProperty Name="ROE" ColumnName="ROE" />
-                <ScalarProperty Name="ZARPortionAmount" ColumnName="ZARPortionAmount" />
-                <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
-                <ScalarProperty Name="YearNo" ColumnName="YearNo" />
-                <ScalarProperty Name="QuoteCalculationID" ColumnName="QuoteCalculationID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Quotes">
             <EntityTypeMapping TypeName="DAL.Quote">
               <MappingFragment StoreEntitySet="Quote">
+                <ScalarProperty Name="ContractTerm" ColumnName="ContractTerm" />
+                <ScalarProperty Name="BaseContractID" ColumnName="BaseContractID" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="VAT" ColumnName="VAT" />
                 <ScalarProperty Name="ROEDate" ColumnName="ROEDate" />
@@ -1795,6 +2223,9 @@
           <EntitySetMapping Name="SourceQuotes">
             <EntityTypeMapping TypeName="DAL.SourceQuote">
               <MappingFragment StoreEntitySet="SourceQuote">
+                <ScalarProperty Name="ROEDate" ColumnName="ROEDate" />
+                <ScalarProperty Name="ROE" ColumnName="ROE" />
+                <ScalarProperty Name="TenderNumber" ColumnName="TenderNumber" />
                 <ScalarProperty Name="VAT" ColumnName="VAT" />
                 <ScalarProperty Name="SellingPriceExclVAT" ColumnName="SellingPriceExclVAT" />
                 <ScalarProperty Name="SellingPriceInclVAT" ColumnName="SellingPriceInclVAT" />
@@ -1806,6 +2237,50 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="DAL.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ROEDate" ColumnName="ROEDate" />
+                <ScalarProperty Name="ROE" ColumnName="ROE" />
+                <ScalarProperty Name="ContractTerm" ColumnName="ContractTerm" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+                <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractTerms">
+            <EntityTypeMapping TypeName="DAL.ContractTerm">
+              <MappingFragment StoreEntitySet="ContractTerm">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NoOfMonths" ColumnName="NoOfMonths" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractItems">
+            <EntityTypeMapping TypeName="DAL.ContractItem">
+              <MappingFragment StoreEntitySet="ContractItem">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ZARPortionAmount" ColumnName="ZARPortionAmount" />
+                <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
+                <ScalarProperty Name="ZARPortion" ColumnName="ZARPortion" />
+                <ScalarProperty Name="ROEPortion" ColumnName="ROEPortion" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+                <ScalarProperty Name="ContractTerm" ColumnName="ContractTerm" />
+                <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="QuoteCalculations">
             <EntityTypeMapping TypeName="DAL.QuoteCalculation">
               <MappingFragment StoreEntitySet="QuoteCalculation">
@@ -1813,6 +2288,7 @@
                 <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
                 <ScalarProperty Name="ZARPortion" ColumnName="ZARPortion" />
                 <ScalarProperty Name="ROEPortion" ColumnName="ROEPortion" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
                 <ScalarProperty Name="SellingPricePercAmount" ColumnName="SellingPricePercAmount" />
                 <ScalarProperty Name="SellingPricePerc" ColumnName="SellingPricePerc" />
                 <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
@@ -1821,6 +2297,39 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="QuoteCalculationItems">
+            <EntityTypeMapping TypeName="DAL.QuoteCalculationItem">
+              <MappingFragment StoreEntitySet="QuoteCalculationItem">
+                <ScalarProperty Name="AmountInclVAT" ColumnName="AmountInclVAT" />
+                <ScalarProperty Name="AmountExclVAT" ColumnName="AmountExclVAT" />
+                <ScalarProperty Name="IncrPerc" ColumnName="IncrPerc" />
+                <ScalarProperty Name="ROE" ColumnName="ROE" />
+                <ScalarProperty Name="ZARPortionAmount" ColumnName="ZARPortionAmount" />
+                <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
+                <ScalarProperty Name="YearNo" ColumnName="YearNo" />
+                <ScalarProperty Name="QuoteCalculationID" ColumnName="QuoteCalculationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractInclusions">
+            <EntityTypeMapping TypeName="DAL.ContractInclusion">
+              <MappingFragment StoreEntitySet="ContractInclusion">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ModalityID" ColumnName="ModalityID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Quote_ContractInclusion" TypeName="DAL.Quote_ContractInclusion" StoreEntitySet="Quote_ContractInclusion">
+            <EndProperty Name="Quote">
+              <ScalarProperty Name="ID" ColumnName="QuoteID" />
+            </EndProperty>
+            <EndProperty Name="ContractInclusion">
+              <ScalarProperty Name="ID" ColumnName="ContractIncusionID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

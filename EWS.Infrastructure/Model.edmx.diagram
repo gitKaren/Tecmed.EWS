@@ -26,7 +26,6 @@
         <AssociationConnector Association="DAL.FK_Site_Branch" />
         <EntityTypeShape EntityType="DAL.Supplier" Width="1.5" PointX="10.5" PointY="10.375" />
         <AssociationConnector Association="DAL.FK_BrandModel_Supplier" />
-        <EntityTypeShape EntityType="DAL.Contract" Width="1.5" PointX="18.5" PointY="2.75" />
         <EntityTypeShape EntityType="DAL.Currency" Width="1.5" PointX="4" PointY="7.375" />
         <EntityTypeShape EntityType="DAL.Device" Width="1.5" PointX="14.375" PointY="1.625" />
         <EntityTypeShape EntityType="DAL.ProductLine" Width="1.5" PointX="11" PointY="5.375" />
@@ -42,21 +41,36 @@
         <EntityTypeShape EntityType="DAL.Test" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DAL.Country" Width="1.5" PointX="6.25" PointY="11.375" />
         <AssociationConnector Association="DAL.FK_Country_Currency" />
-        <EntityTypeShape EntityType="DAL.QuoteCalculationItem" Width="1.5" PointX="20.5" PointY="9.75" />
-        <AssociationConnector Association="DAL.FK_Contract_ContractType" />
-        <AssociationConnector Association="DAL.FK_Contract_Device" />
         <EntityTypeShape EntityType="DAL.Quote" Width="1.5" PointX="18.5" PointY="7.5" />
-        <AssociationConnector Association="DAL.FK_Contract_Quote" />
         <AssociationConnector Association="DAL.FK_Quote_Device" />
-        <EntityTypeShape EntityType="DAL.SourceQuote" Width="1.5" PointX="8.375" PointY="10.5" />
+        <EntityTypeShape EntityType="DAL.SourceQuote" Width="1.5" PointX="8.375" PointY="10.125" />
         <AssociationConnector Association="DAL.FK_SourceQuote_Device" />
         <AssociationConnector Association="DAL.FK_Quote_SourceQuote" />
         <AssociationConnector Association="DAL.FK_SourceQuote_Supplier" />
-        <EntityTypeShape EntityType="DAL.QuoteCalculation" Width="1.5" PointX="22.5" PointY="6.625" />
-        <AssociationConnector Association="DAL.FK_QuoteCalculation_ContractType" />
+        <AssociationConnector Association="DAL.FK_Quote_Customer" />
+        <AssociationConnector Association="DAL.FK_SourceQuote_Customer" />
+        <EntityTypeShape EntityType="DAL.Contract" Width="1.5" PointX="22.625" PointY="3.625" />
+        <EntityTypeShape EntityType="DAL.ContractTerm" Width="1.5" PointX="20.375" PointY="2.75" />
+        <AssociationConnector Association="DAL.FK_Contract_ContractTerm" />
+        <AssociationConnector Association="DAL.FK_Contract_ContractType" />
+        <AssociationConnector Association="DAL.FK_Contract_Device" />
+        <AssociationConnector Association="DAL.FK_Contract_Quote" />
+        <EntityTypeShape EntityType="DAL.ContractItem" Width="1.5" PointX="24.875" PointY="3.875" />
+        <AssociationConnector Association="DAL.FK_Contract_Customer" />
+        <AssociationConnector Association="DAL.FK_ContractItem_Contract" />
+        <AssociationConnector Association="DAL.FK_ContractItem_ContractTerm" />
+        <AssociationConnector Association="DAL.FK_ContractItem_ContractType" />
+        <EntityTypeShape EntityType="DAL.QuoteCalculation" Width="1.5" PointX="22.875" PointY="9.125" />
+        <AssociationConnector Association="DAL.FK_Quote_ContractTerm" />
+        <AssociationConnector Association="DAL.FK_QuoteCalculation_ContractType" ManuallyRouted="false" >
+        </AssociationConnector>
         <AssociationConnector Association="DAL.FK_QuoteCalculation_Quote" />
+        <EntityTypeShape EntityType="DAL.QuoteCalculationItem" Width="1.5" PointX="26.25" PointY="9.125" />
         <AssociationConnector Association="DAL.FK_QuoteCalculationItem_QuoteCalculation" />
-      </Diagram>
+        <EntityTypeShape EntityType="DAL.ContractInclusion" Width="1.5" PointX="15.25" PointY="14.375" />
+        <AssociationConnector Association="DAL.FK_ContractInclusion_Modality" />
+        <AssociationConnector Association="DAL.Quote_ContractInclusion" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -16,7 +16,9 @@ namespace EWS.Domain.Data.Commands
         public decimal ROEPortionAmount { get; set; }
         public decimal ZARPortionAmount { get; set; }
         public decimal ROE { get; set; }
-        public Nullable<decimal> IncrPerc { get; set; }
+        public decimal IncrPerc { get; set; }
+        public decimal AmountInclVAT { get; set; }
+        public decimal AmountExclVAT { get; set; }
     }
 
     public class QuoteCalculationItemSaveCommandHandler : ICommandHandler<QuoteCalculationItemSaveCommand>
@@ -40,7 +42,10 @@ namespace EWS.Domain.Data.Commands
                     YearNo = command.YearNo,
                     ROEPortionAmount = command.ROEPortionAmount,
                     ZARPortionAmount = command.ZARPortionAmount,
-                    ROE = command.ROE               
+                    ROE = command.ROE,
+                    IncrPerc = command.IncrPerc,
+                    AmountInclVAT = command.AmountInclVAT,
+                    AmountExclVAT = command.AmountExclVAT
                 };
                 _entities.Create(entity);
             }
@@ -51,6 +56,9 @@ namespace EWS.Domain.Data.Commands
                 entity.ROEPortionAmount = command.ROEPortionAmount;
                 entity.ZARPortionAmount = command.ZARPortionAmount;
                 entity.ROE = command.ROE;
+                entity.IncrPerc = command.IncrPerc;
+                entity.AmountExclVAT = command.AmountExclVAT;
+                entity.AmountInclVAT = command.AmountInclVAT;
             }
             
             _entities.SaveChanges();

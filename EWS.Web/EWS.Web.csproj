@@ -55,6 +55,10 @@
       <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Magnum, Version=2.1.2.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
       <HintPath>..\packages\Magnum.2.1.2\lib\NET40\Magnum.dll</HintPath>
       <Private>True</Private>
@@ -217,11 +221,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="ContractServicesController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -239,14 +250,21 @@
     <Compile Include="Logic\Infrastructure\CurrentUserFactory.cs" />
     <Compile Include="Logic\Infrastructure\QueryProcessor.cs" />
     <Compile Include="Logic\Infrastructure\UserSession.cs" />
+    <Compile Include="Logic\IResultMessagesFactory.cs" />
     <Compile Include="Logic\NavSession.cs" />
+    <Compile Include="Logic\ResultMessage.cs" />
+    <Compile Include="Logic\ResultMessagesFactory.cs" />
     <Compile Include="Logic\UserSession.cs" />
     <Compile Include="LoginController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FinaliseQuote_Model.cs" />
+    <Compile Include="Models\ContractInclusionAdmin_Model.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginViewModels.cs" />
-    <Compile Include="Models\QuoteStart_Model.cs" />
+    <Compile Include="Models\ChooseMode_Model.cs" />
+    <Compile Include="Models\PrintOptions_Model.cs" />
+    <Compile Include="Models\SearchContracts.cs" />
     <Compile Include="Models\SourceQuoteItem_Model.cs" />
     <Compile Include="Models\Quote_Model.cs" />
     <Compile Include="Models\NewContract_Model.cs" />
@@ -272,6 +290,7 @@
     <Content Include="Content\bootstrap-fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\Hierarchy.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\subthemes\lime\bulletimg.gif" />
@@ -302,6 +321,7 @@
     <Content Include="Images\QuickIcons\settings.png" />
     <Content Include="Images\systemlogo.jpg" />
     <Content Include="Images\throbber.gif" />
+    <Content Include="ReadMe.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\BaseStyles.css.map" />
@@ -319,9 +339,13 @@
     <Content Include="MassTransit.Host.RabbitMQ.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Grid.mvc.readme" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\custom\SubmitForm.js" />
     <Content Include="Scripts\custom\GetList.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -359,21 +383,36 @@
     <Content Include="Views\User\_UserNavigation.cshtml" />
     <Content Include="Views\User\_UserNavigationTabs.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Quote\ChooseMode.cshtml" />
     <None Include="T4MVC.tt.hooks.t4" />
     <Content Include="Views\Quote\NewContractForm.cshtml" />
-    <Content Include="Views\Quote\NewQuote.cshtml" />
     <Content Include="Views\Shared\ValidationSummary.cshtml" />
     <Content Include="Views\Shared\_SourceQuoteList.cshtml" />
-    <Content Include="Views\Quote\EquipmentCalculation.cshtml" />
+    <Content Include="Views\Quote\EnterEquipment.cshtml" />
     <Content Include="Views\Shared\_DeviceInfo.cshtml" />
     <Content Include="Views\Shared\_ContractsCalculation.cshtml" />
     <Content Include="Views\Shared\_temp.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Device.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ExchangeRate.cshtml" />
     <Content Include="Views\Quote\Quote.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\ContractTypesCalculation.cshtml" />
     <Content Include="Views\Shared\_YearlyCalculation.cshtml" />
+    <Content Include="Views\Quote\ChooseMode.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Customer.cshtml" />
+    <Content Include="Views\Quote\ChooseContract.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ContractCalculation.cshtml" />
+    <Content Include="Views\Quote\EnterCurrent.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\QuoteTable.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Admin\ContractService_Add.cshtml" />
+    <Content Include="Views\Admin\ContractService_Details.cshtml" />
+    <Content Include="Views\Admin\ContractService_Edit.cshtml" />
+    <Content Include="Views\Admin\ContractService_Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ContractCalculations.cshtml" />
+    <Content Include="Views\Quote\FinaliseQuote.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Devices.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ContractInclusions.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PrintOptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

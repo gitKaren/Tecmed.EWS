@@ -128,20 +128,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Contracts">
-      <EntityTypeMapping TypeName="DAL.Contract">
-        <MappingFragment StoreEntitySet="Contract">
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
-          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
-          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-          <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
-          <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Currencies">
       <EntityTypeMapping TypeName="DAL.Currency">
         <MappingFragment StoreEntitySet="Currency">
@@ -236,22 +222,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="QuoteCalculationItems">
-      <EntityTypeMapping TypeName="DAL.QuoteCalculationItem">
-        <MappingFragment StoreEntitySet="QuoteCalculationItem">
-          <ScalarProperty Name="IncrPerc" ColumnName="IncrPerc" />
-          <ScalarProperty Name="ROE" ColumnName="ROE" />
-          <ScalarProperty Name="ZARPortionAmount" ColumnName="ZARPortionAmount" />
-          <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
-          <ScalarProperty Name="YearNo" ColumnName="YearNo" />
-          <ScalarProperty Name="QuoteCalculationID" ColumnName="QuoteCalculationID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Quotes">
       <EntityTypeMapping TypeName="DAL.Quote">
         <MappingFragment StoreEntitySet="Quote">
+          <ScalarProperty Name="ContractTerm" ColumnName="ContractTerm" />
+          <ScalarProperty Name="BaseContractID" ColumnName="BaseContractID" />
           <ScalarProperty Name="Deleted" ColumnName="Deleted" />
           <ScalarProperty Name="VAT" ColumnName="VAT" />
           <ScalarProperty Name="ROEDate" ColumnName="ROEDate" />
@@ -269,6 +244,9 @@
     <EntitySetMapping Name="SourceQuotes">
       <EntityTypeMapping TypeName="DAL.SourceQuote">
         <MappingFragment StoreEntitySet="SourceQuote">
+          <ScalarProperty Name="ROEDate" ColumnName="ROEDate" />
+          <ScalarProperty Name="ROE" ColumnName="ROE" />
+          <ScalarProperty Name="TenderNumber" ColumnName="TenderNumber" />
           <ScalarProperty Name="VAT" ColumnName="VAT" />
           <ScalarProperty Name="SellingPriceExclVAT" ColumnName="SellingPriceExclVAT" />
           <ScalarProperty Name="SellingPriceInclVAT" ColumnName="SellingPriceInclVAT" />
@@ -280,6 +258,50 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Contracts">
+      <EntityTypeMapping TypeName="DAL.Contract">
+        <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="VAT" ColumnName="VAT" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="ROEDate" ColumnName="ROEDate" />
+          <ScalarProperty Name="ROE" ColumnName="ROE" />
+          <ScalarProperty Name="ContractTerm" ColumnName="ContractTerm" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+          <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
+          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+          <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+          <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractTerms">
+      <EntityTypeMapping TypeName="DAL.ContractTerm">
+        <MappingFragment StoreEntitySet="ContractTerm">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="NoOfMonths" ColumnName="NoOfMonths" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractItems">
+      <EntityTypeMapping TypeName="DAL.ContractItem">
+        <MappingFragment StoreEntitySet="ContractItem">
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="ZARPortionAmount" ColumnName="ZARPortionAmount" />
+          <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
+          <ScalarProperty Name="ZARPortion" ColumnName="ZARPortion" />
+          <ScalarProperty Name="ROEPortion" ColumnName="ROEPortion" />
+          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+          <ScalarProperty Name="ContractTerm" ColumnName="ContractTerm" />
+          <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
+          <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="QuoteCalculations">
       <EntityTypeMapping TypeName="DAL.QuoteCalculation">
         <MappingFragment StoreEntitySet="QuoteCalculation">
@@ -287,6 +309,7 @@
           <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
           <ScalarProperty Name="ZARPortion" ColumnName="ZARPortion" />
           <ScalarProperty Name="ROEPortion" ColumnName="ROEPortion" />
+          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
           <ScalarProperty Name="SellingPricePercAmount" ColumnName="SellingPricePercAmount" />
           <ScalarProperty Name="SellingPricePerc" ColumnName="SellingPricePerc" />
           <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
@@ -295,5 +318,38 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="QuoteCalculationItems">
+      <EntityTypeMapping TypeName="DAL.QuoteCalculationItem">
+        <MappingFragment StoreEntitySet="QuoteCalculationItem">
+          <ScalarProperty Name="AmountInclVAT" ColumnName="AmountInclVAT" />
+          <ScalarProperty Name="AmountExclVAT" ColumnName="AmountExclVAT" />
+          <ScalarProperty Name="IncrPerc" ColumnName="IncrPerc" />
+          <ScalarProperty Name="ROE" ColumnName="ROE" />
+          <ScalarProperty Name="ZARPortionAmount" ColumnName="ZARPortionAmount" />
+          <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
+          <ScalarProperty Name="YearNo" ColumnName="YearNo" />
+          <ScalarProperty Name="QuoteCalculationID" ColumnName="QuoteCalculationID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractInclusions">
+      <EntityTypeMapping TypeName="DAL.ContractInclusion">
+        <MappingFragment StoreEntitySet="ContractInclusion">
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ModalityID" ColumnName="ModalityID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Quote_ContractInclusion" TypeName="DAL.Quote_ContractInclusion" StoreEntitySet="Quote_ContractInclusion">
+      <EndProperty Name="Quote">
+        <ScalarProperty Name="ID" ColumnName="QuoteID" />
+      </EndProperty>
+      <EndProperty Name="ContractInclusion">
+        <ScalarProperty Name="ID" ColumnName="ContractIncusionID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>
