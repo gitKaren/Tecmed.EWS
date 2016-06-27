@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentMetaFields">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MetaFieldName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="ValidationExpression" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="SourceTableName" Type="varchar" MaxLength="150" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentMetaValues">
+    <Key>
+      <PropertyRef Name="documentMetaFieldID" />
+      <PropertyRef Name="documentID" />
+    </Key>
+    <Property Name="documentMetaFieldID" Type="int" Nullable="false" />
+    <Property Name="documentID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MetaValue" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DocumentRoles">
+    <Key>
+      <PropertyRef Name="documentID" />
+      <PropertyRef Name="roleName" />
+    </Key>
+    <Property Name="documentID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="roleName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="documentTypeID" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="DocumentName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RefNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TargetRef" Type="varchar" MaxLength="150" />
+    <Property Name="LatestVersionNumber" Type="int" Nullable="false" />
+    <Property Name="LatestFileName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="LatestVersionDate" Type="datetime" />
+    <Property Name="LatestVersionCreator" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="LatestSize" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentTypeCategories">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="DocumentTypeCategoryName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Scope" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentTypes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="documentTypeCategoryID" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="DocumentTypeName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentVersionExpiries">
+    <Key>
+      <PropertyRef Name="documentId" />
+      <PropertyRef Name="VersionNumber" />
+      <PropertyRef Name="ExpiryDate" />
+    </Key>
+    <Property Name="documentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VersionNumber" Type="int" Nullable="false" />
+    <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifyingUser" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentVersions">
+    <Key>
+      <PropertyRef Name="documentID" />
+      <PropertyRef Name="VersionNumber" />
+    </Key>
+    <Property Name="documentID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VersionNumber" Type="int" Nullable="false" />
+    <Property Name="FileName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="VersionDate" Type="datetime" Nullable="false" />
+    <Property Name="FileSize" Type="bigint" Nullable="false" />
+    <Property Name="VersionCreator" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_DocumentMetaValues_DocumentMetaFields">
+    <End Role="DocumentMetaFields" Type="Self.DocumentMetaFields" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentMetaValues" Type="Self.DocumentMetaValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentMetaFields">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DocumentMetaValues">
+        <PropertyRef Name="documentMetaFieldID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentMetaValues_Documents">
+    <End Role="Documents" Type="Self.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentMetaValues" Type="Self.DocumentMetaValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documents">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DocumentMetaValues">
+        <PropertyRef Name="documentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentRoles_Documents1">
+    <End Role="Documents" Type="Self.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentRoles" Type="Self.DocumentRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documents">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DocumentRoles">
+        <PropertyRef Name="documentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentRoles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentRoles" Type="Self.DocumentRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleName" />
+      </Principal>
+      <Dependent Role="DocumentRoles">
+        <PropertyRef Name="roleName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documents_DocumentTypes">
+    <End Role="DocumentTypes" Type="Self.DocumentTypes" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentTypes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Documents">
+        <PropertyRef Name="documentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentTypes_DocumentTypeCategories">
+    <End Role="DocumentTypeCategories" Type="Self.DocumentTypeCategories" Multiplicity="1" />
+    <End Role="DocumentTypes" Type="Self.DocumentTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentTypeCategories">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DocumentTypes">
+        <PropertyRef Name="documentTypeCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentVersionExpiries_DocumentVersions">
+    <End Role="DocumentVersions" Type="Self.DocumentVersions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentVersionExpiries" Type="Self.DocumentVersionExpiries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentVersions">
+        <PropertyRef Name="documentID" />
+        <PropertyRef Name="VersionNumber" />
+      </Principal>
+      <Dependent Role="DocumentVersionExpiries">
+        <PropertyRef Name="documentId" />
+        <PropertyRef Name="VersionNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentVersions_Documents">
+    <End Role="Documents" Type="Self.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentVersions" Type="Self.DocumentVersions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documents">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DocumentVersions">
+        <PropertyRef Name="documentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="Common" store:Type="Tables" />
+    <EntitySet Name="DocumentMetaFields" EntityType="Self.DocumentMetaFields" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentMetaValues" EntityType="Self.DocumentMetaValues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentRoles" EntityType="Self.DocumentRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentTypeCategories" EntityType="Self.DocumentTypeCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentTypes" EntityType="Self.DocumentTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentVersionExpiries" EntityType="Self.DocumentVersionExpiries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentVersions" EntityType="Self.DocumentVersions" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DocumentMetaValues_DocumentMetaFields" Association="Self.FK_DocumentMetaValues_DocumentMetaFields">
+      <End Role="DocumentMetaFields" EntitySet="DocumentMetaFields" />
+      <End Role="DocumentMetaValues" EntitySet="DocumentMetaValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentMetaValues_Documents" Association="Self.FK_DocumentMetaValues_Documents">
+      <End Role="Documents" EntitySet="Documents" />
+      <End Role="DocumentMetaValues" EntitySet="DocumentMetaValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentRoles_Documents1" Association="Self.FK_DocumentRoles_Documents1">
+      <End Role="Documents" EntitySet="Documents" />
+      <End Role="DocumentRoles" EntitySet="DocumentRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentRoles_Roles" Association="Self.FK_DocumentRoles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="DocumentRoles" EntitySet="DocumentRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documents_DocumentTypes" Association="Self.FK_Documents_DocumentTypes">
+      <End Role="DocumentTypes" EntitySet="DocumentTypes" />
+      <End Role="Documents" EntitySet="Documents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentTypes_DocumentTypeCategories" Association="Self.FK_DocumentTypes_DocumentTypeCategories">
+      <End Role="DocumentTypeCategories" EntitySet="DocumentTypeCategories" />
+      <End Role="DocumentTypes" EntitySet="DocumentTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentVersionExpiries_DocumentVersions" Association="Self.FK_DocumentVersionExpiries_DocumentVersions">
+      <End Role="DocumentVersions" EntitySet="DocumentVersions" />
+      <End Role="DocumentVersionExpiries" EntitySet="DocumentVersionExpiries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentVersions_Documents" Association="Self.FK_DocumentVersions_Documents">
+      <End Role="Documents" EntitySet="Documents" />
+      <End Role="DocumentVersions" EntitySet="DocumentVersions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

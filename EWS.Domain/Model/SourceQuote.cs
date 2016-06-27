@@ -32,11 +32,11 @@ namespace EWS.Domain.Model
         public DateTime Date { get; set; }
 
         [Required]
-        [Display(Name = "Selling Price Incl VAT"), DisplayFormat(DataFormatString = "{0:C2}")]
+        [Display(Name = "Selling Price Incl VAT"), DisplayFormat(DataFormatString = "{0:N2}")]
         public decimal SellingPriceInclVAT { get; set; }
 
         [Required]
-        [Display(Name = "VAT"), DisplayFormat(DataFormatString = "{0:C2}")]
+        [Display(Name = "VAT"), DisplayFormat(DataFormatString = "{0:N2}")]
         public float VAT { get; set; }
 
         [Display(Name = "Tender No")]

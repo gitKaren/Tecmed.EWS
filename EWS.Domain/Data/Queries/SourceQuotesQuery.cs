@@ -38,10 +38,11 @@ namespace EWS.Domain.Data.Queries
                 Domain.Model.SourceQuote model = new Domain.Model.SourceQuote()
                                                             { Date = item.Date, 
                                                               DeviceID = item.DeviceID,
-                                                              DeviceDescription = item.DeviceID.ToString(),
+                                                              DeviceDescription = item.Device.DisplayName,
                                                               QuoteRef = item.Ref,
                                                               Supplier = item.Supplier.SupplierName,
                                                               VAT = item.VAT,
+                                                              SellingPriceInclVAT = item.SellingPriceInclVAT,
                                                               TenderNumber = item.TenderNumber};
                 models.Add(model);
             }

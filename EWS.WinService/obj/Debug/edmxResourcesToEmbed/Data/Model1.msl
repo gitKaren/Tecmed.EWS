@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="DocumentMetaFields">
+      <EntityTypeMapping TypeName="Model.DocumentMetaField">
+        <MappingFragment StoreEntitySet="DocumentMetaFields">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MetaFieldName" ColumnName="MetaFieldName" />
+          <ScalarProperty Name="ValidationExpression" ColumnName="ValidationExpression" />
+          <ScalarProperty Name="SourceTableName" ColumnName="SourceTableName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentMetaValues">
+      <EntityTypeMapping TypeName="Model.DocumentMetaValue">
+        <MappingFragment StoreEntitySet="DocumentMetaValues">
+          <ScalarProperty Name="documentMetaFieldID" ColumnName="documentMetaFieldID" />
+          <ScalarProperty Name="documentID" ColumnName="documentID" />
+          <ScalarProperty Name="MetaValue" ColumnName="MetaValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="Model.Document">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="documentTypeID" ColumnName="documentTypeID" />
+          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+          <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+          <ScalarProperty Name="TargetRef" ColumnName="TargetRef" />
+          <ScalarProperty Name="LatestVersionNumber" ColumnName="LatestVersionNumber" />
+          <ScalarProperty Name="LatestFileName" ColumnName="LatestFileName" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="LatestVersionDate" ColumnName="LatestVersionDate" />
+          <ScalarProperty Name="LatestVersionCreator" ColumnName="LatestVersionCreator" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="LatestSize" ColumnName="LatestSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentTypeCategories">
+      <EntityTypeMapping TypeName="Model.DocumentTypeCategory">
+        <MappingFragment StoreEntitySet="DocumentTypeCategories">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DocumentTypeCategoryName" ColumnName="DocumentTypeCategoryName" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentTypes">
+      <EntityTypeMapping TypeName="Model.DocumentType">
+        <MappingFragment StoreEntitySet="DocumentTypes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="documentTypeCategoryID" ColumnName="documentTypeCategoryID" />
+          <ScalarProperty Name="DocumentTypeName" ColumnName="DocumentTypeName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentVersionExpiries">
+      <EntityTypeMapping TypeName="Model.DocumentVersionExpiry">
+        <MappingFragment StoreEntitySet="DocumentVersionExpiries">
+          <ScalarProperty Name="documentId" ColumnName="documentId" />
+          <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="ModifyingUser" ColumnName="ModifyingUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentVersions">
+      <EntityTypeMapping TypeName="Model.DocumentVersion">
+        <MappingFragment StoreEntitySet="DocumentVersions">
+          <ScalarProperty Name="documentID" ColumnName="documentID" />
+          <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="VersionDate" ColumnName="VersionDate" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="VersionCreator" ColumnName="VersionCreator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="Model.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DocumentRoles" TypeName="Model.DocumentRoles" StoreEntitySet="DocumentRoles">
+      <EndProperty Name="Role">
+        <ScalarProperty Name="RoleName" ColumnName="roleName" />
+      </EndProperty>
+      <EndProperty Name="Document">
+        <ScalarProperty Name="ID" ColumnName="documentID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

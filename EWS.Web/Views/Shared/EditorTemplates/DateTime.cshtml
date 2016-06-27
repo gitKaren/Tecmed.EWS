@@ -1,0 +1,12 @@
+﻿@model DateTime?
+
+@{
+    string date = string.Empty;
+    if (Model != null)
+    {
+        date = string.Format("{0}-{1}-{2}", Model.Value.Year, Model.Value.Month.ToString().PadLeft(2, '0'), Model.Value.Day.ToString().PadLeft(2, '0'));
+    }
+
+    @Html.TextBox(String.Empty, date, new { @class = "form-control input-xs", type = "Date", placeholder = "Date To" })
+}
+

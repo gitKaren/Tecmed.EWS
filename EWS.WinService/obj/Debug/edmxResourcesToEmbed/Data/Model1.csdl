@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DocumentMetaField">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MetaFieldName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ValidationExpression" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SourceTableName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="DocumentMetaValues" Relationship="Self.FK_DocumentMetaValues_DocumentMetaFields" FromRole="DocumentMetaFields" ToRole="DocumentMetaValues" />
+  </EntityType>
+  <EntityType Name="DocumentMetaValue">
+    <Key>
+      <PropertyRef Name="documentMetaFieldID" />
+      <PropertyRef Name="documentID" />
+    </Key>
+    <Property Name="documentMetaFieldID" Type="Int32" Nullable="false" />
+    <Property Name="documentID" Type="Guid" Nullable="false" />
+    <Property Name="MetaValue" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DocumentMetaField" Relationship="Self.FK_DocumentMetaValues_DocumentMetaFields" FromRole="DocumentMetaValues" ToRole="DocumentMetaFields" />
+    <NavigationProperty Name="Document" Relationship="Self.FK_DocumentMetaValues_Documents" FromRole="DocumentMetaValues" ToRole="Documents" />
+  </EntityType>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="documentTypeID" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DocumentName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TargetRef" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="LatestVersionNumber" Type="Int32" Nullable="false" />
+    <Property Name="LatestFileName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LatestVersionDate" Type="DateTime" Precision="3" />
+    <Property Name="LatestVersionCreator" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="LatestSize" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="DocumentMetaValues" Relationship="Self.FK_DocumentMetaValues_Documents" FromRole="Documents" ToRole="DocumentMetaValues" />
+    <NavigationProperty Name="DocumentType" Relationship="Self.FK_Documents_DocumentTypes" FromRole="Documents" ToRole="DocumentTypes" />
+    <NavigationProperty Name="DocumentVersions" Relationship="Self.FK_DocumentVersions_Documents" FromRole="Documents" ToRole="DocumentVersions" />
+    <NavigationProperty Name="Roles" Relationship="Model.DocumentRoles" FromRole="Document" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="DocumentTypeCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DocumentTypeCategoryName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Scope" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="DocumentTypes" Relationship="Self.FK_DocumentTypes_DocumentTypeCategories" FromRole="DocumentTypeCategories" ToRole="DocumentTypes" />
+  </EntityType>
+  <EntityType Name="DocumentType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="documentTypeCategoryID" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DocumentTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Documents" Relationship="Self.FK_Documents_DocumentTypes" FromRole="DocumentTypes" ToRole="Documents" />
+    <NavigationProperty Name="DocumentTypeCategory" Relationship="Self.FK_DocumentTypes_DocumentTypeCategories" FromRole="DocumentTypes" ToRole="DocumentTypeCategories" />
+  </EntityType>
+  <EntityType Name="DocumentVersionExpiry">
+    <Key>
+      <PropertyRef Name="documentId" />
+      <PropertyRef Name="VersionNumber" />
+      <PropertyRef Name="ExpiryDate" />
+    </Key>
+    <Property Name="documentId" Type="Guid" Nullable="false" />
+    <Property Name="VersionNumber" Type="Int32" Nullable="false" />
+    <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyingUser" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="DocumentVersion" Relationship="Self.FK_DocumentVersionExpiries_DocumentVersions" FromRole="DocumentVersionExpiries" ToRole="DocumentVersions" />
+  </EntityType>
+  <EntityType Name="DocumentVersion">
+    <Key>
+      <PropertyRef Name="documentID" />
+      <PropertyRef Name="VersionNumber" />
+    </Key>
+    <Property Name="documentID" Type="Guid" Nullable="false" />
+    <Property Name="VersionNumber" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VersionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FileSize" Type="Int64" Nullable="false" />
+    <Property Name="VersionCreator" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Document" Relationship="Self.FK_DocumentVersions_Documents" FromRole="DocumentVersions" ToRole="Documents" />
+    <NavigationProperty Name="DocumentVersionExpiries" Relationship="Self.FK_DocumentVersionExpiries_DocumentVersions" FromRole="DocumentVersions" ToRole="DocumentVersionExpiries" />
+  </EntityType>
+  <Association Name="FK_DocumentMetaValues_DocumentMetaFields">
+    <End Role="DocumentMetaFields" Type="Self.DocumentMetaField" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentMetaValues" Type="Self.DocumentMetaValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentMetaFields">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DocumentMetaValues">
+        <PropertyRef Name="documentMetaFieldID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentMetaValues_Documents">
+    <End Role="Documents" Type="Self.Document" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentMetaValues" Type="Self.DocumentMetaValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documents">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DocumentMetaValues">
+        <PropertyRef Name="documentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documents_DocumentTypes">
+    <End Role="DocumentTypes" Type="Self.DocumentType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Documents" Type="Self.Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentTypes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Documents">
+        <PropertyRef Name="documentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentVersions_Documents">
+    <End Role="Documents" Type="Self.Document" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentVersions" Type="Self.DocumentVersion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documents">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DocumentVersions">
+        <PropertyRef Name="documentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentTypes_DocumentTypeCategories">
+    <End Role="DocumentTypeCategories" Type="Self.DocumentTypeCategory" Multiplicity="1" />
+    <End Role="DocumentTypes" Type="Self.DocumentType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentTypeCategories">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DocumentTypes">
+        <PropertyRef Name="documentTypeCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentVersionExpiries_DocumentVersions">
+    <End Role="DocumentVersions" Type="Self.DocumentVersion" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DocumentVersionExpiries" Type="Self.DocumentVersionExpiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentVersions">
+        <PropertyRef Name="documentID" />
+        <PropertyRef Name="VersionNumber" />
+      </Principal>
+      <Dependent Role="DocumentVersionExpiries">
+        <PropertyRef Name="documentId" />
+        <PropertyRef Name="VersionNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DocumentMetaFields" EntityType="Self.DocumentMetaField" />
+    <EntitySet Name="DocumentMetaValues" EntityType="Self.DocumentMetaValue" />
+    <EntitySet Name="Documents" EntityType="Self.Document" />
+    <EntitySet Name="DocumentTypeCategories" EntityType="Self.DocumentTypeCategory" />
+    <EntitySet Name="DocumentTypes" EntityType="Self.DocumentType" />
+    <EntitySet Name="DocumentVersionExpiries" EntityType="Self.DocumentVersionExpiry" />
+    <EntitySet Name="DocumentVersions" EntityType="Self.DocumentVersion" />
+    <AssociationSet Name="FK_DocumentMetaValues_DocumentMetaFields" Association="Self.FK_DocumentMetaValues_DocumentMetaFields">
+      <End Role="DocumentMetaFields" EntitySet="DocumentMetaFields" />
+      <End Role="DocumentMetaValues" EntitySet="DocumentMetaValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentMetaValues_Documents" Association="Self.FK_DocumentMetaValues_Documents">
+      <End Role="Documents" EntitySet="Documents" />
+      <End Role="DocumentMetaValues" EntitySet="DocumentMetaValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documents_DocumentTypes" Association="Self.FK_Documents_DocumentTypes">
+      <End Role="DocumentTypes" EntitySet="DocumentTypes" />
+      <End Role="Documents" EntitySet="Documents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentVersions_Documents" Association="Self.FK_DocumentVersions_Documents">
+      <End Role="Documents" EntitySet="Documents" />
+      <End Role="DocumentVersions" EntitySet="DocumentVersions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentTypes_DocumentTypeCategories" Association="Self.FK_DocumentTypes_DocumentTypeCategories">
+      <End Role="DocumentTypeCategories" EntitySet="DocumentTypeCategories" />
+      <End Role="DocumentTypes" EntitySet="DocumentTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentVersionExpiries_DocumentVersions" Association="Self.FK_DocumentVersionExpiries_DocumentVersions">
+      <End Role="DocumentVersions" EntitySet="DocumentVersions" />
+      <End Role="DocumentVersionExpiries" EntitySet="DocumentVersionExpiries" />
+    </AssociationSet>
+    <EntitySet Name="Roles" EntityType="Model.Role" />
+    <AssociationSet Name="DocumentRoles" Association="Model.DocumentRoles">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Documents" Relationship="Model.DocumentRoles" FromRole="Role" ToRole="Document" />
+  </EntityType>
+  <Association Name="DocumentRoles">
+    <End Type="Model.Document" Role="Document" Multiplicity="*" />
+    <End Type="Model.Role" Role="Role" Multiplicity="*" />
+  </Association>
+</Schema>

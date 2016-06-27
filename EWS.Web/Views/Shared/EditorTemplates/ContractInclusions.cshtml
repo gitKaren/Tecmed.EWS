@@ -1,0 +1,26 @@
+﻿@model EWS.Domain.Data.DataModel.ContractInclusion[]
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="panel-title"> Summary of Inclusions / Exclusions</span>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-6 ">
+        <table class="grid-table">
+            @for (int i = 0; i < Model.GetLength(0); i++)
+            {
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <div class="row ">
+                            @Html.CheckBox("Inclusion", true, new { @class = "", @value = Model[i].ID })
+                        </div>
+                    </td>
+                    <td>
+                        <strong> @Html.DisplayFor(item => Model[i].Description, new { @class = "form-control" })</strong>
+                    </td>
+                </tr>
+            }
+        </table>
+        </div>
+    </div>
+</div>

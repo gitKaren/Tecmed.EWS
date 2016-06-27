@@ -1,0 +1,13 @@
+﻿@model EWS.Domain.Model.Customer
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.CustomerName)
+@Html.HiddenFor(model => model.Locality)
+@Html.HiddenFor(model => model.RegistrationNo)
+
+<div class="form-group">
+    @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-4 form-control-static" })
+    <div class="col-sm-6 col-md-5">
+        @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control form-control-greyed text-center", @readonly = "readonly" } })
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model EWS.Web.Models.FinaliseQuote_Model
+
+@{
+    ViewBag.Title = "Extended Warranty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    @Html.Partial("ValidationSummary", ViewData.ModelState)
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Quote</h3>
+        </div>
+        <div class="panel-body">
+
+            @using (Html.BeginForm(MVC.Quote.FinaliseQuote(), FormMethod.Post, new { role = "form", id = "SearchForm" }))
+            {
+                @Html.EditorFor(model => model.Devices, "Devices")
+
+                @Html.EditorFor(model => model.Inclusions, "ContractInclusions")
+
+                @Html.EditorFor(model => model.PrintOptions, "PrintOptions")
+
+            }
+        </div>
+    </div>
+</div>

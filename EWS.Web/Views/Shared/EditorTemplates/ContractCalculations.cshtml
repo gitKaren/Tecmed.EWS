@@ -1,0 +1,73 @@
+﻿@using EWS.Domain.Model;
+@model List<QuoteCalculation> 
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    if (Model[i].Selected)
+    {
+        @Html.HiddenFor(modelitem => Model[i].Selected)
+        @Html.HiddenFor(modelitem => Model[i].ContractCalculationID)
+        @Html.HiddenFor(modelitem => Model[i].ContractTypeID)
+        @Html.HiddenFor(modelitem => Model[i].ContractType)
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@Html.DisplayFor(modelitem => Model[i].ContractType)</h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    @if (Model[i].SellingPricePerc > 0)
+                    {
+                        <div class="col-xs-4">
+                            <div class="col-xs-2 pad3 r-align" style="border: solid 0px red;">
+                                @Html.LabelFor(item => item[i].SellingPricePerc, htmlAttributes: new { @class = "control-label text-right" })
+                            </div>
+                            <div class="col-xs-3 pad3">
+                                @Html.EditorFor(item => item[i].SellingPricePerc, new { htmlAttributes = new { @class = "form-control text-right", id = "SellingPricePerc" } })
+                            </div>
+                            <div class="col-xs-2 pad3 r-align">
+                                @Html.LabelFor(item => item[i].BasePrice, htmlAttributes: new { @class = "control-label text-right" })
+                            </div>
+                            <div class="col-xs-4 pad3">
+                                @Html.EditorFor(item => item[i].BasePrice, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly", id = "SellingPricePercAmount" } })
+                            </div>
+                        </div>
+                    }
+                    <div class="col-xs-4">
+                        <div class="col-xs-2 pad3 r-align">
+                            @Html.LabelFor(item => item[i].ROEPortion, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-3 pad3">
+                            @Html.EditorFor(item => item[i].ROEPortion, new { htmlAttributes = new { @class = "form-control text-right", id = "ROEPortion" } })
+                        </div>
+                        <div class="col-xs-2 pad3 r-align">
+                            @Html.LabelFor(item => item[i].ROEPortionAmount, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-4 pad3">
+                            @Html.EditorFor(item => item[i].ROEPortionAmount, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly", id = "ROEPortionAmount" } })
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="col-xs-2 pad3 r-align">
+                            @Html.LabelFor(item => item[i].ZARPortion, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-3 pad3">
+                            @Html.EditorFor(item => item[i].ZARPortion, new { htmlAttributes = new { @class = "form-control text-right", id = "ZARPortion" } })
+                        </div>
+                        <div class="col-xs-2 pad3 r-align">
+                            @Html.LabelFor(item => item[i].ZARPortionAmount, htmlAttributes: new { @class = "control-label text-right" })
+                        </div>
+                        <div class="col-xs-4 pad3">
+                            @Html.EditorFor(item => item[i].ZARPortionAmount, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly", id = "ZARPortionAmount" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.EditorFor(model => Model[i].QuoteCalculationItems, "QuoteTable")
+                </div>
+            </div>
+
+        </div>
+    }
+}

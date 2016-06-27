@@ -1,0 +1,68 @@
+﻿@using GridMvc.Html
+@model EWS.Web.Models.SearchContracts
+@{
+    ViewBag.Title = "Extended Warranty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+  .vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}  
+
+  .form-inline > .form-group {
+    vertical-align: bottom;
+}
+</style>
+
+<div class="container-fluid">
+    @Html.Partial("ValidationSummary", ViewData.ModelState)
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Choose Contract</h3>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm(MVC.Quote.ChooseContract(), FormMethod.Post, new { role = "form", id = "SearchForm" }))
+            {
+                <div class="row bottom-gap-10">
+                   
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.Keyword, new { htmlAttributes = new { @class = "form-control col-md-3" } })
+                    </div>
+                    <div class="col-xs-2">
+                        <button id="btnSearch" type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>
+                    </div>
+
+                </div>
+
+                @Html.Grid(Model.Contracts).Columns(columns =>
+                    {
+                        columns.Add(c => c.ContractDate).Titled("Date").Format("{0:yyyy/MM/dd}");
+                        columns.Add(c => c.TenderNo).Titled("Tender No");
+                        columns.Add(c => c.Device.DisplayName).Titled("Device");
+                        columns.Add(c => c.Customer.CustomerName).Titled("Customer");
+                        //columns.Add(c => c.IncompleteQuestionnaires)
+                        //       .Titled("Questionnaires Completed")
+                        //       .Sanitized(false)
+                        //       .Encoded(false)
+                        //       .SetWidth(150)
+                        //       .RenderValueAs(c => Html.MVCGridCompliantField(c.IncompleteQuestionnaires == 0 ? "YES" : (c.IncompleteQuestionnaires == 1 ? "NO" : "-"), (c.IncompleteQuestionnaires == 0)))
+                        //       .Css("MVCGridCentreColumn");
+                        //columns.Add(c => c.AuditStatusID)
+                        //        .Titled("Status")
+                        //        .Css("MVCGridCentreColumn");
+                        columns.Add(c => c.ID)
+                                 .Titled("")
+                                 .Sanitized(false)
+                                 .Encoded(false)
+                                 .SetWidth(130)
+                                 .RenderValueAs(c => Html.ActionLink("Select", MVC.Quote.EnterCurrent(c.ID), new { @class = "btn btn-primary btn-sm" }).ToHtmlString()
+                                                );
+                    }).WithPaging(50).Sortable(true)
+            }
+        </div>
+    </div>
+</div>
+

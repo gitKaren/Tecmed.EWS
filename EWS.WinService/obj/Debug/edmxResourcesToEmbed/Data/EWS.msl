@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Tecmed_EWSModelStoreContainer" CdmEntityContainer="Tecmed_EWSEntities">
+    <EntitySetMapping Name="Branches">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Branch">
+        <MappingFragment StoreEntitySet="Branch">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BrandModels">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.BrandModel">
+        <MappingFragment StoreEntitySet="BrandModel">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="supplierID" ColumnName="supplierID" />
+          <ScalarProperty Name="BrandModelName" ColumnName="BrandModelName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contracts">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Contract">
+        <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+          <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+          <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
+          <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="ContractTerm" ColumnName="ContractTerm" />
+          <ScalarProperty Name="ROE" ColumnName="ROE" />
+          <ScalarProperty Name="ROEDate" ColumnName="ROEDate" />
+          <ScalarProperty Name="VAT" ColumnName="VAT" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractInclusions">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.ContractInclusion">
+        <MappingFragment StoreEntitySet="ContractInclusion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ModalityID" ColumnName="ModalityID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractItems">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.ContractItem">
+        <MappingFragment StoreEntitySet="ContractItem">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+          <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
+          <ScalarProperty Name="ContractTerm" ColumnName="ContractTerm" />
+          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+          <ScalarProperty Name="ROEPortion" ColumnName="ROEPortion" />
+          <ScalarProperty Name="ZARPortion" ColumnName="ZARPortion" />
+          <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
+          <ScalarProperty Name="ZARPortionAmount" ColumnName="ZARPortionAmount" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractTerms">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.ContractTerm">
+        <MappingFragment StoreEntitySet="ContractTerm">
+          <ScalarProperty Name="NoOfMonths" ColumnName="NoOfMonths" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractTypes">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.ContractType">
+        <MappingFragment StoreEntitySet="ContractType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ContractTypeName" ColumnName="ContractTypeName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="ISOCode" ColumnName="ISOCode" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="VAT" ColumnName="VAT" />
+          <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Currencies">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Currency">
+        <MappingFragment StoreEntitySet="Currency">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+          <ScalarProperty Name="CurrencyName" ColumnName="CurrencyName" />
+          <ScalarProperty Name="DefaultRateOfExchange" ColumnName="DefaultRateOfExchange" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CustomerRef" ColumnName="CustomerRef" />
+          <ScalarProperty Name="AccountRef" ColumnName="AccountRef" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerNameFriendly" ColumnName="CustomerNameFriendly" />
+          <ScalarProperty Name="customerTypeID" ColumnName="customerTypeID" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="PractiscId" ColumnName="PractiscId" />
+          <ScalarProperty Name="VATNo" ColumnName="VATNo" />
+          <ScalarProperty Name="customerLocalityID" ColumnName="customerLocalityID" />
+          <ScalarProperty Name="IsInternational" ColumnName="IsInternational" />
+          <ScalarProperty Name="IsGovernment" ColumnName="IsGovernment" />
+          <ScalarProperty Name="managementCompanyID" ColumnName="managementCompanyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerLocalities">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.CustomerLocality">
+        <MappingFragment StoreEntitySet="CustomerLocality">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CustomerLocalityName" ColumnName="CustomerLocalityName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="siteID" ColumnName="siteID" />
+          <ScalarProperty Name="hospitalDepartmentID" ColumnName="hospitalDepartmentID" />
+          <ScalarProperty Name="ResponsibleUserName" ColumnName="ResponsibleUserName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Devices">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Device">
+        <MappingFragment StoreEntitySet="Device">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="roomID" ColumnName="roomID" />
+          <ScalarProperty Name="deviceTypeID" ColumnName="deviceTypeID" />
+          <ScalarProperty Name="submodalityID" ColumnName="submodalityID" />
+          <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+          <ScalarProperty Name="CommissionedDate" ColumnName="CommissionedDate" />
+          <ScalarProperty Name="commissioningCertID" ColumnName="commissioningCertID" />
+          <ScalarProperty Name="FactoryShipmentFrom" ColumnName="FactoryShipmentFrom" />
+          <ScalarProperty Name="FactoryShipmentTo" ColumnName="FactoryShipmentTo" />
+          <ScalarProperty Name="ProductLineID" ColumnName="ProductLineID" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="SalesLicenceNumber" ColumnName="SalesLicenceNumber" />
+          <ScalarProperty Name="ModelNumber" ColumnName="ModelNumber" />
+          <ScalarProperty Name="RadiationBoardSerialNumber" ColumnName="RadiationBoardSerialNumber" />
+          <ScalarProperty Name="SalesLicenceFileReferenceNumber" ColumnName="SalesLicenceFileReferenceNumber" />
+          <ScalarProperty Name="EquipmentIDNumber" ColumnName="EquipmentIDNumber" />
+          <ScalarProperty Name="RequiresIBQCTests" ColumnName="RequiresIBQCTests" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeviceComponents">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.DeviceComponent">
+        <MappingFragment StoreEntitySet="DeviceComponent">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="deviceID" ColumnName="deviceID" />
+          <ScalarProperty Name="componentTypeID" ColumnName="componentTypeID" />
+          <ScalarProperty Name="brandModelID" ColumnName="brandModelID" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeviceTypes">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.DeviceType">
+        <MappingFragment StoreEntitySet="DeviceType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="subModalityID" ColumnName="subModalityID" />
+          <ScalarProperty Name="DeviceTypeName" ColumnName="DeviceTypeName" />
+          <ScalarProperty Name="RadiationEmitting" ColumnName="RadiationEmitting" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HospitalDepartments">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.HospitalDepartment">
+        <MappingFragment StoreEntitySet="HospitalDepartment">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HospitalDepartmentName" ColumnName="HospitalDepartmentName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modalities">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Modality">
+        <MappingFragment StoreEntitySet="Modality">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ModalityName" ColumnName="ModalityName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductLines">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.ProductLine">
+        <MappingFragment StoreEntitySet="ProductLine">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="supplierID" ColumnName="supplierID" />
+          <ScalarProperty Name="ProductLineName" ColumnName="ProductLineName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quotes">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Quote">
+        <MappingFragment StoreEntitySet="Quote">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+          <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+          <ScalarProperty Name="QuoteRef" ColumnName="QuoteRef" />
+          <ScalarProperty Name="BaseContractID" ColumnName="BaseContractID" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="ROE" ColumnName="ROE" />
+          <ScalarProperty Name="ROEDate" ColumnName="ROEDate" />
+          <ScalarProperty Name="VAT" ColumnName="VAT" />
+          <ScalarProperty Name="ContractTerm" ColumnName="ContractTerm" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuoteCalculations">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.QuoteCalculation">
+        <MappingFragment StoreEntitySet="QuoteCalculation">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+          <ScalarProperty Name="ContractTypeID" ColumnName="ContractTypeID" />
+          <ScalarProperty Name="SellingPricePerc" ColumnName="SellingPricePerc" />
+          <ScalarProperty Name="SellingPricePercAmount" ColumnName="SellingPricePercAmount" />
+          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+          <ScalarProperty Name="ROEPortion" ColumnName="ROEPortion" />
+          <ScalarProperty Name="ZARPortion" ColumnName="ZARPortion" />
+          <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
+          <ScalarProperty Name="ZARPortionAmount" ColumnName="ZARPortionAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuoteCalculationItems">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.QuoteCalculationItem">
+        <MappingFragment StoreEntitySet="QuoteCalculationItem">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="QuoteCalculationID" ColumnName="QuoteCalculationID" />
+          <ScalarProperty Name="YearNo" ColumnName="YearNo" />
+          <ScalarProperty Name="ROEPortionAmount" ColumnName="ROEPortionAmount" />
+          <ScalarProperty Name="ZARPortionAmount" ColumnName="ZARPortionAmount" />
+          <ScalarProperty Name="ROE" ColumnName="ROE" />
+          <ScalarProperty Name="IncrPerc" ColumnName="IncrPerc" />
+          <ScalarProperty Name="AmountExclVAT" ColumnName="AmountExclVAT" />
+          <ScalarProperty Name="AmountInclVAT" ColumnName="AmountInclVAT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rooms">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Room">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="departmentID" ColumnName="departmentID" />
+          <ScalarProperty Name="RoomNo" ColumnName="RoomNo" />
+          <ScalarProperty Name="RadUserLicence" ColumnName="RadUserLicence" />
+          <ScalarProperty Name="RadEquipLicence" ColumnName="RadEquipLicence" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sites">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Site">
+        <MappingFragment StoreEntitySet="Site">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SiteRef" ColumnName="SiteRef" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="marketSegmentID" ColumnName="marketSegmentID" />
+          <ScalarProperty Name="supportBranchID" ColumnName="supportBranchID" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="VATNo" ColumnName="VATNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SourceQuotes">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.SourceQuote">
+        <MappingFragment StoreEntitySet="SourceQuote">
+          <ScalarProperty Name="Ref" ColumnName="Ref" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="SellingPriceInclVAT" ColumnName="SellingPriceInclVAT" />
+          <ScalarProperty Name="SellingPriceExclVAT" ColumnName="SellingPriceExclVAT" />
+          <ScalarProperty Name="VAT" ColumnName="VAT" />
+          <ScalarProperty Name="TenderNumber" ColumnName="TenderNumber" />
+          <ScalarProperty Name="ROE" ColumnName="ROE" />
+          <ScalarProperty Name="ROEDate" ColumnName="ROEDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubModalities">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.SubModality">
+        <MappingFragment StoreEntitySet="SubModality">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="modalityID" ColumnName="modalityID" />
+          <ScalarProperty Name="SubModalityName" ColumnName="SubModalityName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="ProductClassification" ColumnName="ProductClassification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="Tecmed_EWSModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Quote_ContractInclusion" TypeName="Tecmed_EWSModel.Quote_ContractInclusion" StoreEntitySet="Quote_ContractInclusion">
+      <EndProperty Name="ContractInclusion">
+        <ScalarProperty Name="ID" ColumnName="ContractIncusionID" />
+      </EndProperty>
+      <EndProperty Name="Quote">
+        <ScalarProperty Name="ID" ColumnName="QuoteID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

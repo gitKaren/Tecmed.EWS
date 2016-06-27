@@ -1,0 +1,68 @@
+﻿@model EWS.Domain.Model.QuoteCalculationItem[]
+
+<style >
+    .nopadding {
+   padding: 0 ;
+   margin: 0 ;
+}
+</style>
+
+<div class="bottom-gap-10">
+    
+</div>
+<div class="clearfix"></div>
+
+<div class="container-fluid">
+    <div class="panel panel-default">
+
+            <div class="panel-heading">
+
+                <div class="row">
+                    <span class="col-xs-1 text-center">@Html.LabelFor(model => model.First().YearNo)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model.First().ROEPortion)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model.First().ZARPortion)</span>
+                    <span class="col-xs-1 text-center">@Html.LabelFor(model => model.First().UseNewROE)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model.First().TOPSROE)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model.First().NewROE)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model.First().Increment)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model.First().StartDate)</span>
+                    <span class="col-xs-1">@Html.LabelFor(model => model.First().EndDate)</span>
+                    <span class="col-xs-1 text-right">@Html.LabelFor(model => model.First().AmountExclVAT)</span>
+                    <span class="col-xs-2 text-right">@Html.LabelFor(model => model.First().AmountInclVAT)</span>
+                </div>
+                </div>
+        <div class="panel-body">
+            @for (int i = 0; i < Model.GetLength(0); i++)
+            {              
+               <div class="row">
+                    @Html.HiddenFor(item => Model[i].ID) 
+                    @Html.HiddenFor(item => Model[i].YearNo) 
+                    @Html.HiddenFor(item => Model[i].ROEPortion) 
+                    @Html.HiddenFor(item => Model[i].ZARPortion) 
+                    @Html.HiddenFor(item => Model[i].TOPSROE) 
+                    @Html.HiddenFor(item => Model[i].NewROE) 
+                    @Html.HiddenFor(item => Model[i].AmountExclVAT) 
+                    @Html.HiddenFor(item => Model[i].StartDate) 
+                    @Html.HiddenFor(item => Model[i].EndDate) 
+                    @Html.HiddenFor(item => Model[i].AmountInclVAT) 
+                    @Html.HiddenFor(item => Model[i].VAT)
+
+                    <div class="col-xs-1 text-center">@Html.DisplayFor(item => Model[i].YearNo) </div>
+                    <div class="col-xs-1 text-right">@Html.DisplayFor(item => Model[i].ROEPortion) </div>
+                    <div class="col-xs-1 text-right">@Html.DisplayFor(item => Model[i].ZARPortion) </div>
+                    <div class="col-xs-1 text-center">@Html.EditorFor(item => Model[i].UseNewROE) </div>
+                    <div class="col-xs-1">@Html.DisplayFor(item => Model[i].TOPSROE) </div>
+                    <div class="col-xs-1">@Html.DisplayFor(item => Model[i].NewROE) </div>
+                    <div class="col-xs-1">@Html.EditorFor(item => Model[i].Increment, new { htmlAttributes = new { @class = "col-xs-12 text-right nopadding" } }) </div>
+                    <div class="col-xs-1">@Html.DisplayFor(item => Model[i].StartDate) </div>
+                    <div class="col-xs-1">@Html.DisplayFor(item => Model[i].EndDate) </div>
+                    <div class="col-xs-1 text-right">@Html.DisplayFor(item => Model[i].AmountExclVAT) </div>
+                    <div class="col-xs-2 text-right">@Html.DisplayFor(item => Model[i].AmountInclVAT) </div>
+
+                </div>
+
+
+            }
+        </div>
+    </div>
+</div>

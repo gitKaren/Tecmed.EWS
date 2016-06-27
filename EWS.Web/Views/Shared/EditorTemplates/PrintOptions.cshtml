@@ -1,0 +1,63 @@
+﻿@model EWS.Web.Models.PrintOptions_Model
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="panel-title">Print Options</span>
+    </div>
+    <div class="panel-body row">
+        <div class="form-group col-md-4">
+            <h3> @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "" })</h3>
+            <div class="">
+
+                <div class="checkbox">
+                    @Html.RadioButtonFor(model => model.Logo, "1", new { @checked = "checked" })  No Logo
+                </div>
+
+                <div class="checkbox">
+                    @Html.RadioButtonFor(model => model.Logo, "2")  Default
+                </div>
+
+                <div class="checkbox">
+                    @Html.RadioButtonFor(model => model.Logo, "3")  Company
+                </div>
+            </div>
+            
+        </div>
+        <div class="form-group col-md-4">
+            <h3>Signature</h3>
+            <div class="">
+                <div class="checkbox">
+                    @Html.RadioButtonFor(model => model.Signature, "1")  Digital Signature
+                </div>
+
+                <div class="checkbox">
+                    @Html.RadioButtonFor(model => model.Signature, "2", new { @checked = "checked" })  Blank Signature
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <div class="">
+                <h3> Sections to print</h3>
+            </div>
+            <div class="">
+                <div class="">
+                    @Html.CheckBox("CoveringLetter", new { @checked = "checked" }) Covering Letter 
+                </div>
+                <div class="">
+                    @Html.CheckBox("CoveringLetter", new { @checked = "checked" }) Terms &amp; Conditions
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 row">
+            <div class="pull-right">
+                <button id="btnPrint" title="Print this Quote" type="submit" value="Next" class="btn btn-primary throbber">
+                    Print&nbsp;<span class="glyphicon glyphicon-print"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

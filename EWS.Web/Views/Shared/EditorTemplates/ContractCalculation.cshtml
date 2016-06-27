@@ -1,0 +1,84 @@
+﻿@using EWS.Domain.Data.DataModel
+@model EWS.Domain.Model.QuoteCalculation
+
+@Html.HiddenFor(modelitem => Model.ContractCalculationID)
+@Html.HiddenFor(modelitem => Model.ContractTypeID)
+@Html.HiddenFor(modelitem => Model.BasePrice)
+
+<div class="col-xs-4">
+<div class="form-horizontal">
+    <div class="row">
+        <span class="control-label col-xs-2 pad3 r-align">
+            @Html.EditorFor(modelitem => Model.Selected)
+        </span>
+        <div class="col-xs-9 pad3">
+            @Html.EditorFor(modelitem => Model.ContractType, new
+            {
+                htmlAttributes = new { @class = "form-control", @readonly = "readonly" }
+            })
+        </div>
+    </div>
+   
+    @if(Model.SellingPricePerc > 0)
+    {        
+    <div class="row">
+        <div class="col-xs-2 pad3 r-align" style="border: solid 0px red;">
+            @Html.LabelFor(modelitem => Model.SellingPricePerc, htmlAttributes: new { @class = "control-label text-right" })
+        </div>
+        <div class="col-xs-3 pad3">
+            @Html.EditorFor(modelitem => Model.SellingPricePerc, new { htmlAttributes = new { @class = "form-control text-right", id = "SellingPricePerc"}})
+        </div>
+        <div class="col-xs-2 pad3 r-align">
+            @Html.LabelFor(modelitem => Model.BasePrice, htmlAttributes: new { @class = "control-label text-right" })
+        </div>
+        <div class="col-xs-4 pad3">
+            @Html.EditorFor(modelitem => Model.BasePrice, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly", id = "BasePrice" } })
+        </div>
+    </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-xs-2 pad3 r-align">
+                @Html.LabelFor(modelitem => Model.BasePrice, htmlAttributes: new { @class = "control-label text-right" })
+            </div>
+            <div class="col-xs-9 pad3">
+                @Html.EditorFor(modelitem => Model.BasePrice, new { htmlAttributes = new { @class = "form-control text-right", id = "BasePrice" } })
+            </div>
+        </div>
+    }
+
+            <div class="row">
+                <div class="col-xs-2 pad3 r-align">
+                    @Html.LabelFor(modelitem => Model.ROEPortion, htmlAttributes: new { @class = "control-label text-right" })
+                </div>
+                <div class="col-xs-3 pad3">
+                    @Html.EditorFor(modelitem => Model.ROEPortion, new { htmlAttributes = new { @class = "form-control text-right", id="ROEPortion" } })
+                </div>
+                <div class="col-xs-2 pad3 r-align">
+                    @Html.LabelFor(modelitem => Model.ROEPortionAmount, htmlAttributes: new { @class = "control-label text-right" })
+                </div>
+                <div class="col-xs-4 pad3">
+                    @Html.EditorFor(modelitem => Model.ROEPortionAmount, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly", id="ROEPortionAmount" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 pad3 r-align">
+                    @Html.LabelFor(modelitem => Model.ZARPortion, htmlAttributes: new { @class = "control-label text-right" })
+                </div>
+                <div class="col-xs-3 pad3">
+                    @Html.EditorFor(modelitem => Model.ZARPortion, new { htmlAttributes = new { @class = "form-control text-right", id = "ZARPortion" } })
+                </div>
+                <div class="col-xs-2 pad3 r-align">
+                    @Html.LabelFor(modelitem => Model.ZARPortionAmount, htmlAttributes: new { @class = "control-label text-right" })
+                </div>
+                <div class="col-xs-4 pad3">
+                    @Html.EditorFor(modelitem => Model.ZARPortionAmount, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly", id = "ZARPortionAmount" } })
+                </div>
+            </div>
+
+
+        </div>
+</div>
+
+

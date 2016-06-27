@@ -1,0 +1,956 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Tecmed_EWSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BrandModel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="supplierID" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="BrandModelName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contract">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuoteID" Type="int" />
+    <Property Name="TenderNo" Type="varchar" MaxLength="15" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="DeviceID" Type="int" Nullable="false" />
+    <Property Name="ContractTypeID" Type="smallint" Nullable="false" />
+    <Property Name="ContractDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="StartDate" Type="smalldatetime" />
+    <Property Name="EndDate" Type="smalldatetime" />
+    <Property Name="ContractTerm" Type="tinyint" Nullable="false" />
+    <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="ROEDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="VAT" Type="real" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContractInclusion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" Nullable="false" />
+    <Property Name="ModalityID" Type="char" MaxLength="3" />
+    <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContractItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractID" Type="int" Nullable="false" />
+    <Property Name="ContractTypeID" Type="smallint" Nullable="false" />
+    <Property Name="ContractTerm" Type="tinyint" Nullable="false" />
+    <Property Name="BasePrice" Type="money" Nullable="false" />
+    <Property Name="ROEPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="ZARPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="ROEPortionAmount" Type="money" Nullable="false" />
+    <Property Name="ZARPortionAmount" Type="money" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContractTerm">
+    <Key>
+      <PropertyRef Name="NoOfMonths" />
+    </Key>
+    <Property Name="NoOfMonths" Type="tinyint" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContractType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="ISOCode" />
+    </Key>
+    <Property Name="ISOCode" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="CountryName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VAT" Type="decimal" Precision="3" Scale="3" />
+    <Property Name="CurrencyID" Type="char" MaxLength="3" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="Symbol" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="CurrencyName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="DefaultRateOfExchange" Type="float" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerRef" Type="varchar" MaxLength="50" />
+    <Property Name="AccountRef" Type="varchar" MaxLength="10" />
+    <Property Name="CustomerName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="CustomerNameFriendly" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="customerTypeID" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="RegistrationNo" Type="varchar" MaxLength="50" />
+    <Property Name="PractiscId" Type="varchar" MaxLength="50" />
+    <Property Name="VATNo" Type="varchar" MaxLength="50" />
+    <Property Name="customerLocalityID" Type="int" Nullable="false" />
+    <Property Name="IsInternational" Type="bit" Nullable="false" />
+    <Property Name="IsGovernment" Type="bit" Nullable="false" />
+    <Property Name="managementCompanyID" Type="int" />
+  </EntityType>
+  <EntityType Name="CustomerLocality">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerLocalityName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="siteID" Type="int" Nullable="false" />
+    <Property Name="hospitalDepartmentID" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="ResponsibleUserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Device">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="roomID" Type="int" Nullable="false" />
+    <Property Name="deviceTypeID" Type="int" Nullable="false" />
+    <Property Name="submodalityID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CommissionedDate" Type="datetime" Nullable="false" />
+    <Property Name="commissioningCertID" Type="uniqueidentifier" />
+    <Property Name="FactoryShipmentFrom" Type="datetime" />
+    <Property Name="FactoryShipmentTo" Type="datetime" />
+    <Property Name="ProductLineID" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="SalesLicenceNumber" Type="varchar" MaxLength="50" />
+    <Property Name="ModelNumber" Type="varchar" MaxLength="50" />
+    <Property Name="RadiationBoardSerialNumber" Type="varchar" MaxLength="50" />
+    <Property Name="SalesLicenceFileReferenceNumber" Type="varchar" MaxLength="50" />
+    <Property Name="EquipmentIDNumber" Type="varchar" MaxLength="50" />
+    <Property Name="RequiresIBQCTests" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeviceComponent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deviceID" Type="int" Nullable="false" />
+    <Property Name="componentTypeID" Type="int" Nullable="false" />
+    <Property Name="brandModelID" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeviceType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subModalityID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DeviceTypeName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="RadiationEmitting" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HospitalDepartment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="HospitalDepartmentName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Modality">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="ModalityName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="150" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="150" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ProductLine">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="supplierID" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="ProductLineName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quote">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreateDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="DeviceID" Type="int" Nullable="false" />
+    <Property Name="TenderNo" Type="varchar" MaxLength="15" />
+    <Property Name="QuoteRef" Type="varchar" MaxLength="15" />
+    <Property Name="BaseContractID" Type="int" />
+    <Property Name="SellingPrice" Type="money" Nullable="false" />
+    <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="ROEDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="VAT" Type="real" Nullable="false" />
+    <Property Name="ContractTerm" Type="tinyint" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quote_ContractInclusion">
+    <Key>
+      <PropertyRef Name="QuoteID" />
+      <PropertyRef Name="ContractIncusionID" />
+    </Key>
+    <Property Name="QuoteID" Type="int" Nullable="false" />
+    <Property Name="ContractIncusionID" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuoteCalculation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuoteID" Type="int" Nullable="false" />
+    <Property Name="ContractTypeID" Type="smallint" Nullable="false" />
+    <Property Name="SellingPricePerc" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="SellingPricePercAmount" Type="money" Nullable="false" />
+    <Property Name="BasePrice" Type="money" Nullable="false" />
+    <Property Name="ROEPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="ZARPortion" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="ROEPortionAmount" Type="money" Nullable="false" />
+    <Property Name="ZARPortionAmount" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuoteCalculationItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuoteCalculationID" Type="int" Nullable="false" />
+    <Property Name="YearNo" Type="smallint" Nullable="false" />
+    <Property Name="ROEPortionAmount" Type="money" Nullable="false" />
+    <Property Name="ZARPortionAmount" Type="money" Nullable="false" />
+    <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="IncrPerc" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="AmountExclVAT" Type="money" Nullable="false" />
+    <Property Name="AmountInclVAT" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="departmentID" Type="int" Nullable="false" />
+    <Property Name="RoomNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RadUserLicence" Type="varchar" MaxLength="50" />
+    <Property Name="RadEquipLicence" Type="varchar" MaxLength="50" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Site">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiteRef" Type="varchar" MaxLength="20" />
+    <Property Name="SiteName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="customerID" Type="int" Nullable="false" />
+    <Property Name="marketSegmentID" Type="int" Nullable="false" />
+    <Property Name="supportBranchID" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="RegistrationNo" Type="varchar" MaxLength="50" />
+    <Property Name="VATNo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SourceQuote">
+    <Key>
+      <PropertyRef Name="Ref" />
+    </Key>
+    <Property Name="Ref" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="SupplierID" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="DeviceID" Type="int" Nullable="false" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="Date" Type="smalldatetime" Nullable="false" />
+    <Property Name="SellingPriceInclVAT" Type="money" Nullable="false" />
+    <Property Name="SellingPriceExclVAT" Type="money" />
+    <Property Name="VAT" Type="real" Nullable="false" />
+    <Property Name="TenderNumber" Type="varchar" MaxLength="15" />
+    <Property Name="ROE" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="ROEDate" Type="smalldatetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubModality">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="modalityID" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="SubModalityName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="ProductClassification" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="SupplierName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BrandModel_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="BrandModel" Type="Self.BrandModel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BrandModel">
+        <PropertyRef Name="supplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_ContractTerm">
+    <End Role="ContractTerm" Type="Self.ContractTerm" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractTerm">
+        <PropertyRef Name="NoOfMonths" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="ContractTerm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_ContractType">
+    <End Role="ContractType" Type="Self.ContractType" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="ContractTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Device">
+    <End Role="Device" Type="Self.Device" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Device">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="DeviceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Quote">
+    <End Role="Quote" Type="Self.Quote" Multiplicity="0..1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quote">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="QuoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractInclusion_Modality">
+    <End Role="Modality" Type="Self.Modality" Multiplicity="0..1" />
+    <End Role="ContractInclusion" Type="Self.ContractInclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modality">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ContractInclusion">
+        <PropertyRef Name="ModalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractItem_Contract">
+    <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+    <End Role="ContractItem" Type="Self.ContractItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ContractItem">
+        <PropertyRef Name="ContractID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractItem_ContractTerm">
+    <End Role="ContractTerm" Type="Self.ContractTerm" Multiplicity="1" />
+    <End Role="ContractItem" Type="Self.ContractItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractTerm">
+        <PropertyRef Name="NoOfMonths" />
+      </Principal>
+      <Dependent Role="ContractItem">
+        <PropertyRef Name="ContractTerm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractItem_ContractType">
+    <End Role="ContractType" Type="Self.ContractType" Multiplicity="1" />
+    <End Role="ContractItem" Type="Self.ContractItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ContractItem">
+        <PropertyRef Name="ContractTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Country_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+    <End Role="Country" Type="Self.Country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Country">
+        <PropertyRef Name="CurrencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Customer1" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customer1">
+        <PropertyRef Name="managementCompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_CustomerLocality">
+    <End Role="CustomerLocality" Type="Self.CustomerLocality" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerLocality">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="customerLocalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_CustomerLocality">
+    <End Role="CustomerLocality" Type="Self.CustomerLocality" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerLocality">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="customerLocalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Department_HospitalDepartment">
+    <End Role="HospitalDepartment" Type="Self.HospitalDepartment" Multiplicity="1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HospitalDepartment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="hospitalDepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Department_Site">
+    <End Role="Site" Type="Self.Site" Multiplicity="1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Site">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="siteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Device_BrandModel">
+    <End Role="ProductLine" Type="Self.ProductLine" Multiplicity="1" />
+    <End Role="Device" Type="Self.Device" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductLine">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Device">
+        <PropertyRef Name="ProductLineID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Device_Room">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="Device" Type="Self.Device" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Device">
+        <PropertyRef Name="roomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Device_SubModality">
+    <End Role="SubModality" Type="Self.SubModality" Multiplicity="1" />
+    <End Role="Device" Type="Self.Device" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubModality">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Device">
+        <PropertyRef Name="submodalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeviceComponent_BrandModel">
+    <End Role="BrandModel" Type="Self.BrandModel" Multiplicity="1" />
+    <End Role="DeviceComponent" Type="Self.DeviceComponent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BrandModel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DeviceComponent">
+        <PropertyRef Name="brandModelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeviceType_SubModality">
+    <End Role="SubModality" Type="Self.SubModality" Multiplicity="1" />
+    <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubModality">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DeviceType">
+        <PropertyRef Name="subModalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductLine_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="ProductLine" Type="Self.ProductLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProductLine">
+        <PropertyRef Name="supplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quote_ContractInclusion_ContractInclusion">
+    <End Role="ContractInclusion" Type="Self.ContractInclusion" Multiplicity="1" />
+    <End Role="Quote_ContractInclusion" Type="Self.Quote_ContractInclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractInclusion">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Quote_ContractInclusion">
+        <PropertyRef Name="ContractIncusionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quote_ContractInclusion_Quote">
+    <End Role="Quote" Type="Self.Quote" Multiplicity="1" />
+    <End Role="Quote_ContractInclusion" Type="Self.Quote_ContractInclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quote">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Quote_ContractInclusion">
+        <PropertyRef Name="QuoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quote_ContractTerm">
+    <End Role="ContractTerm" Type="Self.ContractTerm" Multiplicity="1" />
+    <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractTerm">
+        <PropertyRef Name="NoOfMonths" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="ContractTerm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quote_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quote_Device">
+    <End Role="Device" Type="Self.Device" Multiplicity="1" />
+    <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Device">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="DeviceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quote_SourceQuote">
+    <End Role="SourceQuote" Type="Self.SourceQuote" Multiplicity="0..1" />
+    <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SourceQuote">
+        <PropertyRef Name="Ref" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="QuoteRef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuoteCalculation_ContractType">
+    <End Role="ContractType" Type="Self.ContractType" Multiplicity="1" />
+    <End Role="QuoteCalculation" Type="Self.QuoteCalculation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QuoteCalculation">
+        <PropertyRef Name="ContractTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuoteCalculation_Quote">
+    <End Role="Quote" Type="Self.Quote" Multiplicity="1" />
+    <End Role="QuoteCalculation" Type="Self.QuoteCalculation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quote">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QuoteCalculation">
+        <PropertyRef Name="QuoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuoteCalculationItem_QuoteCalculation">
+    <End Role="QuoteCalculation" Type="Self.QuoteCalculation" Multiplicity="1" />
+    <End Role="QuoteCalculationItem" Type="Self.QuoteCalculationItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuoteCalculation">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QuoteCalculationItem">
+        <PropertyRef Name="QuoteCalculationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Room_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="departmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Site_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+    <End Role="Site" Type="Self.Site" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Site">
+        <PropertyRef Name="supportBranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Site_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Site" Type="Self.Site" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Site">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SourceQuote_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="SourceQuote" Type="Self.SourceQuote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SourceQuote">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SourceQuote_Device">
+    <End Role="Device" Type="Self.Device" Multiplicity="1" />
+    <End Role="SourceQuote" Type="Self.SourceQuote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Device">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SourceQuote">
+        <PropertyRef Name="DeviceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SourceQuote_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="SourceQuote" Type="Self.SourceQuote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SourceQuote">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubModality_Modality">
+    <End Role="Modality" Type="Self.Modality" Multiplicity="1" />
+    <End Role="SubModality" Type="Self.SubModality" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modality">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubModality">
+        <PropertyRef Name="modalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Tecmed_EWSModelStoreContainer">
+    <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BrandModel" EntityType="Self.BrandModel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractInclusion" EntityType="Self.ContractInclusion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractItem" EntityType="Self.ContractItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractTerm" EntityType="Self.ContractTerm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractType" EntityType="Self.ContractType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerLocality" EntityType="Self.CustomerLocality" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeviceComponent" EntityType="Self.DeviceComponent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeviceType" EntityType="Self.DeviceType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HospitalDepartment" EntityType="Self.HospitalDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Modality" EntityType="Self.Modality" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductLine" EntityType="Self.ProductLine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quote" EntityType="Self.Quote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quote_ContractInclusion" EntityType="Self.Quote_ContractInclusion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuoteCalculation" EntityType="Self.QuoteCalculation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuoteCalculationItem" EntityType="Self.QuoteCalculationItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SourceQuote" EntityType="Self.SourceQuote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubModality" EntityType="Self.SubModality" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BrandModel_Supplier" Association="Self.FK_BrandModel_Supplier">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="BrandModel" EntitySet="BrandModel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_ContractTerm" Association="Self.FK_Contract_ContractTerm">
+      <End Role="ContractTerm" EntitySet="ContractTerm" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_ContractType" Association="Self.FK_Contract_ContractType">
+      <End Role="ContractType" EntitySet="ContractType" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Customer" Association="Self.FK_Contract_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Device" Association="Self.FK_Contract_Device">
+      <End Role="Device" EntitySet="Device" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Quote" Association="Self.FK_Contract_Quote">
+      <End Role="Quote" EntitySet="Quote" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractInclusion_Modality" Association="Self.FK_ContractInclusion_Modality">
+      <End Role="Modality" EntitySet="Modality" />
+      <End Role="ContractInclusion" EntitySet="ContractInclusion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractItem_Contract" Association="Self.FK_ContractItem_Contract">
+      <End Role="Contract" EntitySet="Contract" />
+      <End Role="ContractItem" EntitySet="ContractItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractItem_ContractTerm" Association="Self.FK_ContractItem_ContractTerm">
+      <End Role="ContractTerm" EntitySet="ContractTerm" />
+      <End Role="ContractItem" EntitySet="ContractItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractItem_ContractType" Association="Self.FK_ContractItem_ContractType">
+      <End Role="ContractType" EntitySet="ContractType" />
+      <End Role="ContractItem" EntitySet="ContractItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Country_Currency" Association="Self.FK_Country_Currency">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Country" EntitySet="Country" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Customer" Association="Self.FK_Customer_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Customer1" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_CustomerLocality" Association="Self.FK_Customer_CustomerLocality">
+      <End Role="CustomerLocality" EntitySet="CustomerLocality" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_CustomerLocality" Association="Self.FK_Customers_CustomerLocality">
+      <End Role="CustomerLocality" EntitySet="CustomerLocality" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Department_HospitalDepartment" Association="Self.FK_Department_HospitalDepartment">
+      <End Role="HospitalDepartment" EntitySet="HospitalDepartment" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Department_Site" Association="Self.FK_Department_Site">
+      <End Role="Site" EntitySet="Site" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Device_BrandModel" Association="Self.FK_Device_BrandModel">
+      <End Role="ProductLine" EntitySet="ProductLine" />
+      <End Role="Device" EntitySet="Device" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Device_Room" Association="Self.FK_Device_Room">
+      <End Role="Room" EntitySet="Room" />
+      <End Role="Device" EntitySet="Device" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Device_SubModality" Association="Self.FK_Device_SubModality">
+      <End Role="SubModality" EntitySet="SubModality" />
+      <End Role="Device" EntitySet="Device" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeviceComponent_BrandModel" Association="Self.FK_DeviceComponent_BrandModel">
+      <End Role="BrandModel" EntitySet="BrandModel" />
+      <End Role="DeviceComponent" EntitySet="DeviceComponent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeviceType_SubModality" Association="Self.FK_DeviceType_SubModality">
+      <End Role="SubModality" EntitySet="SubModality" />
+      <End Role="DeviceType" EntitySet="DeviceType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductLine_Supplier" Association="Self.FK_ProductLine_Supplier">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="ProductLine" EntitySet="ProductLine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_ContractInclusion_ContractInclusion" Association="Self.FK_Quote_ContractInclusion_ContractInclusion">
+      <End Role="ContractInclusion" EntitySet="ContractInclusion" />
+      <End Role="Quote_ContractInclusion" EntitySet="Quote_ContractInclusion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_ContractInclusion_Quote" Association="Self.FK_Quote_ContractInclusion_Quote">
+      <End Role="Quote" EntitySet="Quote" />
+      <End Role="Quote_ContractInclusion" EntitySet="Quote_ContractInclusion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_ContractTerm" Association="Self.FK_Quote_ContractTerm">
+      <End Role="ContractTerm" EntitySet="ContractTerm" />
+      <End Role="Quote" EntitySet="Quote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_Customer" Association="Self.FK_Quote_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Quote" EntitySet="Quote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_Device" Association="Self.FK_Quote_Device">
+      <End Role="Device" EntitySet="Device" />
+      <End Role="Quote" EntitySet="Quote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_SourceQuote" Association="Self.FK_Quote_SourceQuote">
+      <End Role="SourceQuote" EntitySet="SourceQuote" />
+      <End Role="Quote" EntitySet="Quote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuoteCalculation_ContractType" Association="Self.FK_QuoteCalculation_ContractType">
+      <End Role="ContractType" EntitySet="ContractType" />
+      <End Role="QuoteCalculation" EntitySet="QuoteCalculation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuoteCalculation_Quote" Association="Self.FK_QuoteCalculation_Quote">
+      <End Role="Quote" EntitySet="Quote" />
+      <End Role="QuoteCalculation" EntitySet="QuoteCalculation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuoteCalculationItem_QuoteCalculation" Association="Self.FK_QuoteCalculationItem_QuoteCalculation">
+      <End Role="QuoteCalculation" EntitySet="QuoteCalculation" />
+      <End Role="QuoteCalculationItem" EntitySet="QuoteCalculationItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Room_Department" Association="Self.FK_Room_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Room" EntitySet="Room" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Site_Branch" Association="Self.FK_Site_Branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="Site" EntitySet="Site" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Site_Customer" Association="Self.FK_Site_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Site" EntitySet="Site" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceQuote_Customer" Association="Self.FK_SourceQuote_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="SourceQuote" EntitySet="SourceQuote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceQuote_Device" Association="Self.FK_SourceQuote_Device">
+      <End Role="Device" EntitySet="Device" />
+      <End Role="SourceQuote" EntitySet="SourceQuote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceQuote_Supplier" Association="Self.FK_SourceQuote_Supplier">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="SourceQuote" EntitySet="SourceQuote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubModality_Modality" Association="Self.FK_SubModality_Modality">
+      <End Role="Modality" EntitySet="Modality" />
+      <End Role="SubModality" EntitySet="SubModality" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
