@@ -252,7 +252,9 @@
     <Compile Include="Logic\Infrastructure\UserSession.cs" />
     <Compile Include="Logic\IResultMessagesFactory.cs" />
     <Compile Include="Logic\NavSession.cs" />
-    <Compile Include="Logic\ResultMessage.cs" />
+    <Compile Include="Logic\ResultMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Logic\ResultMessagesFactory.cs" />
     <Compile Include="Logic\UserSession.cs" />
     <Compile Include="LoginController.generated.cs">

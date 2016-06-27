@@ -181,17 +181,17 @@
     <Compile Include="Data\DataModel\Test.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Queries\ContractItemQuery.cs" />
-    <Compile Include="Data\Queries\ContractItemsQuery.cs" />
-    <Compile Include="Data\Queries\ContractTermQuery.cs" />
-    <Compile Include="Data\Queries\ContractTermsQuery.cs" />
     <Compile Include="Data\Queries\ContractInclusionQuery.cs" />
     <Compile Include="Data\Queries\ContractInclusionsQuery.cs" />
+    <Compile Include="Data\Queries\ContractItemQuery.cs" />
+    <Compile Include="Data\Queries\ContractItemsQuery.cs" />
+    <Compile Include="Data\Queries\ContractQuery.cs" />
+    <Compile Include="Data\Queries\ContractsQuery.cs" />
+    <Compile Include="Data\Queries\ContractTermQuery.cs" />
+    <Compile Include="Data\Queries\ContractTermsQuery.cs" />
     <Compile Include="Data\Queries\CustomerQuery.cs" />
     <Compile Include="Data\Queries\QuoteCalculationItemsQuery.cs" />
     <Compile Include="Data\Queries\QuoteCalculationsQuery.cs" />
-    <Compile Include="Data\Queries\ContractQuery.cs" />
-    <Compile Include="Data\Queries\ContractsQuery.cs" />
     <Compile Include="Data\Queries\QuotesQuery.cs" />
     <Compile Include="Data\Queries\QuoteQuery.cs" />
     <Compile Include="Data\Queries\ContractTypesQuery.cs" />
